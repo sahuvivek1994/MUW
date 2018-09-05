@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2c6937</color>
+    <color name="colorPrimaryDark">#2a5b30</color>
+
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+
+
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorRed">#B71C1C</color>
+    <color name="color_white">#FFF</color>
+    <color name="green">#3cc749</color>
+    <color name="lightBlue">#3F51B5</color>
+    <color name="background_color">#fffdfd</color>
+    <color name="light_red">#DE5E42</color>
+
+    <color name="color_pinkish_grey">#bebebe</color>
+    <color name="color_blue">#3f51b5</color>
+    <color name="text_color">#212121</color>
+    <color name="color_dark_gray">#414041</color>
+    <color name="dependent_question_background">#EEEEEE</color>
+    <color name="color_btn_normal">#757575</color>
+    <color name="main_question_background">#F5F5F5</color>
+    <color name="enroll_form">#0288D1</color>
+    <color name="anc_form">#FF9800</color>
+    <color name="highrisk">#f44336</color>
+    <color name="anc_form_dependent">#EF6C00</color>
+    <color name="grey">#888</color>
+    <color name="color_incomplete">#FF9800</color>
+
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_button_padding">24dp</dimen>
+    <dimen name="badge_text_size">14sp</dimen>
+    <dimen name="mainMenu_margin">10dp</dimen>
+    <dimen name="Main_home_Icon_weight">120dp</dimen>
+    <dimen name="Main_home_Icon_Height">90dp</dimen>
+    <dimen name="npdsf_main_menu_text_size">20sp</dimen>
+
+    <dimen name="progressbar_margin_top">10dp</dimen>
+    <dimen name="progress_dialog_padding">20dp</dimen>
+    <dimen name="enr_xlarge_margin">40dp</dimen>
+    <dimen name="enr_small_padding">5dp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="enr_large_margin">20dp</dimen>
+    <dimen name="text_size_xx_large">25sp</dimen>
+    <dimen name="enr_normal_padding">10dp</dimen>
+    <dimen name="enr_large_padding">15dp</dimen>
+    <dimen name="questions_top_bottom_margin">-10dp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+
+    <!--Text sizes -->
+    <dimen name="text_size_xxx_large">27sp</dimen>
+    <dimen name="text_size_x_large">22sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_x_small">12sp</dimen>
+    <dimen name="text_size_xx_small">10sp</dimen>
+
+    <dimen name="login_margin">60dp</dimen>
+    <dimen name="home_page_margin">8dp</dimen>
+    <dimen name="menu_button_margin">16dp</dimen>
+    <dimen name="menu_button_top_padding">40dp</dimen>
+    <dimen name="menu_button_radius">5dp</dimen>
+    <dimen name="as_logo_top_margin">120dp</dimen>
+    <dimen name="ic_armman_margin">16dp</dimen>
+    <dimen name="enr_button_height">60dp</dimen>
+    <dimen name="searchview_normal_marging">10dp</dimen>
+
+</resources>

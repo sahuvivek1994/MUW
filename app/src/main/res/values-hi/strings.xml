@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Npdsf</string>
+    <string name="button_login">लॉग इन करें</string>
+    <string name="hint_username">उपयोगकर्ता नाम</string>
+    <string name="hint_password">पारण शब्द</string>
+    <string name="enter_password">कृप्या पास्वर्ड भरो</string>
+    <string name="enter_username">कृपया उपयोगकर्ता नाम दर्ज करें</string>
+    <string name="no_internet">इंटरनेट उपलब्ध नहीं हैं</string>
+    <string name="no_internet_connection">कोई इंटरनेट संपर्क में नहीं हैं। अपने जगह की नेटवर्क
+        कनेक्शन जाँच लें
+    </string>
+    <string name="yes">हाँ</string>
+    <string name="error">त्रुटि</string>
+    <string name="authentication_error_msg">अमान्य उपयोगकर्ता नाम और पासवर्ड</string>
+    <string name="authentication_failed">प्रमाणीकरण विफल होना</string>
+    <string name="response_not_found">प्रतिक्रिया नहीं मिली</string>
+    <string name="input_output_error_occured">इनपुट आउटपुट त्रुटि हुई</string>
+    <string name="invalid_data_frm_server">सर्वर से अमान्य डेटा मिला है</string>
+    <string name="oops_some_thing_happened_wrong">उफ़ !! कुछ हुआ। कृपया पुन: प्रयास करें</string>
+    <string name="sync">सिंक</string>
+    <string name="action_settings">सेटिंग</string>
+
+    <string name="category_personal">निजी</string>
+    <string name="category_sync">सिंक डेटा</string>
+    <string name="category_account">खाता</string>
+    <string name="category_about">इस के बारे में</string>
+    <string name="language">भाषा</string>
+    <string name="sync_forms">फॉर्म को अपडेट करें</string>
+    <string name="get_help_mannual">संसाधन की मदद लें</string>
+    <string name="restore_data">डेटा को पुनर्स्थापित करें</string>
+    <string name="check_update">नया अपडेट खोजें</string>
+    <string name="logout">लॉगआउट</string>
+    <string name="version">संस्करण</string>
+
+    <string name="mainMenu_Registration">पंजीकरण </string>
+    <string name="mainMenu_Incomplet">अपूर्ण रूप</string>
+    <string name="mainMenu_Completed">फार्म पूरा करें</string>
+    <string name="mainMenu_userProfile">उपयोगकर्ता प्रोफ़ाइल</string>
+    <string name="title_activity_setting">सेटिंग्स</string>
+
+
+    <string name="an_initiative_by">द्वारा एक पहल</string>
+    <string name="title_button_registration">नया पंजीकरण</string>
+    <string name="no">नहीं</string>
+    <string name="back_form_message">क्या बाहर जाना चाहते हो?</string>
+    <string name="back_form">बाहर निकलें फॉर्म</string>
+
+    <string name="ok">ठीक</string>
+    <string name="Toast_msg_for_formsavesuccessfully">फ़ॉर्म सफलतापूर्वक सहेजा गया</string>
+    <string name="checkbox_select_msg">कृपया सभी चेकबॉक्स का चयन करें</string>
+    <string name="Important_Note">उत्तरदायी यात्रा</string>
+    <string name="confirm_dialog">Confirm</string>
+    <string name="no_important_msg">कोई संदेश नहीं मिला</string>
+    <string name="counselling_msg_txt">परामर्श संदेश</string>
+
+    <string name="choose_video_player">वीडियो प्लेयर चुनें</string>
+    <string name="no_handler_for_type">इस प्रकार की फाइल के लिए कोई हैंडलर नहीं।</string>
+    <string name="file_not_exit_txt">दस्तावेज मौजूद नहीं है !!</string>
+    <string name="anc_next_visit">अगली मुलाकात</string>
+    <string name="nextvisit_text_part1">आपकी अगली यात्रा \ t है</string>
+    <string name="all_anc_visits_comp_title">एएनसी पूरा पूरा करें</string>
+    <string name="all_anc_visits_comp_msg">महिलांच्या सर्व एएनसी भेटी पूर्ण झाल्या आहेत</string>
+    <string name="nextvisit_text_part2">\ t आणि ते \ t वर देय असेल</string>
+    <string name="nextvisit_text_part3">\t</string>
+    <string name="Reg_women">अपूर्ण भेट दिली नाही</string>
+    <string name="incomplete_visit">अपूर्ण भेट</string>
+    <string name="uploading_forms">फॉर्म अपलोड करीत आहे ...</string>
+
+
+    <string name="downloading_data">डेटा डाउनलोड कर रहा है ...</string>
+    <string name="forms_already_updated">फॉर्म पहले ही अपडेट किए गए हैं</string>
+    <string name="saving_forms">फॉर्म सहेजा जा रहा है ...</string>
+    <string name="select">चुनते हैं</string>
+    <string name="button_previous">पिछला</string>
+    <string name="button_next">आगामी</string>
+    <string name="no_data">कोई आकड़ा उपलब्ध नहीं है</string>
+    <string name="Toast_msg_for_compulsory">ऊपर प्रश्न अनिवार्य हैं</string>
+    <string name="exceed_curnt_dt">दर्ज तिथि वर्तमान तिथि से अधिक है</string>
+    <string name="save_form">फॉर्म सहेजें</string>
+    <string name="save_form_message">क्या आप फॉर्म के ब्योरे को स्टोर करना चाहते हैं?</string>
+    <string name="default_validation_msg">यह क्षेत्र अनिवार्य है</string>
+    <string name="enter_valid_lmp">कृपया वैध एलएमपी तिथि दर्ज करें</string>
+    <string name="present_age_msg">वर्तमान उम्र शादी में उम्र से कम नहीं होनी चाहिए</string>
+    <string name="dropdown_text">चुनते हैं</string>
+    <string name="capture_photo_text">फोटो कैप्चर करें</string>
+    <string name="loading_question">प्रश्न लोड हो रहा है ....</string>
+    <string name="title_data_not_found">डेटा नहीं मिला</string>
+    <string name="sync_forms_message">सेटिंग्स से फॉर्म सिंक करें \ n बाहर निकलने के लिए ओके बटन दबाएं</string>
+    <string name="looking_for_update">Looking for update…</string>
+    <string name="dialog_app_updated_text">Your app is up to date</string>
+    <string name="invalid_server_url"> Server Error.</string>
+    <string name="no_records_error_msg">No Records</string>
+    <string name="dialog_update_available">Update Available</string>
+    <string name="dialog_install_text">Install</string>
+    <string name="apk_download_request_text">New Version</string>
+    <string name="apk_download_progress_title">Downloading....</string>
+    <string name="restore_warning_text">Warning</string>
+    <string name="dialog_msg_loss_data_warning">This operation will remove the unsent forms and this
+        might result in loss of data.\nPress Cancel to send unsent forms or Press OK to proceed.
+    </string>
+
+</resources>
