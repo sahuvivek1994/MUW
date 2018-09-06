@@ -84,7 +84,7 @@
     <string name="ok">OK</string>
     <string name="Toast_msg_for_formsavesuccessfully">Form Saved Successfully</string>
     <string name="checkbox_select_msg">Please select all checkboxes</string>
-    <string name="Important_Note">RESPONDENT VISIT</string>
+    <string name="Important_Note">Do you want to store details of the Form?</string>
     <string name="confirm_dialog">Confirm</string>
     <string name="no_important_msg">No message detected</string>
     <string name="counselling_msg_txt">Counselling Message</string>
@@ -101,6 +101,7 @@
     <string name="Reg_women">No Incomplete Visit Found</string>
     <string name="incomplete_visit">Incomplete visit</string>
     <string name="uploading_forms">Uploading forms…</string>
+
     <string name="looking_for_update">Looking for update…</string>
     <string name="dialog_app_updated_text">Your app is up to date</string>
     <string name="no_records_error_msg">No Records</string>

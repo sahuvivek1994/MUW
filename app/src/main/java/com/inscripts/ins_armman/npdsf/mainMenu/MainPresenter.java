@@ -132,6 +132,7 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
 
             String uniqueId = cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID));
             details.setUniqueId(uniqueId);
+            details.setMotherId(cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_MOTHER_ID)));
             details.setName(cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_FIRST_NAME)));
             details.setAddress(cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_ADDRESS)));
             details.setMobNo(cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_MOBILE_NO)));

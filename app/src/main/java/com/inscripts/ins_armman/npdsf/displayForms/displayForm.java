@@ -30,6 +30,7 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -145,6 +146,8 @@ public class displayForm extends AppCompatActivity {
     ScrollView scroll, scroll_temp;
     Context ctx = this;
     int counter;
+    int number_of_children = 0;
+    int child_entry_counter = 1;
     int scrollcounter = 0;
     Date SystemDate, selectedDate;
     SimpleDateFormat formatter;
@@ -258,6 +261,7 @@ public class displayForm extends AppCompatActivity {
 //    private List<ListClass> recieveListDueCount = new ArrayList<>();
     private int overDueVisitsCount, dueVisitsCount;
     private String uniqueId = "";
+    private String childUniqueId = "";
     private String mAppLanguage;
 
     /**
@@ -477,6 +481,11 @@ public class displayForm extends AppCompatActivity {
 
     public void NextButtonValidations() {
         try {
+            if(Backup_answerTyped1.containsKey("child_name"))
+            {
+                childUniqueId = questionInteractor.saveRegistrationDetails(Backup_answerTyped1.get("child_name"), "", "", "", "","", uniqueId,1);
+            }
+
             int counter = 0;
             int totalpagecondition = 0;
             Boolean isCompulsoryQstnInFocus = false;
@@ -4175,16 +4184,132 @@ public class displayForm extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     dialog.dismiss();
-                    if (FormID == 5) {
+
+    if(number_of_children == 0)
+    {
+
+        if (FormID <=5 && FormID >=9 ) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(displayForm.this);
+
+            LayoutInflater inflater = getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custome_child_dialogbox,null);
+
+            // Specify alert dialog is not cancelable/not ignorable
+            builder.setCancelable(false);
+
+            // Set the custom layout as alert dialog view
+            builder.setView(dialogView);
+
+            // Get the custom alert dialog view widgets reference
+            Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
+            Button btn_negative = (Button) dialogView.findViewById(R.id.dialog_negative_btn);
+            final EditText et_name = (EditText) dialogView.findViewById(R.id.et_no_child);
+
+            // Create the alert dialog
+            final AlertDialog dialog = builder.create();
+
+            // Set positive/yes button click listener
+            btn_positive.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Dismiss the alert dialog
+                    dialog.cancel();
+                    number_of_children = Integer.parseInt(et_name.getText().toString());
+                    if(number_of_children == 0)
+                    {
                         Intent intent = new Intent(displayForm.this, MainActivity.class);
                         startActivity(intent);
-                    } else {
+                    }
+                    else
+                    {
                         String formNumber = String.valueOf(FormID + 1);
                         Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                        intent2.putExtra(UNIQUE_ID, uniqueId);
+                        intent2.putExtra(UNIQUE_ID, childUniqueId);
                         intent2.putExtra(FORM_ID, formNumber);
+                        intent2.putExtra("child",number_of_children);
+                        intent2.putExtra("childcounter",child_entry_counter);
                         startActivity(intent2);
                     }
+                }
+            });
+
+            // Set negative/no button click listener
+            btn_negative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    Intent intent = new Intent(displayForm.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            // Display the custom alert dialog on interface
+            dialog.show();
+
+        }
+        else if(FormID == 10)
+        {
+            Intent intent = new Intent(displayForm.this, MainActivity.class);
+            startActivity(intent);
+        }
+        else {
+            String formNumber = String.valueOf(FormID + 1);
+            Intent intent2 = new Intent(displayForm.this, displayForm.class);
+            intent2.putExtra(UNIQUE_ID, uniqueId);
+            intent2.putExtra(FORM_ID, formNumber);
+            startActivity(intent2);
+        }
+
+  }
+  else
+  {
+      if(child_entry_counter <= number_of_children)
+      {
+          if(FormID == 9)
+          {
+              Intent intent2 = new Intent(displayForm.this, displayForm.class);
+              intent2.putExtra(UNIQUE_ID, childUniqueId);
+              intent2.putExtra(FORM_ID, "6");
+              intent2.putExtra("child",number_of_children);
+              intent2.putExtra("childcounter",child_entry_counter + 1);
+              startActivity(intent2);
+          }
+          else
+          {
+              String formNumber = String.valueOf(FormID + 1);
+              Intent intent2 = new Intent(displayForm.this, displayForm.class);
+              intent2.putExtra(UNIQUE_ID, childUniqueId);
+              intent2.putExtra(FORM_ID, formNumber);
+              intent2.putExtra("child",number_of_children);
+              intent2.putExtra("childcounter",child_entry_counter);
+              intent2.putExtra("child",0);
+              intent2.putExtra("childcounter",1);
+              startActivity(intent2);
+          }
+
+      }
+      else if(child_entry_counter > number_of_children)
+      {
+          if(FormID == 9)
+          {
+              String formNumber = String.valueOf(FormID + 1);
+              Intent intent2 = new Intent(displayForm.this, displayForm.class);
+              intent2.putExtra(UNIQUE_ID, childUniqueId);
+              intent2.putExtra(FORM_ID, formNumber);
+              intent2.putExtra("child",number_of_children);
+              intent2.putExtra("childcounter",child_entry_counter + 1);
+              startActivity(intent2);
+          }
+          else if (FormID == 10)
+          {
+              Intent intent = new Intent(displayForm.this, MainActivity.class);
+              startActivity(intent);
+          }
+      }
+
+  }
+
 //                    int count = ll.getChildCount();
 //                    Boolean flag = true;
 //
@@ -4431,26 +4556,26 @@ public class displayForm extends AppCompatActivity {
                 dbhelper.updatehighrisklist(uniqueId, "1");*/
             }
 
-            if (FormID == DELIVERY_FORM_ID) {
-                String deliveryDate = womendetails.get(DELIVERY_DATE);
-                int childCount = Integer.parseInt(womendetails.get(LIVE_CHILDREN_COUNT));
-
-                Cursor cursor = utility.getDatabase().rawQuery("SELECT * FROM "
-                        + DatabaseContract.RegistrationTable.TABLE_NAME
-                        + " WHERE "
-                        + DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID + " = ? ", new String[]{uniqueId});
-                String address = "", villageId = "", mobNo = "", alternateNo = "";
-                if (cursor.moveToFirst()) {
-                    address = cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_ADDRESS));
-                    mobNo = cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_MOBILE_NO));
-                }
-
-                for (int i = 0; i < childCount; i++) {
-                  //  questionInteractor.saveRegistrationDetails("", "", "", mobNo, alternateNo, villageId, "", "", address, deliveryDate, "", "", "", null, uniqueId, 0);
-                }
-
-
-            }
+//            if (FormID == DELIVERY_FORM_ID) {
+//                String deliveryDate = womendetails.get(DELIVERY_DATE);
+//                int childCount = Integer.parseInt(womendetails.get(LIVE_CHILDREN_COUNT));
+//
+//                Cursor cursor = utility.getDatabase().rawQuery("SELECT * FROM "
+//                        + DatabaseContract.RegistrationTable.TABLE_NAME
+//                        + " WHERE "
+//                        + DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID + " = ? ", new String[]{uniqueId});
+//                String address = "", villageId = "", mobNo = "", alternateNo = "";
+//                if (cursor.moveToFirst()) {
+//                    address = cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_ADDRESS));
+//                    mobNo = cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_MOBILE_NO));
+//                }
+//
+//                for (int i = 0; i < childCount; i++) {
+//                  //  questionInteractor.saveRegistrationDetails("", "", "", mobNo, alternateNo, villageId, "", "", address, deliveryDate, "", "", "", null, uniqueId, 0);
+//                }
+//
+//
+//            }
 
             Toast.makeText(getApplicationContext(), displayForm.this.getString(R.string.Toast_msg_for_formsavesuccessfully), Toast.LENGTH_LONG).show();
 
@@ -5680,7 +5805,8 @@ public class displayForm extends AppCompatActivity {
             formid = b.getString(FORM_ID);
             storePrevAncId = Integer.parseInt(formid);
             FormID = Integer.parseInt(formid);
-
+            number_of_children = b.getInt("child");
+            child_entry_counter = b.getInt("childcounter");
             uniqueId = b.getString(UNIQUE_ID);
 
             questionInteractor = new QuestionInteractor(displayForm.this);

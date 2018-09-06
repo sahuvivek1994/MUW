@@ -84,6 +84,8 @@ public class IncompleteForm extends AppCompatActivity implements IncompleteView 
                     Intent intent2 = new Intent(IncompleteForm.this, displayForm.class);
                     intent2.putExtra(UNIQUE_ID, uniqueId);
                     intent2.putExtra(FORM_ID, formNumber);
+                    intent2.putExtra("child",0);
+                    intent2.putExtra("childcounter",1);
                     startActivity(intent2);
                     finish();
                 }

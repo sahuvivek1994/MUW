@@ -155,8 +155,8 @@ public final class TelephonyInfo {
     }*/
 
     public String getImsiSIM1() {
-        //       return imsiSIM1;
-        return "867375022176455";
+               return imsiSIM1;
+        // return "867375022176455";
     }
 
     public String getImsiSIM2() {

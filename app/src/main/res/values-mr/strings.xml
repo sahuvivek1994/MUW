@@ -50,7 +50,7 @@
     <string name="ok">ठीक आहे</string>
     <string name="Toast_msg_for_formsavesuccessfully">फॉर्म यशस्वीपणे जतन केला</string>
     <string name="checkbox_select_msg">कृपया सर्व चेकबॉक्सेस निवडा</string>
-    <string name="Important_Note">RESPONDENT भेट द्या</string>
+    <string name="Important_Note">फॉर्म जतन करीत आहे ...</string>
     <string name="confirm_dialog">पुष्टी</string>
     <string name="no_important_msg">कोणताही संदेश आढळला नाही</string>
     <string name="counselling_msg_txt">समुपदेशन संदेश</string>
@@ -88,17 +88,18 @@
     <string name="Reg_women">अपूर्ण भेट दिली नाही</string>
     <string name="incomplete_visit">अपूर्ण भेट</string>
     <string name="uploading_forms">फॉर्म अपलोड करीत आहे ...</string>
-    <string name="looking_for_update">Looking for update…</string>
-    <string name="dialog_app_updated_text">Your app is up to date</string>
-    <string name="invalid_server_url"> Server Error.</string>
-    <string name="no_records_error_msg">No Records</string>
-    <string name="dialog_update_available">Update Available</string>
-    <string name="dialog_install_text">Install</string>
-    <string name="apk_download_request_text">New Version</string>
-    <string name="apk_download_progress_title">Downloading....</string>
-    <string name="restore_warning_text">Warning</string>
-    <string name="dialog_msg_loss_data_warning">This operation will remove the unsent forms and this
-        might result in loss of data.\nPress Cancel to send unsent forms or Press OK to proceed.
+
+    <string name="looking_for_update">अद्यतने शोधत आहे ...</string>
+    <string name="dialog_app_updated_text">आपला अॅप अद्ययावत आहे</string>
+    <string name="invalid_server_url"> सर्व्हर त्रुटी.</string>
+    <string name="no_records_error_msg">रेकॉर्ड नाहीत</string>
+    <string name="dialog_update_available">अद्यतन उपलब्ध</string>
+    <string name="dialog_install_text">स्थापित करा</string>
+    <string name="apk_download_request_text">नवीन आवृत्ती</string>
+    <string name="apk_download_progress_title">डाऊनलोड करत आहे ....</string>
+    <string name="restore_warning_text">चेतावणी</string>
+    <string name="dialog_msg_loss_data_warning">हे ऑपरेशन नकारण फॉर्म आणि हे काढून टाकेल
+        कदाचित डेटा गमावला जाऊ शकेल. \ n न पाठवलेले फॉर्म पाठविण्यासाठी रद्द करा दाबा किंवा पुढे जाण्यासाठी ओके दाबा
     </string>
 
 </resources>

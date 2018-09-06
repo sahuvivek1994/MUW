@@ -67,7 +67,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = utility.getDatabase().rawQuery("SELECT * FROM \n" +
                 "\t(SELECT current.unique_id,current.form_id,reg.name FROM current_form_status AS current LEFT JOIN registration AS reg on current.unique_id = reg.unique_id)\n" +
-                "\tWHERE form_id != 5", null);
+                "\tWHERE form_id != 10", null);
 
         while (cursor.moveToNext()) {
             list.add(new IncompleteFiledForm(cursor.getString(cursor.getColumnIndex("unique_id")), cursor.getString(cursor.getColumnIndex("name")),

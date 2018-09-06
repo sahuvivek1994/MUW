@@ -27,6 +27,7 @@
     <color name="highrisk">#f44336</color>
     <color name="anc_form_dependent">#EF6C00</color>
     <color name="grey">#888</color>
+    <color name="lightgrey">#e6e4e4</color>
     <color name="color_incomplete">#FF9800</color>
 
 </resources>
