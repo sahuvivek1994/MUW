@@ -3,12 +3,10 @@ package com.inscripts.ins_armman.npdsf.forms;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.widget.LinearLayout;
 
 import com.inscripts.ins_armman.npdsf.R;
 import com.inscripts.ins_armman.npdsf.database.DatabaseContract;
-import com.inscripts.ins_armman.npdsf.database.DatabaseContract.RegistrationTable;
 import com.inscripts.ins_armman.npdsf.utility.utility;
 
 import java.text.SimpleDateFormat;
@@ -92,21 +90,21 @@ public class QuestionInteractor {
 
     public int currentFormStatus(String uniqueId, int formId, int completionStatus, String createdOn) {
         ContentValues values = new ContentValues();
-        values.put(DatabaseContract.currentFormStatus.COLUMN_UNIQUE_ID, uniqueId);
-        values.put(DatabaseContract.currentFormStatus.COLUMN_FORM_ID, formId);
-        values.put(DatabaseContract.currentFormStatus.COLUMN_FORM_COMPLETION_STATUS, completionStatus);
-        values.put(DatabaseContract.currentFormStatus.COLUMN_CREATED_ON, createdOn);
+        values.put(DatabaseContract.CurrentFormStatus.COLUMN_UNIQUE_ID, uniqueId);
+        values.put(DatabaseContract.CurrentFormStatus.COLUMN_FORM_ID, formId);
+        values.put(DatabaseContract.CurrentFormStatus.COLUMN_FORM_COMPLETION_STATUS, completionStatus);
+        values.put(DatabaseContract.CurrentFormStatus.COLUMN_CREATED_ON, createdOn);
 
-        return (int) utility.getDatabase().insert(DatabaseContract.currentFormStatus.TABLE_NAME, null, values);
+        return (int) utility.getDatabase().insert(DatabaseContract.CurrentFormStatus.TABLE_NAME, null, values);
     }
 
     public void currentFormUpdate(String uniqueID, int formID) {
         ContentValues values = new ContentValues();
-        values.put(DatabaseContract.currentFormStatus.COLUMN_FORM_ID, formID);
+        values.put(DatabaseContract.CurrentFormStatus.COLUMN_FORM_ID, formID);
 
-        utility.getDatabase().update(DatabaseContract.currentFormStatus.TABLE_NAME
+        utility.getDatabase().update(DatabaseContract.CurrentFormStatus.TABLE_NAME
                 , values
-                , DatabaseContract.currentFormStatus.COLUMN_UNIQUE_ID + " = ? "
+                , DatabaseContract.CurrentFormStatus.COLUMN_UNIQUE_ID + " = ? "
                 , new String[]{String.valueOf(uniqueID)});
     }
 
@@ -448,4 +446,35 @@ public class QuestionInteractor {
 
         return cursor.moveToFirst() ? cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_DOB)) : "";
     }
+
+    public ArrayList<String> getChildrenUniqueID(String uniqueId){
+        ArrayList<String> uniqueIds = new ArrayList<>();
+        Cursor cursor = utility.getDatabase().query(DatabaseContract.RegistrationTable.TABLE_NAME,
+                new String[]{DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID},
+                DatabaseContract.RegistrationTable.COLUMN_MOTHER_ID + " = ? ",
+                new String[]{uniqueId},null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()){
+            do {
+                uniqueIds.add(cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID)));
+            }while (cursor.moveToNext());
+
+            return uniqueIds;
+        }
+
+        return null;
+    }
+
+    public void updateChildRegistration(String childName, String uniqueId){
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.RegistrationTable.COLUMN_FIRST_NAME, childName);
+        values.put(DatabaseContract.RegistrationTable.COLUMN_REGISTRATION_STATUS, 1);
+
+        utility.getDatabase().update(DatabaseContract.RegistrationTable.TABLE_NAME,
+                values,
+                DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID + " = ?",
+                new String[]{uniqueId});
+
+    }
+
 }

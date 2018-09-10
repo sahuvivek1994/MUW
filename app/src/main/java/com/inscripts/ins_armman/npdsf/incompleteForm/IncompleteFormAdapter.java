@@ -49,7 +49,7 @@ public class IncompleteFormAdapter extends RecyclerView.Adapter<IncompleteFormAd
     }
 
     public interface OnItemClickListener {
-        void onItemClick(String uniqueId, String form_id);
+        void onItemClick(String uniqueId, int form_id);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,14 +66,18 @@ public class IncompleteFormAdapter extends RecyclerView.Adapter<IncompleteFormAd
         private void bindData(final IncompleteFiledForm listModel) {
             if (listModel != null) {
                 textViewName.setText(listModel.getName());
-            }
 
-            constraintLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mOnItemClickListener.onItemClick(listModel.getUniqueId(), listModel.getFormId());
-                }
-            });
+
+                constraintLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int formIdToOpen = Integer.parseInt(listModel.getFormId());
+                        if (listModel.getFormCompleteStatus() == 1)
+                            formIdToOpen = formIdToOpen +  1;
+                        mOnItemClickListener.onItemClick(listModel.getUniqueId(), formIdToOpen);
+                    }
+                });
+            }
         }
     }
 }

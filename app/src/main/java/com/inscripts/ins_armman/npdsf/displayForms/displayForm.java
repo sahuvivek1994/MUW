@@ -57,7 +57,6 @@ import android.widget.Toast;
 
 import com.clutch.dates.StringToTime;
 import com.inscripts.ins_armman.npdsf.R;
-import com.inscripts.ins_armman.npdsf.database.DatabaseContract;
 import com.inscripts.ins_armman.npdsf.forms.DecimalDigitsInputFilter;
 import com.inscripts.ins_armman.npdsf.forms.Label;
 import com.inscripts.ins_armman.npdsf.forms.QuestionInteractor;
@@ -114,12 +113,6 @@ import static com.inscripts.ins_armman.npdsf.utility.Keywords.CHILD_CLOSE_REASON
 import static com.inscripts.ins_armman.npdsf.utility.Keywords.CHILD_DEATH_DATE;
 import static com.inscripts.ins_armman.npdsf.utility.Keywords.CHILD_DEATH_REASON;
 import static com.inscripts.ins_armman.npdsf.utility.Keywords.CHILD_DOB;
-import static com.inscripts.ins_armman.npdsf.utility.Keywords.DELIVERY_DATE;
-import static com.inscripts.ins_armman.npdsf.utility.Keywords.FIRST_NAME;
-import static com.inscripts.ins_armman.npdsf.utility.Keywords.GENDER;
-import static com.inscripts.ins_armman.npdsf.utility.Keywords.LAST_NAME;
-import static com.inscripts.ins_armman.npdsf.utility.Keywords.LIVE_CHILDREN_COUNT;
-import static com.inscripts.ins_armman.npdsf.utility.Keywords.MIDDLE_NAME;
 import static com.inscripts.ins_armman.npdsf.utility.Keywords.MOTHER_CLOSE_REASON;
 import static com.inscripts.ins_armman.npdsf.utility.Keywords.MOTHER_DEATH_DATE;
 import static com.inscripts.ins_armman.npdsf.utility.Keywords.MOTHER_DEATH_REASON;
@@ -262,6 +255,7 @@ public class displayForm extends AppCompatActivity {
     private int overDueVisitsCount, dueVisitsCount;
     private String uniqueId = "";
     private String childUniqueId = "";
+    private ArrayList<String> childsUniqueIds;
     private String mAppLanguage;
 
     /**
@@ -481,9 +475,11 @@ public class displayForm extends AppCompatActivity {
 
     public void NextButtonValidations() {
         try {
-            if(Backup_answerTyped1.containsKey("child_name"))
+            if(Backup_answerTyped1.containsKey("child_count"))
             {
-                childUniqueId = questionInteractor.saveRegistrationDetails(Backup_answerTyped1.get("child_name"), "", "", "", "","", uniqueId,1);
+                for (int i = 0; i < Integer.valueOf(Backup_answerTyped1.get("child_count")); i++) {
+                    childUniqueId = questionInteractor.saveRegistrationDetails("", "", "", "", "","", uniqueId,0);
+                }
             }
 
             int counter = 0;
@@ -555,9 +551,17 @@ public class displayForm extends AppCompatActivity {
              */
 
             if (totalpagecondition == counter) {
-                previous.setVisibility(View.VISIBLE);
 
-                questionInteractor.saveQuestionAnswers(Backup_answerTyped1, maxautoId, uniqueId, Integer.parseInt(formid), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(new Date()));
+                if (Backup_answerTyped1.containsKey("child_name"))
+                    questionInteractor.updateChildRegistration(Backup_answerTyped1.get("child_name"), childUniqueId);
+                
+                previous.setVisibility(View.VISIBLE);
+                if (!formid.equals("6") && !formid.equals("7")
+                        && !formid.equals("8") && !formid.equals("9"))
+                    questionInteractor.saveQuestionAnswers(Backup_answerTyped1, maxautoId, uniqueId, Integer.parseInt(formid), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(new Date()));
+                else
+                    questionInteractor.saveQuestionAnswers(Backup_answerTyped1, maxautoId, childUniqueId, Integer.parseInt(formid), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(new Date()));
+
 
                 Backup_answerTyped1.clear();
 
@@ -578,8 +582,11 @@ public class displayForm extends AppCompatActivity {
                     scroll_temp = (ScrollView) Frame.findViewById(Integer.parseInt(String.valueOf(scrollId.get(scrollcounter))));
                     scroll_temp.setVisibility(View.VISIBLE);
 
+                    
+
                     questionInteractor.updateFormCompletionStatus(maxautoId);
-                    questionInteractor.currentFormUpdate(uniqueId, FormID);
+                    //TODO: Remove all currentTable code from project
+//                    questionInteractor.currentFormUpdate(uniqueId, FormID);
                  //   questionInteractor.updateChildRegistrationDetails(uniqueId, womendetails.get(FIRST_NAME), womendetails.get(MIDDLE_NAME), womendetails.get(LAST_NAME), womendetails.get(GENDER));
                     if (!ImportantDialogStatus) {
                         ImportantNote_Dialog();
@@ -4188,7 +4195,7 @@ public class displayForm extends AppCompatActivity {
     if(number_of_children == 0)
     {
 
-        if (FormID <=5 && FormID >=9 ) {
+        if (FormID > 5) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(displayForm.this);
 
@@ -4223,9 +4230,12 @@ public class displayForm extends AppCompatActivity {
                     }
                     else
                     {
+
+
+
                         String formNumber = String.valueOf(FormID + 1);
                         Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                        intent2.putExtra(UNIQUE_ID, childUniqueId);
+                        intent2.putExtra(UNIQUE_ID, uniqueId);
                         intent2.putExtra(FORM_ID, formNumber);
                         intent2.putExtra("child",number_of_children);
                         intent2.putExtra("childcounter",child_entry_counter);
@@ -4269,7 +4279,7 @@ public class displayForm extends AppCompatActivity {
           if(FormID == 9)
           {
               Intent intent2 = new Intent(displayForm.this, displayForm.class);
-              intent2.putExtra(UNIQUE_ID, childUniqueId);
+              intent2.putExtra(UNIQUE_ID, uniqueId);
               intent2.putExtra(FORM_ID, "6");
               intent2.putExtra("child",number_of_children);
               intent2.putExtra("childcounter",child_entry_counter + 1);
@@ -4279,7 +4289,7 @@ public class displayForm extends AppCompatActivity {
           {
               String formNumber = String.valueOf(FormID + 1);
               Intent intent2 = new Intent(displayForm.this, displayForm.class);
-              intent2.putExtra(UNIQUE_ID, childUniqueId);
+              intent2.putExtra(UNIQUE_ID, uniqueId);
               intent2.putExtra(FORM_ID, formNumber);
               intent2.putExtra("child",number_of_children);
               intent2.putExtra("childcounter",child_entry_counter);
@@ -4295,7 +4305,7 @@ public class displayForm extends AppCompatActivity {
           {
               String formNumber = String.valueOf(FormID + 1);
               Intent intent2 = new Intent(displayForm.this, displayForm.class);
-              intent2.putExtra(UNIQUE_ID, childUniqueId);
+              intent2.putExtra(UNIQUE_ID, uniqueId);
               intent2.putExtra(FORM_ID, formNumber);
               intent2.putExtra("child",number_of_children);
               intent2.putExtra("childcounter",child_entry_counter + 1);
@@ -4551,6 +4561,7 @@ public class displayForm extends AppCompatActivity {
             questionInteractor.updateFormCompletionStatus(maxautoId);
 
             if (highrisklist.size() > 0) {
+                //TODO: ADD HIGHRISK CODE for CHILD if comes
                 questionInteractor.saveReferralData(highrisklist, uniqueId, formid);
                /* insertedRowIdReferralWomenTable = dbhelper.inserthighriskwomen(highrisklist, "" + uniqueId, dbhelper.getANMInfo("ANMSubCenterId"), "");
                 dbhelper.updatehighrisklist(uniqueId, "1");*/
@@ -5809,7 +5820,10 @@ public class displayForm extends AppCompatActivity {
             child_entry_counter = b.getInt("childcounter");
             uniqueId = b.getString(UNIQUE_ID);
 
+
             questionInteractor = new QuestionInteractor(displayForm.this);
+
+
 
             mAppLanguage = utility.getLanguagePreferance(getApplicationContext());
 
@@ -5840,13 +5854,28 @@ public class displayForm extends AppCompatActivity {
             YMDFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             DMYFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
-            maxautoId = questionInteractor.getFilledFormReferenceId(uniqueId, String.valueOf(FormID));
-            if (maxautoId == -1) {
-                maxautoId = questionInteractor.saveFilledFormStatus(uniqueId, FormID, 0, 0, utility.getCurrentDateTime());
+            String uniqueIDToUse = uniqueId;
+            if (formid.equals("6") || formid.equals("7")
+                    || formid.equals("8") || formid.equals("9")){
+                childsUniqueIds = questionInteractor.getChildrenUniqueID(uniqueId);
+
+                if (child_entry_counter == 0)
+                    child_entry_counter = 1;
+
+                number_of_children = childsUniqueIds.size();
+                childUniqueId = childsUniqueIds.get(child_entry_counter - 1);
+                uniqueIDToUse = childUniqueId;
             }
 
-            previousVisitDetails = questionInteractor.getFormFilledData(uniqueId, (FormID - 1));
-            womendetails = questionInteractor.getFormFilledData(uniqueId, FormID);
+
+            maxautoId = questionInteractor.getFilledFormReferenceId(uniqueIDToUse, String.valueOf(FormID));
+
+            if (maxautoId == -1) {
+                maxautoId = questionInteractor.saveFilledFormStatus(uniqueIDToUse, FormID, 0, 0, utility.getCurrentDateTime());
+            }
+
+            previousVisitDetails = questionInteractor.getFormFilledData(uniqueIDToUse, (FormID - 1));
+            womendetails = questionInteractor.getFormFilledData(uniqueIDToUse, FormID);
             Frame = (FrameLayout) findViewById(R.id.frame);
             next = (Button) findViewById(R.id.btnNext);
             previous = (Button) findViewById(R.id.btnpre);

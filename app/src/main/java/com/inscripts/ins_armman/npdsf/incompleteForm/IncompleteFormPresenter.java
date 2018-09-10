@@ -1,6 +1,9 @@
 package com.inscripts.ins_armman.npdsf.incompleteForm;
 
+import android.database.Cursor;
+
 import com.inscripts.ins_armman.npdsf.data.model.IncompleteFiledForm;
+import com.inscripts.ins_armman.npdsf.database.DatabaseContract.FilledFormStatusTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +28,17 @@ public class IncompleteFormPresenter implements IncompletePresenter<IncompleteVi
     }
 
     @Override
-    public void GetListIncompleteForm() {
+    public void getListInCompleteForm() {
         List<IncompleteFiledForm> womenList = new ArrayList<>();
-        womenList = incompleteFormInteractor.FetchListIncompleteForm();
+        Cursor cursor = incompleteFormInteractor.fetchListIncompleteForm();
+        if (cursor != null && cursor.moveToFirst())
+            do {
+                womenList.add(new IncompleteFiledForm(cursor.getString(cursor.getColumnIndex("unique_id")),
+                        cursor.getString(cursor.getColumnIndex("name")),
+                        cursor.getString(cursor.getColumnIndex("form_id")),
+                        cursor.getInt(cursor.getColumnIndex(FilledFormStatusTable.COLUMN_FORM_COMPLETION_STATUS))));
+            }while (cursor.moveToNext()) ;
+
         incompleteView.setAdapter(womenList);
     }
 }

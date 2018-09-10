@@ -833,6 +833,9 @@ public class SettingInteractor implements ISettingInteractor, LoaderManager.Load
                 publishProgress(++mProgress);
             }
 
+            utility.getDatabase().setTransactionSuccessful();
+            utility.getDatabase().endTransaction();
+
             return null;
         }
 

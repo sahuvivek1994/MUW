@@ -9,6 +9,6 @@ import com.inscripts.ins_armman.npdsf.utility.IBasePresenter;
 public interface IncompletePresenter<v> extends IBasePresenter<v> {
 
 
-    public void GetListIncompleteForm();
+    public void getListInCompleteForm();
 
 }

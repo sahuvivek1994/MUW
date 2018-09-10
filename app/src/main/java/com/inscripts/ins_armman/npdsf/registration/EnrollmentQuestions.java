@@ -687,7 +687,7 @@ public class EnrollmentQuestions extends AppCompatActivity {
                             // upload status as 0 i.e not uploaded to the server
 //                                dbhelper.saveFormUploadStatus(uniqueId, formID, 0, 1, "", "", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(new Date()));
                             int referenceId = questionInteractor.saveFilledFormStatus(uniqueId, Integer.parseInt(formID), 1, 0, utility.getCurrentDateTime());
-                            int id = questionInteractor.currentFormStatus(uniqueId, Integer.parseInt(formID), 1, utility.getCurrentDateTime());
+//                            int id = questionInteractor.currentFormStatus(uniqueId, Integer.parseInt(formID), 1, utility.getCurrentDateTime());
 
 //                                dbhelper.insertanswer(womenanswer, formid, uniqueId); // this insert statement is used to insert all the data entered by the user in localDB
                             questionInteractor.saveQuestionAnswers(womendetails, referenceId, uniqueId, Integer.parseInt(formID), utility.getCurrentDateTime());

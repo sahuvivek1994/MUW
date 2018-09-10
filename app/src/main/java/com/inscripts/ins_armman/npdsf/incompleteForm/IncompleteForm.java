@@ -77,14 +77,15 @@ public class IncompleteForm extends AppCompatActivity implements IncompleteView 
         if (mIncompleteFormAdapter == null) {
             mIncompleteFormAdapter = new IncompleteFormAdapter(IncompleteForm.this, womenList, new IncompleteFormAdapter.OnItemClickListener() {
                 @Override
-                public void onItemClick(String uniqueId, String form_id) {
-                    int FormID = Integer.parseInt(form_id);
-                    String formNumber = String.valueOf(FormID + 1);
+                public void onItemClick(String uniqueId, int form_id) {
+
 
                     Intent intent2 = new Intent(IncompleteForm.this, displayForm.class);
                     intent2.putExtra(UNIQUE_ID, uniqueId);
-                    intent2.putExtra(FORM_ID, formNumber);
+                    intent2.putExtra(FORM_ID, String.valueOf(form_id));
+                    //child =  total childrens
                     intent2.putExtra("child",0);
+                    //childcounter is current childs
                     intent2.putExtra("childcounter",1);
                     startActivity(intent2);
                     finish();
@@ -101,6 +102,6 @@ public class IncompleteForm extends AppCompatActivity implements IncompleteView 
     @Override
     protected void onResume() {
         super.onResume();
-        incompletePresenter.GetListIncompleteForm();
+        incompletePresenter.getListInCompleteForm();
     }
 }

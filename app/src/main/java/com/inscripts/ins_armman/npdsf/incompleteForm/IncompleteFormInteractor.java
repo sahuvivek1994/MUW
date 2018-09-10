@@ -1,6 +1,7 @@
 package com.inscripts.ins_armman.npdsf.incompleteForm;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.inscripts.ins_armman.npdsf.data.model.IncompleteFiledForm;
 import com.inscripts.ins_armman.npdsf.database.DBHelper;
@@ -22,7 +23,7 @@ public class IncompleteFormInteractor implements IncompleteInteractor {
     }
 
     @Override
-    public List<IncompleteFiledForm> FetchListIncompleteForm() {
+    public Cursor fetchListIncompleteForm() {
         return dbHelper.getIncompleteFormListList();
     }
 }

@@ -10,7 +10,7 @@ public final class DatabaseContract {
 
 
     public static final String DATABASE_NAME = "Npdsf.sr";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DB_LOCATION = Environment.getExternalStorageDirectory() + "/NPDSF";
 
 
@@ -254,7 +254,7 @@ public final class DatabaseContract {
                 COLUMN_ORDER_ID + TEXT_TYPE + ")";
     }
 
-    public static final class currentFormStatus {
+    public static final class CurrentFormStatus {
         public static final String TABLE_NAME = "current_form_status";
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_UNIQUE_ID = "unique_id";
