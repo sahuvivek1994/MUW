@@ -68,9 +68,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return utility.getDatabase().rawQuery("SELECT * FROM \n" +
                 "\t(SELECT current.unique_id,current.form_id,reg.name, current.form_completion_status \n" +
                 "\tFROM filled_forms_status AS current \n" +
-                " JOIN registration AS reg on current.unique_id = reg.unique_id AND reg.mother_id is null)\n" +
-                "\tWHERE form_id != 10" +
-                "\tGROUP BY unique_id", null);
+                " JOIN registration AS reg on current.unique_id = reg.unique_id AND (reg.mother_id is null OR reg.mother_id = '') \n" +
+                " AND current.unique_id NOT IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10 AND form_completion_status = 1))\n" +
+                " GROUP BY unique_id", null);
     }
 
 

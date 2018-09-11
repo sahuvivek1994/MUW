@@ -4276,7 +4276,7 @@ public class displayForm extends AppCompatActivity {
   {
       if(child_entry_counter <= number_of_children)
       {
-          if(FormID == 9)
+          if(FormID == 9 && child_entry_counter != number_of_children )
           {
               Intent intent2 = new Intent(displayForm.this, displayForm.class);
               intent2.putExtra(UNIQUE_ID, uniqueId);
@@ -4308,7 +4308,7 @@ public class displayForm extends AppCompatActivity {
               intent2.putExtra(UNIQUE_ID, uniqueId);
               intent2.putExtra(FORM_ID, formNumber);
               intent2.putExtra("child",number_of_children);
-              intent2.putExtra("childcounter",child_entry_counter + 1);
+              intent2.putExtra("childcounter",child_entry_counter);
               startActivity(intent2);
           }
           else if (FormID == 10)
