@@ -4196,66 +4196,67 @@ public class displayForm extends AppCompatActivity {
     {
 
         if (FormID > 5) {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(displayForm.this);
-
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.custome_child_dialogbox,null);
-
-            // Specify alert dialog is not cancelable/not ignorable
-            builder.setCancelable(false);
-
-            // Set the custom layout as alert dialog view
-            builder.setView(dialogView);
-
-            // Get the custom alert dialog view widgets reference
-            Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
-            Button btn_negative = (Button) dialogView.findViewById(R.id.dialog_negative_btn);
-            final EditText et_name = (EditText) dialogView.findViewById(R.id.et_no_child);
-
-            // Create the alert dialog
-            final AlertDialog dialog = builder.create();
-
-            // Set positive/yes button click listener
-            btn_positive.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Dismiss the alert dialog
-                    dialog.cancel();
-                    number_of_children = Integer.parseInt(et_name.getText().toString());
-                    if(number_of_children == 0)
-                    {
-                        Intent intent = new Intent(displayForm.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                    else
-                    {
-
-
-
-                        String formNumber = String.valueOf(FormID + 1);
-                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                        intent2.putExtra(UNIQUE_ID, uniqueId);
-                        intent2.putExtra(FORM_ID, formNumber);
-                        intent2.putExtra("child",number_of_children);
-                        intent2.putExtra("childcounter",child_entry_counter);
-                        startActivity(intent2);
-                    }
-                }
-            });
-
-            // Set negative/no button click listener
-            btn_negative.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    Intent intent = new Intent(displayForm.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            });
-
-            // Display the custom alert dialog on interface
-            dialog.show();
+            Intent intent = new Intent(displayForm.this, MainActivity.class);
+            startActivity(intent);
+//            AlertDialog.Builder builder = new AlertDialog.Builder(displayForm.this);
+//
+//            LayoutInflater inflater = getLayoutInflater();
+//            View dialogView = inflater.inflate(R.layout.custome_child_dialogbox,null);
+//
+//            // Specify alert dialog is not cancelable/not ignorable
+//            builder.setCancelable(false);
+//
+//            // Set the custom layout as alert dialog view
+//            builder.setView(dialogView);
+//
+//            // Get the custom alert dialog view widgets reference
+//            Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
+//            Button btn_negative = (Button) dialogView.findViewById(R.id.dialog_negative_btn);
+//            final EditText et_name = (EditText) dialogView.findViewById(R.id.et_no_child);
+//
+//            // Create the alert dialog
+//            final AlertDialog dialog = builder.create();
+//
+//            // Set positive/yes button click listener
+//            btn_positive.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    // Dismiss the alert dialog
+//                    dialog.cancel();
+//                    number_of_children = Integer.parseInt(et_name.getText().toString());
+//                    if(number_of_children == 0)
+//                    {
+//                        Intent intent = new Intent(displayForm.this, MainActivity.class);
+//                        startActivity(intent);
+//                    }
+//                    else
+//                    {
+//
+//
+//
+//                        String formNumber = String.valueOf(FormID + 1);
+//                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
+//                        intent2.putExtra(UNIQUE_ID, uniqueId);
+//                        intent2.putExtra(FORM_ID, formNumber);
+//                        intent2.putExtra("child",number_of_children);
+//                        intent2.putExtra("childcounter",child_entry_counter);
+//                        startActivity(intent2);
+//                    }
+//                }
+//            });
+//
+//            // Set negative/no button click listener
+//            btn_negative.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                    Intent intent = new Intent(displayForm.this, MainActivity.class);
+//                    startActivity(intent);
+//                }
+//            });
+//
+//            // Display the custom alert dialog on interface
+//            dialog.show();
 
         }
         else if(FormID == 10)
@@ -4285,6 +4286,21 @@ public class displayForm extends AppCompatActivity {
               intent2.putExtra("childcounter",child_entry_counter + 1);
               startActivity(intent2);
           }
+          else if (FormID == 10)
+          {
+              Intent intent = new Intent(displayForm.this, MainActivity.class);
+              startActivity(intent);
+          }
+          else if(FormID == 9 && child_entry_counter > number_of_children)
+          {
+              String formNumber = String.valueOf(FormID + 1);
+              Intent intent2 = new Intent(displayForm.this, displayForm.class);
+              intent2.putExtra(UNIQUE_ID, uniqueId);
+              intent2.putExtra(FORM_ID, formNumber);
+              intent2.putExtra("child",number_of_children);
+              intent2.putExtra("childcounter",child_entry_counter);
+              startActivity(intent2);
+          }
           else
           {
               String formNumber = String.valueOf(FormID + 1);
@@ -4293,31 +4309,10 @@ public class displayForm extends AppCompatActivity {
               intent2.putExtra(FORM_ID, formNumber);
               intent2.putExtra("child",number_of_children);
               intent2.putExtra("childcounter",child_entry_counter);
-              intent2.putExtra("child",0);
-              intent2.putExtra("childcounter",1);
               startActivity(intent2);
           }
 
       }
-      else if(child_entry_counter > number_of_children)
-      {
-          if(FormID == 9)
-          {
-              String formNumber = String.valueOf(FormID + 1);
-              Intent intent2 = new Intent(displayForm.this, displayForm.class);
-              intent2.putExtra(UNIQUE_ID, uniqueId);
-              intent2.putExtra(FORM_ID, formNumber);
-              intent2.putExtra("child",number_of_children);
-              intent2.putExtra("childcounter",child_entry_counter);
-              startActivity(intent2);
-          }
-          else if (FormID == 10)
-          {
-              Intent intent = new Intent(displayForm.this, MainActivity.class);
-              startActivity(intent);
-          }
-      }
-
   }
 
 //                    int count = ll.getChildCount();

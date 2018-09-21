@@ -37,7 +37,7 @@ public class IncompleteForm extends AppCompatActivity implements IncompleteView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incomplete_form);
-
+        setTitle("Incomplete Form");
         mProgressBar = findViewById(R.id.child_list_progress_bar);
         emptyLayout = findViewById(R.id.empty_layout);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);

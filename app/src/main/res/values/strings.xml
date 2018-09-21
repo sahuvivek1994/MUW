@@ -99,6 +99,7 @@
     <string name="nextvisit_text_part2">\t and it will be due on\t</string>
     <string name="nextvisit_text_part3">\t</string>
     <string name="Reg_women">No Incomplete Visit Found</string>
+    <string name="Reg_women_com">No complete Visit Found</string>
     <string name="incomplete_visit">Incomplete visit</string>
     <string name="uploading_forms">Uploading forms…</string>
 

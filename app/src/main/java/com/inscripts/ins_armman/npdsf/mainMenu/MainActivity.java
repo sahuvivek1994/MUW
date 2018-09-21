@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inscripts.ins_armman.npdsf.R;
+import com.inscripts.ins_armman.npdsf.completedForm.completedForm;
 import com.inscripts.ins_armman.npdsf.incompleteForm.IncompleteForm;
 import com.inscripts.ins_armman.npdsf.registration.EnrollmentQuestions;
 import com.inscripts.ins_armman.npdsf.settingActivity.Settings;
@@ -114,9 +115,8 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
                 break;
 
             case R.id.card3:
-                Toast.makeText(this, "In Progress", Toast.LENGTH_SHORT).show();
-                //  Intent intent = new Intent(MainActivity.this, HouseholdActivity.class);
-                //  startActivity(intent);
+                 Intent intent3 = new Intent(MainActivity.this, completedForm.class);
+                  startActivity(intent3);
 
                 break;
 

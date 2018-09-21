@@ -95,4 +95,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return utility.getDatabase().rawQuery(query, null);
     }
 
+    public Cursor getcompleteFormListList() {
+
+        return utility.getDatabase().rawQuery("SELECT name from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10)", null);
+    }
+
 }
