@@ -222,7 +222,6 @@ public class MainInteractor implements IMainInteractor, LoaderManager.LoaderCall
                 JSONObject object = jsonArray.getJSONObject(i);
                 if (object.optBoolean(STATUS)) {
                     values.put(DatabaseContract.RegistrationTable.COLUMN_SYNC_STATUS, 1);
-                    values.put(DatabaseContract.RegistrationTable.COLUMN_UPDATE_IMAGE_STATUS, 1);
                     values.put(DatabaseContract.RegistrationTable.COLUMN_FAILURE_STATUS, 0);
                     values.put(DatabaseContract.RegistrationTable.COLUMN_FAILURE_REASON, "");
                     utility.getDatabase().update(DatabaseContract.RegistrationTable.TABLE_NAME

@@ -33,7 +33,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".settingActivity.Settings"
-            android:label="@string/title_activity_setting" >
+            android:label="@string/title_activity_setting"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".mainMenu.MainActivity" />

@@ -50,23 +50,23 @@
     <string name="ok">ठीक</string>
     <string name="Toast_msg_for_formsavesuccessfully">फ़ॉर्म सफलतापूर्वक सहेजा गया</string>
     <string name="checkbox_select_msg">कृपया सभी चेकबॉक्स का चयन करें</string>
-    <string name="Important_Note">उत्तरदायी यात्रा</string>
-    <string name="confirm_dialog">Confirm</string>
+    <string name="Important_Note">फॉर्म सहेजा जा रहा है ...</string>
+    <string name="confirm_dialog">की पुष्टि करें</string>
     <string name="no_important_msg">कोई संदेश नहीं मिला</string>
     <string name="counselling_msg_txt">परामर्श संदेश</string>
-
+<!--need to change-->
     <string name="choose_video_player">वीडियो प्लेयर चुनें</string>
     <string name="no_handler_for_type">इस प्रकार की फाइल के लिए कोई हैंडलर नहीं।</string>
     <string name="file_not_exit_txt">दस्तावेज मौजूद नहीं है !!</string>
     <string name="anc_next_visit">अगली मुलाकात</string>
     <string name="nextvisit_text_part1">आपकी अगली यात्रा \ t है</string>
     <string name="all_anc_visits_comp_title">एएनसी पूरा पूरा करें</string>
-    <string name="all_anc_visits_comp_msg">महिलांच्या सर्व एएनसी भेटी पूर्ण झाल्या आहेत</string>
-    <string name="nextvisit_text_part2">\ t आणि ते \ t वर देय असेल</string>
+    <string name="all_anc_visits_comp_msg">महिलाओं के सभी एएनसी दौरे पूरे हो गए हैं</string>
+    <string name="nextvisit_text_part2">\ t और यह \ t पर देय होगा</string>
     <string name="nextvisit_text_part3">\t</string>
-    <string name="Reg_women">अपूर्ण भेट दिली नाही</string>
-    <string name="incomplete_visit">अपूर्ण भेट</string>
-    <string name="uploading_forms">फॉर्म अपलोड करीत आहे ...</string>
+    <string name="Reg_women">कोई अपूर्ण यात्रा नहीं मिली</string>
+    <string name="incomplete_visit">अपूर्ण यात्रा</string>
+    <string name="uploading_forms">फॉर्म अपलोड कर रहा है ...</string>
 
 
     <string name="downloading_data">डेटा डाउनलोड कर रहा है ...</string>
@@ -88,17 +88,17 @@
     <string name="loading_question">प्रश्न लोड हो रहा है ....</string>
     <string name="title_data_not_found">डेटा नहीं मिला</string>
     <string name="sync_forms_message">सेटिंग्स से फॉर्म सिंक करें \ n बाहर निकलने के लिए ओके बटन दबाएं</string>
-    <string name="looking_for_update">Looking for update…</string>
-    <string name="dialog_app_updated_text">Your app is up to date</string>
-    <string name="invalid_server_url"> Server Error.</string>
-    <string name="no_records_error_msg">No Records</string>
-    <string name="dialog_update_available">Update Available</string>
-    <string name="dialog_install_text">Install</string>
-    <string name="apk_download_request_text">New Version</string>
-    <string name="apk_download_progress_title">Downloading....</string>
-    <string name="restore_warning_text">Warning</string>
-    <string name="dialog_msg_loss_data_warning">This operation will remove the unsent forms and this
-        might result in loss of data.\nPress Cancel to send unsent forms or Press OK to proceed.
+    <string name="looking_for_update">अपडेट की तलाश में है ...</string>
+    <string name="dialog_app_updated_text">आपका ऐप अद्यतित है</string>
+    <string name="invalid_server_url">सर्वर त्रुटि।</string>
+    <string name="no_records_error_msg">कोई रिकॉर्ड नहीं</string>
+    <string name="dialog_update_available">अपडेट उपलब्ध</string>
+    <string name="dialog_install_text">इंस्टॉल करें</string>
+    <string name="apk_download_request_text">नया संस्करण</string>
+    <string name="apk_download_progress_title">डाउनलोड कर रहा है ....</string>
+    <string name="restore_warning_text">चेतावनी</string>
+    <string name="dialog_msg_loss_data_warning">यह ऑपरेशन असंतुलित रूपों और इस को हटा देगा
+        परिणामस्वरूप डेटा का नुकसान हो सकता है। \ n असंतोष फ़ॉर्म भेजने के लिए रद्द करें दबाएं या आगे बढ़ने के लिए ठीक दबाएं।
     </string>
-
+    <string name="Reg_women_com">कोई पूर्ण दौरा नहीं मिला</string>
 </resources>

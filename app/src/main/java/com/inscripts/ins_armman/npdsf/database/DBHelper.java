@@ -5,12 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.inscripts.ins_armman.npdsf.data.model.IncompleteFiledForm;
 import com.inscripts.ins_armman.npdsf.utility.utility;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.inscripts.ins_armman.npdsf.database.DatabaseContract.DATABASE_NAME;
 import static com.inscripts.ins_armman.npdsf.database.DatabaseContract.DATABASE_VERSION;
@@ -25,7 +22,6 @@ import static com.inscripts.ins_armman.npdsf.database.DatabaseContract.QuestionA
 import static com.inscripts.ins_armman.npdsf.database.DatabaseContract.QuestionOptionsTable;
 import static com.inscripts.ins_armman.npdsf.database.DatabaseContract.RegistrationTable;
 import static com.inscripts.ins_armman.npdsf.database.DatabaseContract.ValidationsTable;
-import static com.inscripts.ins_armman.npdsf.database.DatabaseContract.currentFormStatus;
 
 /**
  * This class is used to create and update local database
@@ -54,26 +50,27 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(QuestionAnswerTable.CREATE_TABLE);
         db.execSQL(ValidationsTable.CREATE_TABLE);
         db.execSQL(FilledFormStatusTable.CREATE_TABLE);
-        db.execSQL(currentFormStatus.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (oldVersion < 2){
+            upgradeVersion2(db);
+        }
     }
 
-    public List<IncompleteFiledForm> getIncompleteFormListList() {
-        List<IncompleteFiledForm> list = new ArrayList<>();
+    private void upgradeVersion2(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE " + DatabaseContract.CurrentFormStatus.TABLE_NAME);
+    }
 
+    public Cursor getIncompleteFormListList() {
 
-        Cursor cursor = utility.getDatabase().rawQuery("SELECT * FROM \n" +
-                "\t(SELECT current.unique_id,current.form_id,reg.name FROM current_form_status AS current LEFT JOIN registration AS reg on current.unique_id = reg.unique_id)\n" +
-                "\tWHERE form_id != 5", null);
-
-        while (cursor.moveToNext()) {
-            list.add(new IncompleteFiledForm(cursor.getString(cursor.getColumnIndex("unique_id")), cursor.getString(cursor.getColumnIndex("name")),
-                    cursor.getString(cursor.getColumnIndex("form_id"))));
-        }
-        return list;
+        return utility.getDatabase().rawQuery("SELECT * FROM \n" +
+                "\t(SELECT current.unique_id,current.form_id,reg.name, current.form_completion_status \n" +
+                "\tFROM filled_forms_status AS current \n" +
+                " JOIN registration AS reg on current.unique_id = reg.unique_id AND (reg.mother_id is null OR reg.mother_id = '') \n" +
+                " AND current.unique_id NOT IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10 AND form_completion_status = 1))\n" +
+                " GROUP BY unique_id", null);
     }
 
 
@@ -84,7 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = utility.getDatabase().rawQuery(query, null);
 
-        if (cursor.moveToFirst() && cursor != null) {
+        if ( cursor != null && cursor.moveToFirst()) {
             status = cursor.getString(cursor.getColumnIndex("remaining"));
             cursor.close();
         } else {
@@ -95,8 +92,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor fetchUserDetails() {
         String query = "SELECT name,phone_no FROM " + LoginTable.TABLE_NAME;
-        Cursor cursor = utility.getDatabase().rawQuery(query, null);
-        return cursor;
+        return utility.getDatabase().rawQuery(query, null);
+    }
+
+    public Cursor getcompleteFormListList() {
+
+        return utility.getDatabase().rawQuery("SELECT name from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10)", null);
     }
 
 }

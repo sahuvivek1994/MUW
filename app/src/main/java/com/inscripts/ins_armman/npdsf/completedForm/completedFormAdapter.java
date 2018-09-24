@@ -1,5 +1,4 @@
-package com.inscripts.ins_armman.npdsf.incompleteForm;
-
+package com.inscripts.ins_armman.npdsf.completedForm;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
@@ -10,20 +9,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.inscripts.ins_armman.npdsf.R;
-import com.inscripts.ins_armman.npdsf.data.model.IncompleteFiledForm;
+import com.inscripts.ins_armman.npdsf.data.model.completeFiledForm;
 
 import java.util.List;
 
-/**
- * @author Aniket & Vivek  Created on 4/9/2018
- */
 
-public class IncompleteFormAdapter extends RecyclerView.Adapter<IncompleteFormAdapter.ViewHolder> {
+public class completedFormAdapter extends RecyclerView.Adapter<completedFormAdapter.ViewHolder> {
+
     private Context mContext;
-    private List<IncompleteFiledForm> mWomenList;
-    private IncompleteFormAdapter.OnItemClickListener mOnItemClickListener;
+    private List<completeFiledForm> mWomenList;
+    private completedFormAdapter.OnItemClickListener mOnItemClickListener;
 
-    public IncompleteFormAdapter(Context mContext, List<IncompleteFiledForm> womenList, IncompleteFormAdapter.OnItemClickListener mOnItemClickListener) {
+    public completedFormAdapter(Context mContext, List<completeFiledForm> womenList, completedFormAdapter.OnItemClickListener mOnItemClickListener) {
         this.mContext = mContext;
         this.mWomenList = womenList;
         this.mOnItemClickListener = mOnItemClickListener;
@@ -35,7 +32,7 @@ public class IncompleteFormAdapter extends RecyclerView.Adapter<IncompleteFormAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int i) {
+    public void onBindViewHolder(completedFormAdapter.ViewHolder holder, int i) {
         holder.bindData(mWomenList.get(i));
     }
 
@@ -44,17 +41,17 @@ public class IncompleteFormAdapter extends RecyclerView.Adapter<IncompleteFormAd
         return mWomenList.size();
     }
 
-    public void swapDataList(List<IncompleteFiledForm> womenList) {
+    public void swapDataList(List<completeFiledForm> womenList) {
         this.mWomenList = womenList;
     }
 
     public interface OnItemClickListener {
-        void onItemClick(String uniqueId, int form_id);
+        void onItemClick();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewName, incompleteVisitlabel;
+        TextView textViewName;
         ConstraintLayout constraintLayout;
 
         public ViewHolder(View itemView) {
@@ -63,7 +60,7 @@ public class IncompleteFormAdapter extends RecyclerView.Adapter<IncompleteFormAd
             constraintLayout = itemView.findViewById(R.id.constraint_layout_root);
         }
 
-        private void bindData(final IncompleteFiledForm listModel) {
+        private void bindData(final completeFiledForm listModel) {
             if (listModel != null) {
                 textViewName.setText(listModel.getName());
 
@@ -71,10 +68,7 @@ public class IncompleteFormAdapter extends RecyclerView.Adapter<IncompleteFormAd
                 constraintLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int formIdToOpen = Integer.parseInt(listModel.getFormId());
-                        if (listModel.getFormCompleteStatus() == 1)
-                            formIdToOpen = formIdToOpen +  1;
-                        mOnItemClickListener.onItemClick(listModel.getUniqueId(), formIdToOpen);
+//                        Toast.makeText(mContext, "Hello", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

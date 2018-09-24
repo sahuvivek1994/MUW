@@ -9,7 +9,7 @@ public interface Url {
     //API V2 added after data sync error message structure changed
 
     // String BASE_URL = "http://aww.armman.org/nutrition_API/";
-    String BASE_URL = "http://192.168.0.203/npdsf-web/NPDSF_API/";
+    String BASE_URL = "http://aww.armman.org/nutrition_API/";
 
     String AUTHENTICATE = "authenticate";
     String DOWNLOAD_FORMS = "newjson";

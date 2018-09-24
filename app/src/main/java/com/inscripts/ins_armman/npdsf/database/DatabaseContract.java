@@ -10,7 +10,7 @@ public final class DatabaseContract {
 
 
     public static final String DATABASE_NAME = "Npdsf.sr";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DB_LOCATION = Environment.getExternalStorageDirectory() + "/NPDSF";
 
 
@@ -49,10 +49,8 @@ public final class DatabaseContract {
         public static final String COLUMN_MOBILE_NO = "phone_no";
         public static final String COLUMN_EDUCATION = "education";
         public static final String COLUMN_CREATED_ON = "created_on";
-        public static final String COLUMN_CLOSE_STATUS = "close_status";
         public static final String COLUMN_SYNC_STATUS = "sync_status";
         public static final String COLUMN_REGISTRATION_STATUS = "registration_status";
-        public static final String COLUMN_UPDATE_IMAGE_STATUS = "update_image_status";
         /*COLUMN_FAILURE_STATUS and COLUMN_FAILURE_REASON column is to maintain
             data sync failure status and reason
          */
@@ -72,10 +70,8 @@ public final class DatabaseContract {
                 COLUMN_MOBILE_NO + TEXT_TYPE + COMMA_SEP +
                 COLUMN_EDUCATION + TEXT_TYPE + COMMA_SEP +
                 COLUMN_CREATED_ON + TEXT_TYPE + COMMA_SEP +
-                COLUMN_CLOSE_STATUS + INTEGER_TYPE + " DEFAULT 0" + COMMA_SEP +
                 COLUMN_SYNC_STATUS + INTEGER_TYPE + " DEFAULT 0" + COMMA_SEP +
                 COLUMN_REGISTRATION_STATUS + INTEGER_TYPE + " DEFAULT 0" + COMMA_SEP +
-                COLUMN_UPDATE_IMAGE_STATUS + INTEGER_TYPE + " DEFAULT 1" + COMMA_SEP +
                 COLUMN_FAILURE_STATUS + INTEGER_TYPE + " DEFAULT 0 " + COMMA_SEP +
                 COLUMN_FAILURE_REASON + TEXT_TYPE +
                 ")";
@@ -258,7 +254,7 @@ public final class DatabaseContract {
                 COLUMN_ORDER_ID + TEXT_TYPE + ")";
     }
 
-    public static final class currentFormStatus {
+    public static final class CurrentFormStatus {
         public static final String TABLE_NAME = "current_form_status";
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_UNIQUE_ID = "unique_id";

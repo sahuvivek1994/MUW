@@ -7,11 +7,21 @@ package com.inscripts.ins_armman.npdsf.data.model;
 public class IncompleteFiledForm {
 
     String uniqueId, name, formId;
+    int formCompleteStatus;
 
-    public IncompleteFiledForm(String UniqueId, String Name, String FormId) {
-        this.uniqueId = UniqueId;
-        this.name = Name;
-        this.formId = FormId;
+    public IncompleteFiledForm(String uniqueId, String name, String formId, int formCompleteStatus) {
+        this.uniqueId = uniqueId;
+        this.name = name;
+        this.formId = formId;
+        this.formCompleteStatus = formCompleteStatus;
+    }
+
+    public int getFormCompleteStatus() {
+        return formCompleteStatus;
+    }
+
+    public void setFormCompleteStatus(int formCompleteStatus) {
+        this.formCompleteStatus = formCompleteStatus;
     }
 
     public String getUniqueId() {

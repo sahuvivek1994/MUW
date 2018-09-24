@@ -8,7 +8,7 @@ public interface Keywords {
     String AROGYASAKHI_MOB = "arogyasakhi_mob";
     String AROGYASAKHI_ALTERNATE_NO = "arogyasakhi_alternate_mob_no";
     String FIRST_NAME = "resp_name";
-    String MIDDLE_NAME = "middle_name";
+    String MIDDLE_NAME = "gender";
     String LAST_NAME = "last_name";
     String WOMAN_DOB = "age";
     String WOMAN_AGE = "women_age";
@@ -17,7 +17,7 @@ public interface Keywords {
     String EDD = "edd";
     String WOMAN_MOB_NO = "women_mob_no";
     String WOMAN_ALTERNATE_NO = "women_alternate_mob_no";
-    String EDUCATION = "education_status";
+    String EDUCATION = "education";
     String RELIGION_NAME = "religion_name";
     String CATEGORY_NAME = "category_name";
     String MOTHER_CLOSE_REASON = "close_reason";

@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settingActivity.Settings">
+    tools:context=".settingActivity.Settings"
+    android:orientation="vertical">
 
-    <!--<include layout="@layout/toolbar"/>-->
+    <include
+        layout="@layout/toolbar" />
 
     <FrameLayout
         android:id="@+id/frame_settings_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp" />
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+      />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
