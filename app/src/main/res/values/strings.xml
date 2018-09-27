@@ -114,5 +114,6 @@
     <string name="dialog_msg_loss_data_warning">This operation will remove the unsent forms and this
         might result in loss of data.\nPress Cancel to send unsent forms or Press OK to proceed.
     </string>
+    <string name="incompleteformtitle">Incomplete Form</string>
 
 </resources>

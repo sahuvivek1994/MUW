@@ -5135,6 +5135,15 @@ public class EnrollmentQuestions extends AppCompatActivity {
             questionInteractor = new QuestionInteractor(EnrollmentQuestions.this);
 
             mAppLanguage = utility.getLanguagePreferance(getApplicationContext());
+            String jsonFormName = questionInteractor.getFormNameFromId(Integer.valueOf(formID));
+            try {
+                JSONObject textobj = new JSONObject(jsonFormName);
+                jsonFormName = textobj.getString(mAppLanguage);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            setTitle(jsonFormName);
 
             init();
 

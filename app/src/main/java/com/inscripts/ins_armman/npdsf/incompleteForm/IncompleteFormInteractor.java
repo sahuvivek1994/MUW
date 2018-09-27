@@ -3,10 +3,7 @@ package com.inscripts.ins_armman.npdsf.incompleteForm;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.inscripts.ins_armman.npdsf.data.model.IncompleteFiledForm;
 import com.inscripts.ins_armman.npdsf.database.DBHelper;
-
-import java.util.List;
 
 /**
  * @author Aniket & Vivek  Created on 4/9/2018
@@ -25,5 +22,15 @@ public class IncompleteFormInteractor implements IncompleteInteractor {
     @Override
     public Cursor fetchListIncompleteForm() {
         return dbHelper.getIncompleteFormListList();
+    }
+
+    @Override
+    public Cursor fetchUniqueIdChildId(String unique) {
+        return dbHelper.getChildIdFromMotherId(unique);
+    }
+
+    @Override
+    public Cursor checkChildFilledForm(String unique) {
+        return dbHelper.getuniqueIdFormId(unique);
     }
 }

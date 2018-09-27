@@ -33,8 +33,8 @@ public class QuestionInteractor {
         this.mContext = mContext;
     }
 
-    public String saveRegistrationDetails(String firstName, String middleName,String mobileNo,
-     String address, String dob, String education, String motherId, int registrationStatus) {
+    public String saveRegistrationDetails(String firstName, String middleName, String mobileNo,
+                                          String address, String dob, String education, String motherId, int registrationStatus) {
         ContentValues values = new ContentValues();
 
         String woman_id = utility.generateUniqueId();
@@ -42,7 +42,7 @@ public class QuestionInteractor {
         values.put(DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID, woman_id);
         values.put(DatabaseContract.RegistrationTable.COLUMN_FIRST_NAME, firstName);
         values.put(DatabaseContract.RegistrationTable.COLUMN_MOBILE_NO, mobileNo);
-        values.put(DatabaseContract.RegistrationTable.COLUMN_GENDER,middleName);
+        values.put(DatabaseContract.RegistrationTable.COLUMN_GENDER, middleName);
         values.put(DatabaseContract.RegistrationTable.COLUMN_ADDRESS, address);
         values.put(DatabaseContract.RegistrationTable.COLUMN_DOB, dob);
         values.put(DatabaseContract.RegistrationTable.COLUMN_EDUCATION, education);
@@ -447,17 +447,17 @@ public class QuestionInteractor {
         return cursor.moveToFirst() ? cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_DOB)) : "";
     }
 
-    public ArrayList<String> getChildrenUniqueID(String uniqueId){
+    public ArrayList<String> getChildrenUniqueID(String uniqueId) {
         ArrayList<String> uniqueIds = new ArrayList<>();
         Cursor cursor = utility.getDatabase().query(DatabaseContract.RegistrationTable.TABLE_NAME,
                 new String[]{DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID},
                 DatabaseContract.RegistrationTable.COLUMN_MOTHER_ID + " = ? ",
-                new String[]{uniqueId},null, null, null);
+                new String[]{uniqueId}, null, null, null);
 
-        if (cursor != null && cursor.moveToFirst()){
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 uniqueIds.add(cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID)));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
 
             return uniqueIds;
         }
@@ -465,7 +465,7 @@ public class QuestionInteractor {
         return null;
     }
 
-    public void updateChildRegistration(String childName, String uniqueId){
+    public void updateChildRegistration(String childName, String uniqueId) {
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.RegistrationTable.COLUMN_FIRST_NAME, childName);
         values.put(DatabaseContract.RegistrationTable.COLUMN_REGISTRATION_STATUS, 1);
@@ -475,6 +475,14 @@ public class QuestionInteractor {
                 DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID + " = ?",
                 new String[]{uniqueId});
 
+    }
+
+    public String getFormNameFromId(int formId) {
+        Cursor cursor = utility.getDatabase().rawQuery("SELECT visit_name FROM form_details WHERE form_id = '" + formId + "' group by form_id", null);
+
+        if (cursor.moveToFirst())
+            return cursor.getString(cursor.getColumnIndex(DatabaseContract.FormDetailsTable.COLUMN_VISIT_NAME));
+        else return null;
     }
 
 }

@@ -102,4 +102,5 @@
         कदाचित डेटा गमावला जाऊ शकेल. \ n न पाठवलेले फॉर्म पाठविण्यासाठी रद्द करा दाबा किंवा पुढे जाण्यासाठी ओके दाबा
     </string>
     <string name="Reg_women_com">एकही संपूर्ण भेट सापडली नाही</string>
+    <string name="incompleteformtitle">अपूर्ण फॉर्म</string>
 </resources>

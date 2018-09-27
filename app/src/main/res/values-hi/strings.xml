@@ -54,7 +54,7 @@
     <string name="confirm_dialog">की पुष्टि करें</string>
     <string name="no_important_msg">कोई संदेश नहीं मिला</string>
     <string name="counselling_msg_txt">परामर्श संदेश</string>
-<!--need to change-->
+    <!--need to change-->
     <string name="choose_video_player">वीडियो प्लेयर चुनें</string>
     <string name="no_handler_for_type">इस प्रकार की फाइल के लिए कोई हैंडलर नहीं।</string>
     <string name="file_not_exit_txt">दस्तावेज मौजूद नहीं है !!</string>
@@ -101,4 +101,5 @@
         परिणामस्वरूप डेटा का नुकसान हो सकता है। \ n असंतोष फ़ॉर्म भेजने के लिए रद्द करें दबाएं या आगे बढ़ने के लिए ठीक दबाएं।
     </string>
     <string name="Reg_women_com">कोई पूर्ण दौरा नहीं मिला</string>
+    <string name="incompleteformtitle">अधूरा फॉर्म</string>
 </resources>

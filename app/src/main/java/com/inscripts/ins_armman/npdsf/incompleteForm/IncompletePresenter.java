@@ -11,4 +11,6 @@ public interface IncompletePresenter<v> extends IBasePresenter<v> {
 
     public void getListInCompleteForm();
 
+    public void getUniqueIdFormId(String uniqueId);
+
 }

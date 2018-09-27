@@ -37,7 +37,7 @@ public class IncompleteForm extends AppCompatActivity implements IncompleteView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incomplete_form);
-        setTitle("Incomplete Form");
+        setTitle(R.string.incompleteformtitle);
         mProgressBar = findViewById(R.id.child_list_progress_bar);
         emptyLayout = findViewById(R.id.empty_layout);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -78,17 +78,11 @@ public class IncompleteForm extends AppCompatActivity implements IncompleteView 
             mIncompleteFormAdapter = new IncompleteFormAdapter(IncompleteForm.this, womenList, new IncompleteFormAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(String uniqueId, int form_id) {
-
-
-                    Intent intent2 = new Intent(IncompleteForm.this, displayForm.class);
-                    intent2.putExtra(UNIQUE_ID, uniqueId);
-                    intent2.putExtra(FORM_ID, String.valueOf(form_id));
-                    //child =  total childrens
-                    intent2.putExtra("child",0);
-                    //childcounter is current childs
-                    intent2.putExtra("childcounter",1);
-                    startActivity(intent2);
-                    finish();
+                    if ((form_id > 1 && form_id <= 5) || (form_id == 10)) {
+                        openActivity(uniqueId, form_id, "0", "1");
+                    } else {
+                        incompletePresenter.getUniqueIdFormId(uniqueId);
+                    }
                 }
             });
             mRecyclerView.setAdapter(mIncompleteFormAdapter);
@@ -103,5 +97,16 @@ public class IncompleteForm extends AppCompatActivity implements IncompleteView 
     protected void onResume() {
         super.onResume();
         incompletePresenter.getListInCompleteForm();
+    }
+
+    @Override
+    public void openActivity(String uniqueId, int form_id, String noOfChild, String childCounter) {
+        Intent intent2 = new Intent(IncompleteForm.this, displayForm.class);
+        intent2.putExtra(UNIQUE_ID, uniqueId);
+        intent2.putExtra(FORM_ID, String.valueOf(form_id));
+        intent2.putExtra("child", noOfChild);
+        intent2.putExtra("childcounter", childCounter);
+        startActivity(intent2);
+        finish();
     }
 }
