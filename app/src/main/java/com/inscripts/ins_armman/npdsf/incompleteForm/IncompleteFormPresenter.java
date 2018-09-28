@@ -67,7 +67,7 @@ public class IncompleteFormPresenter implements IncompletePresenter<IncompleteVi
                 } catch (NumberFormatException a) {
                     // This condition if used for only form 6 Handling
                     String childCounter = String.valueOf(i + 1);
-                    incompleteView.openActivity(uniqueId, 6, childList.get(i), childCounter);
+                    incompleteView.openActivity(uniqueId, 6, String.valueOf(childList.size()), childCounter);
                     break;
                 }
             }

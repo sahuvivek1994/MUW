@@ -699,8 +699,8 @@ public class EnrollmentQuestions extends AppCompatActivity {
                             Intent intent = new Intent(EnrollmentQuestions.this, displayForm.class);
                             intent.putExtra(UNIQUE_ID, uniqueId);
                             intent.putExtra(FORM_ID, "2");
-                            intent.putExtra("child",0);
-                            intent.putExtra("childcounter",1);
+                            intent.putExtra("child","0");
+                            intent.putExtra("childcounter","1");
                             startActivity(intent);
                             finish();
 
@@ -5133,18 +5133,7 @@ public class EnrollmentQuestions extends AppCompatActivity {
             formID = "1";
 
             questionInteractor = new QuestionInteractor(EnrollmentQuestions.this);
-
             mAppLanguage = utility.getLanguagePreferance(getApplicationContext());
-            String jsonFormName = questionInteractor.getFormNameFromId(Integer.valueOf(formID));
-            try {
-                JSONObject textobj = new JSONObject(jsonFormName);
-                jsonFormName = textobj.getString(mAppLanguage);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            setTitle(jsonFormName);
-
             init();
 
             ashaList = new ArrayList<>(Arrays.asList("a"));
@@ -5329,6 +5318,16 @@ public class EnrollmentQuestions extends AppCompatActivity {
                 });
                 builder.show();
             } else {
+                String jsonFormName = questionInteractor.getFormNameFromId(Integer.valueOf(formID));
+                try {
+                    JSONObject textobj = new JSONObject(jsonFormName);
+                    jsonFormName = textobj.getString(mAppLanguage);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                setTitle(jsonFormName);
+
                 scroll_temp = (ScrollView) findViewById(Integer.parseInt(String.valueOf(scrollId.get(scrollcounter))));
                 scroll_temp.setVisibility(View.VISIBLE);
                 previous.setVisibility(View.GONE);

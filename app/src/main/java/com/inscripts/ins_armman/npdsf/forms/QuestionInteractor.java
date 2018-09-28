@@ -211,6 +211,47 @@ public class QuestionInteractor {
         return dependentQuestionsList;
     }
 
+
+    public List<Visit> removeDependantQuesList(String selectedOptionKeyword, String formId, LinearLayout ll_sub, String parentQstnKeyword, String pageScrollId) {
+
+        List<Visit> removedependentQuestionsList = new ArrayList<Visit>();
+
+        Cursor cursor = utility.getDatabase().rawQuery("SELECT * FROM "
+                        + DatabaseContract.DependentQuestionsTable.TABLE_NAME
+                        + " WHERE "
+                        + DatabaseContract.DependentQuestionsTable.COLUMN_FORM_ID
+                        + " = "
+                        + formId
+                        + " AND "
+                        + DatabaseContract.DependentQuestionsTable.COLUMN_MAIN_QUESTION_OPTION_KEYWORD
+                        + " = ?"
+                        + " GROUP BY "
+                        + DatabaseContract.DependentQuestionsTable.COLUMN_KEYWORD
+                        + " ORDER BY "
+                        + DatabaseContract.DependentQuestionsTable.COLUMN_ID
+                        + " DESC "
+                , new String[]{selectedOptionKeyword});
+
+        while (cursor.moveToNext()) {
+            Visit visit = new Visit(ll_sub, parentQstnKeyword, pageScrollId
+                    , cursor.getInt(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_QUESTION_ID))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_FORM_ID))
+                    , "0"
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_KEYWORD))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_QUESTION_TYPE))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_QUESTION_LABEL))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_VALIDATIONS))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_MESSAGES))
+                    , cursor.getInt(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_ORIENTATION)));
+
+            removedependentQuestionsList.add(visit);
+        }
+
+        return removedependentQuestionsList;
+    }
+
+
+
     public String getHighRiskCondition(String optionKeyword) {
         Cursor cursor = utility.getDatabase().rawQuery("SELECT "
                         + DatabaseContract.QuestionOptionsTable.COLUMN_MESSAGES
@@ -482,6 +523,17 @@ public class QuestionInteractor {
 
         if (cursor.moveToFirst())
             return cursor.getString(cursor.getColumnIndex(DatabaseContract.FormDetailsTable.COLUMN_VISIT_NAME));
+        else return null;
+    }
+
+    public static String getCheckItemSelectedOption(String keyword) {
+        Cursor cursor = utility.getDatabase().rawQuery("SELECT "+DatabaseContract.DependentQuestionsTable.COLUMN_FORM_ID+" FROM "
+                + DatabaseContract.DependentQuestionsTable.TABLE_NAME
+                + " WHERE "
+                + DatabaseContract.QuestionOptionsTable.COLUMN_KEYWORD + " = ? ", new String[]{keyword});
+
+        if (cursor.moveToFirst())
+            return cursor.getString(cursor.getColumnIndex(DatabaseContract.QuestionOptionsTable.COLUMN_FORM_ID));
         else return null;
     }
 

@@ -1846,7 +1846,7 @@ public class displayForm extends AppCompatActivity {
                             builder.show();
                         }
 
-                        onClickButtonFunctionality(rb, v, quesid, keyword, setid, id, tv, formid, optionList, displayCondition, "" + runtimevalidationlist.get(rg.getId()), isCompulsory, orientation);
+                        onClickButtonFunctionality(rb, v, quesid, keyword, setid, 1, tv, formid, optionList, displayCondition, "" + runtimevalidationlist.get(rg.getId()), isCompulsory, orientation);
 
 
                        /* if (v.getTag().toString().equals("FA_stock_yes")) {
@@ -2100,6 +2100,15 @@ public class displayForm extends AppCompatActivity {
                         referrallist.remove(quesid);
                         patientvisitlist.remove(keyword);
                     }
+                    if (pos != 0) {
+                        String clickKeyword = m.getKeyword();
+                        String checkNullDependentQuestion = QuestionInteractor.getCheckItemSelectedOption(clickKeyword);
+                        if (checkNullDependentQuestion == null) {
+                            removedepentQuestion(view);
+                        }
+                    } else {
+                        removedepentQuestion(view);
+                    }
 
                     /**
                      * This if condition is used to check whether dependant question is present or not
@@ -2145,19 +2154,19 @@ public class displayForm extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
 
-                if (pos == 0) {
-                    LinearLayout ll_4 = (LinearLayout) view.getParent().getParent().getParent();
+            public void removedepentQuestion(View view) {
+                LinearLayout ll_4 = (LinearLayout) view.getParent().getParent().getParent();
 
-                    removeDependent(ll_4, keyword);
+                removeDependent(ll_4, keyword);
 
-                    dependantKeywordPresent.remove(keyword);
+                dependantKeywordPresent.remove(keyword);
 
-                    womendetails.remove(keyword);
-                    Backup_answerTyped1.remove(keyword);
+                womendetails.remove(keyword);
+                Backup_answerTyped1.remove(keyword);
+                questionInteractor.deleteAnswer(uniqueId, formid, keyword);
 
-                    questionInteractor.deleteAnswer(uniqueId, formid, keyword);
-                }
             }
 
             @Override
@@ -2226,7 +2235,7 @@ public class displayForm extends AppCompatActivity {
      */
 
 
-    public LinearLayout createCheckbox(int i, String quesid, final String formid, final String setid, String language, final String keyword, final String validationfield, String messages, String displayCondition, int scrollID, final int orientation) {
+    public LinearLayout createCheckbox(final int i, final String quesid, final String formid, final String setid, String language, final String keyword, final String validationfield, String messages, final String displayCondition, final int scrollID, final int orientation) {
 
         //System.out.println("inside method textViewCount"+i+"   keyword"+keyword);
 
@@ -2312,61 +2321,52 @@ public class displayForm extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
+                    ll_sub = (LinearLayout) v.getParent();
                     hideSoftKeyboard(v);
 
                     int parentId = (((ViewGroup) cb.getParent()).getId());
 
                     if (!view_check.equals(keyword)) {
-                        chechboxlist = new ArrayList<String>();
-
-                        if (womendetails.containsKey(keyword)) {
-                            String getArrayList = String.valueOf(womendetails.get(keyword));
-                            getArrayList = getArrayList.replace("[", "");
-                            getArrayList = getArrayList.replace("]", "");
-
-                            String[] words = getArrayList.split("\\, ");
-
-                            for (String s : words) {
-                                chechboxlist.add("" + s);
-
-                                System.out.println("s is..... = " + s);
-                            }
-                        }
+                        //     chechboxlist = new ArrayList<String>();
                     }
 
                     if (!(chechboxlist.contains(cb.getTag().toString()))) {
                         chechboxlist.add(cb.getTag().toString());
-
+                        if(Backup_answerTyped1.containsKey(keyword))
+                        {
+                            String value = Backup_answerTyped1.get(keyword);
+                            String newValue = value +","+cb.getTag().toString();
+                            Backup_answerTyped1.put(keyword,newValue);
+                        }
+                        else
+                        {
+                            Backup_answerTyped1.put(keyword,cb.getTag().toString());
+                        }
                         validationlist.remove(keyword);
                         NextButtonvalidationlist.remove(keyword);
                         tv.setError(null);
 
+                        dependantList = questionInteractor.getDependantQuesList(cb.getTag().toString(), formid, ll_sub, "" + cb.getTag().toString(), "" + scrollID);  // this list is used to get dependant question in english format (parameter"s received are form_id,keyword,answer_type,english_lang)
+                        if (dependantList != null && dependantList.size() > 0) {
+                            if (!(MainQuestempstoredependant.containsKey(cb.getTag().toString()))) {
+                                layoutids.put("" + cb.getTag().toString(), "" + ll_sub);
+                                DisplayDependantQuestions(dependantList);
+                            }
+                        }
                     } else {
+                        LinearLayout ll_4 = (LinearLayout) ll_sub.getParent();
+                        removeDependent(ll_4, cb.getTag().toString());
                         chechboxlist.remove(cb.getTag().toString());
-
                         if (chechboxlist.isEmpty()) {
                             if (validationfield != null && validationfield.equalsIgnoreCase("true")) {
                                 tv.setError("");
                                 validationlist.put(keyword, "");
                                 NextButtonvalidationlist.put(keyword, scroll_temp.getId());
                             }
-                            womendetails.remove(keyword);
-                            Backup_answerTyped1.remove(keyword);
-
-                            questionInteractor.deleteAnswer(uniqueId, formid, keyword);
                         }
                     }
-
-                    womendetails.put(keyword, "" + chechboxlist);
-                    view_check = keyword;
-
-                    Backup_answerTyped1.put(keyword, "" + chechboxlist); // this treemap is used to insert data in Backup_entered table.
-
-                    ll_sub = (LinearLayout) v.getParent().getParent();
-
                 }
             });
-
 
             if (womendetails.containsKey(keyword)) {
                 System.out.println("Retireve Checkbox list ****" + womendetails.get(keyword));
@@ -4262,6 +4262,8 @@ public class displayForm extends AppCompatActivity {
                             Intent intent2 = new Intent(displayForm.this, displayForm.class);
                             intent2.putExtra(UNIQUE_ID, uniqueId);
                             intent2.putExtra(FORM_ID, formNumber);
+                            intent2.putExtra("child", "0");
+                            intent2.putExtra("childcounter", "1");
                             startActivity(intent2);
                         }
 
@@ -4271,8 +4273,10 @@ public class displayForm extends AppCompatActivity {
                                 Intent intent2 = new Intent(displayForm.this, displayForm.class);
                                 intent2.putExtra(UNIQUE_ID, uniqueId);
                                 intent2.putExtra(FORM_ID, "6");
-                                intent2.putExtra("child", number_of_children);
-                                intent2.putExtra("childcounter", child_entry_counter + 1);
+                                String no_of_child = String.valueOf(number_of_children);
+                                String child_entry = String.valueOf(child_entry_counter + 1);
+                                intent2.putExtra("child", no_of_child);
+                                intent2.putExtra("childcounter", child_entry);
                                 startActivity(intent2);
                             } else if (FormID == 10) {
                                 Intent intent = new Intent(displayForm.this, MainActivity.class);
@@ -4282,16 +4286,20 @@ public class displayForm extends AppCompatActivity {
                                 Intent intent2 = new Intent(displayForm.this, displayForm.class);
                                 intent2.putExtra(UNIQUE_ID, uniqueId);
                                 intent2.putExtra(FORM_ID, formNumber);
-                                intent2.putExtra("child", number_of_children);
-                                intent2.putExtra("childcounter", child_entry_counter);
+                                String no_of_child = String.valueOf(number_of_children);
+                                String child_entry = String.valueOf(child_entry_counter);
+                                intent2.putExtra("child", no_of_child);
+                                intent2.putExtra("childcounter", child_entry);
                                 startActivity(intent2);
                             } else {
                                 String formNumber = String.valueOf(FormID + 1);
                                 Intent intent2 = new Intent(displayForm.this, displayForm.class);
                                 intent2.putExtra(UNIQUE_ID, uniqueId);
                                 intent2.putExtra(FORM_ID, formNumber);
-                                intent2.putExtra("child", number_of_children);
-                                intent2.putExtra("childcounter", child_entry_counter);
+                                String no_of_child = String.valueOf(number_of_children);
+                                String child_entry = String.valueOf(child_entry_counter);
+                                intent2.putExtra("child", no_of_child);
+                                intent2.putExtra("childcounter", child_entry);
                                 startActivity(intent2);
                             }
 
@@ -5802,15 +5810,6 @@ public class displayForm extends AppCompatActivity {
 
             questionInteractor = new QuestionInteractor(displayForm.this);
             mAppLanguage = utility.getLanguagePreferance(getApplicationContext());
-            String jsonFormName = questionInteractor.getFormNameFromId(FormID);
-            try {
-                JSONObject textobj = new JSONObject(jsonFormName);
-                jsonFormName = textobj.getString(mAppLanguage);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            setTitle(jsonFormName);
             womanLmp = b.getString(LMP_DATE);
 
             isAncPncEdit = b.getBoolean("isAncPncEdit");
@@ -6062,6 +6061,17 @@ public class displayForm extends AppCompatActivity {
                 });
                 builder.show();
             } else {
+
+                String jsonFormName = questionInteractor.getFormNameFromId(FormID);
+                try {
+                    JSONObject textobj = new JSONObject(jsonFormName);
+                    jsonFormName = textobj.getString(mAppLanguage);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                setTitle(jsonFormName);
+
                 scroll_temp = (ScrollView) findViewById(Integer.parseInt(String.valueOf(scrollId.get(scrollcounter))));
                 scroll_temp.setVisibility(View.VISIBLE);
                 previous.setVisibility(View.GONE);
