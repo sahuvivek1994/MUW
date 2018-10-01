@@ -73,7 +73,9 @@ public class IncompleteFormAdapter extends RecyclerView.Adapter<IncompleteFormAd
                     public void onClick(View view) {
                         int formIdToOpen = Integer.parseInt(listModel.getFormId());
                         if (listModel.getFormCompleteStatus() == 1)
-                            formIdToOpen = formIdToOpen +  1;
+                            if (formIdToOpen != 10) {
+                                formIdToOpen = formIdToOpen + 1;
+                            }
                         mOnItemClickListener.onItemClick(listModel.getUniqueId(), formIdToOpen);
                     }
                 });

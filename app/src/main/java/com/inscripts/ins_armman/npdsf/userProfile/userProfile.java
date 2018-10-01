@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.inscripts.ins_armman.npdsf.R;
 import com.inscripts.ins_armman.npdsf.data.model.syncing.beneficiaries;
 

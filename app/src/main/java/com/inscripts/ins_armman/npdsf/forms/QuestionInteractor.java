@@ -33,8 +33,8 @@ public class QuestionInteractor {
         this.mContext = mContext;
     }
 
-    public String saveRegistrationDetails(String firstName, String middleName,String mobileNo,
-     String address, String dob, String education, String motherId, int registrationStatus) {
+    public String saveRegistrationDetails(String firstName, String middleName, String mobileNo,
+                                          String address, String dob, String education, String motherId, int registrationStatus) {
         ContentValues values = new ContentValues();
 
         String woman_id = utility.generateUniqueId();
@@ -42,7 +42,7 @@ public class QuestionInteractor {
         values.put(DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID, woman_id);
         values.put(DatabaseContract.RegistrationTable.COLUMN_FIRST_NAME, firstName);
         values.put(DatabaseContract.RegistrationTable.COLUMN_MOBILE_NO, mobileNo);
-        values.put(DatabaseContract.RegistrationTable.COLUMN_GENDER,middleName);
+        values.put(DatabaseContract.RegistrationTable.COLUMN_GENDER, middleName);
         values.put(DatabaseContract.RegistrationTable.COLUMN_ADDRESS, address);
         values.put(DatabaseContract.RegistrationTable.COLUMN_DOB, dob);
         values.put(DatabaseContract.RegistrationTable.COLUMN_EDUCATION, education);
@@ -210,6 +210,47 @@ public class QuestionInteractor {
 
         return dependentQuestionsList;
     }
+
+
+    public List<Visit> removeDependantQuesList(String selectedOptionKeyword, String formId, LinearLayout ll_sub, String parentQstnKeyword, String pageScrollId) {
+
+        List<Visit> removedependentQuestionsList = new ArrayList<Visit>();
+
+        Cursor cursor = utility.getDatabase().rawQuery("SELECT * FROM "
+                        + DatabaseContract.DependentQuestionsTable.TABLE_NAME
+                        + " WHERE "
+                        + DatabaseContract.DependentQuestionsTable.COLUMN_FORM_ID
+                        + " = "
+                        + formId
+                        + " AND "
+                        + DatabaseContract.DependentQuestionsTable.COLUMN_MAIN_QUESTION_OPTION_KEYWORD
+                        + " = ?"
+                        + " GROUP BY "
+                        + DatabaseContract.DependentQuestionsTable.COLUMN_KEYWORD
+                        + " ORDER BY "
+                        + DatabaseContract.DependentQuestionsTable.COLUMN_ID
+                        + " DESC "
+                , new String[]{selectedOptionKeyword});
+
+        while (cursor.moveToNext()) {
+            Visit visit = new Visit(ll_sub, parentQstnKeyword, pageScrollId
+                    , cursor.getInt(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_QUESTION_ID))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_FORM_ID))
+                    , "0"
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_KEYWORD))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_QUESTION_TYPE))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_QUESTION_LABEL))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_VALIDATIONS))
+                    , cursor.getString(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_MESSAGES))
+                    , cursor.getInt(cursor.getColumnIndex(DatabaseContract.DependentQuestionsTable.COLUMN_ORIENTATION)));
+
+            removedependentQuestionsList.add(visit);
+        }
+
+        return removedependentQuestionsList;
+    }
+
+
 
     public String getHighRiskCondition(String optionKeyword) {
         Cursor cursor = utility.getDatabase().rawQuery("SELECT "
@@ -447,17 +488,17 @@ public class QuestionInteractor {
         return cursor.moveToFirst() ? cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_DOB)) : "";
     }
 
-    public ArrayList<String> getChildrenUniqueID(String uniqueId){
+    public ArrayList<String> getChildrenUniqueID(String uniqueId) {
         ArrayList<String> uniqueIds = new ArrayList<>();
         Cursor cursor = utility.getDatabase().query(DatabaseContract.RegistrationTable.TABLE_NAME,
                 new String[]{DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID},
                 DatabaseContract.RegistrationTable.COLUMN_MOTHER_ID + " = ? ",
-                new String[]{uniqueId},null, null, null);
+                new String[]{uniqueId}, null, null, null);
 
-        if (cursor != null && cursor.moveToFirst()){
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 uniqueIds.add(cursor.getString(cursor.getColumnIndex(DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID)));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
 
             return uniqueIds;
         }
@@ -465,7 +506,7 @@ public class QuestionInteractor {
         return null;
     }
 
-    public void updateChildRegistration(String childName, String uniqueId){
+    public void updateChildRegistration(String childName, String uniqueId) {
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.RegistrationTable.COLUMN_FIRST_NAME, childName);
         values.put(DatabaseContract.RegistrationTable.COLUMN_REGISTRATION_STATUS, 1);
@@ -475,6 +516,25 @@ public class QuestionInteractor {
                 DatabaseContract.RegistrationTable.COLUMN_UNIQUE_ID + " = ?",
                 new String[]{uniqueId});
 
+    }
+
+    public String getFormNameFromId(int formId) {
+        Cursor cursor = utility.getDatabase().rawQuery("SELECT visit_name FROM form_details WHERE form_id = '" + formId + "' group by form_id", null);
+
+        if (cursor.moveToFirst())
+            return cursor.getString(cursor.getColumnIndex(DatabaseContract.FormDetailsTable.COLUMN_VISIT_NAME));
+        else return null;
+    }
+
+    public static String getCheckItemSelectedOption(String keyword) {
+        Cursor cursor = utility.getDatabase().rawQuery("SELECT "+DatabaseContract.DependentQuestionsTable.COLUMN_FORM_ID+" FROM "
+                + DatabaseContract.DependentQuestionsTable.TABLE_NAME
+                + " WHERE "
+                + DatabaseContract.QuestionOptionsTable.COLUMN_KEYWORD + " = ? ", new String[]{keyword});
+
+        if (cursor.moveToFirst())
+            return cursor.getString(cursor.getColumnIndex(DatabaseContract.QuestionOptionsTable.COLUMN_FORM_ID));
+        else return null;
     }
 
 }

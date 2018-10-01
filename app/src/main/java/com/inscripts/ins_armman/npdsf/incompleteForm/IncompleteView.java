@@ -14,4 +14,6 @@ public interface IncompleteView {
     void setAdapter(List<IncompleteFiledForm> mWomenList);
 
     Context getContext();
+
+    void openActivity(String uniqueId, int form_id, String noOfChild, String childCounter);
 }

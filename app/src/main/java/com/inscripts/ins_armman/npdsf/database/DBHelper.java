@@ -54,7 +54,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 2){
+        if (oldVersion < 2) {
             upgradeVersion2(db);
         }
     }
@@ -81,7 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = utility.getDatabase().rawQuery(query, null);
 
-        if ( cursor != null && cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             status = cursor.getString(cursor.getColumnIndex("remaining"));
             cursor.close();
         } else {
@@ -98,6 +98,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getcompleteFormListList() {
 
         return utility.getDatabase().rawQuery("SELECT name from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10)", null);
+    }
+
+    public Cursor getChildIdFromMotherId(String motherId) {
+        return utility.getDatabase().rawQuery("SELECT id,unique_id FROM " + RegistrationTable.TABLE_NAME + " WHERE mother_id ='" + motherId + "'", null);
+    }
+
+    public Cursor getuniqueIdFormId(String uniqueId) {
+        return utility.getDatabase().rawQuery("SELECT max(form_id) as form_id FROM " + FilledFormStatusTable.TABLE_NAME + " WHERE unique_id = '" + uniqueId + "' AND form_completion_status = 1", null);
     }
 
 }
