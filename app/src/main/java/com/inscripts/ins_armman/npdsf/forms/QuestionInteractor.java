@@ -251,7 +251,6 @@ public class QuestionInteractor {
     }
 
 
-
     public String getHighRiskCondition(String optionKeyword) {
         Cursor cursor = utility.getDatabase().rawQuery("SELECT "
                         + DatabaseContract.QuestionOptionsTable.COLUMN_MESSAGES
@@ -527,14 +526,20 @@ public class QuestionInteractor {
     }
 
     public static String getCheckItemSelectedOption(String keyword) {
-        Cursor cursor = utility.getDatabase().rawQuery("SELECT "+DatabaseContract.DependentQuestionsTable.COLUMN_FORM_ID+" FROM "
+        Cursor cursor = utility.getDatabase().rawQuery("SELECT " + DatabaseContract.DependentQuestionsTable.COLUMN_FORM_ID + " FROM "
                 + DatabaseContract.DependentQuestionsTable.TABLE_NAME
                 + " WHERE "
-                + DatabaseContract.QuestionOptionsTable.COLUMN_KEYWORD + " = ? ", new String[]{keyword});
+                + DatabaseContract.DependentQuestionsTable.COLUMN_MAIN_QUESTION_OPTION_KEYWORD + " = ? ", new String[]{keyword});
 
         if (cursor.moveToFirst())
             return cursor.getString(cursor.getColumnIndex(DatabaseContract.QuestionOptionsTable.COLUMN_FORM_ID));
         else return null;
+    }
+
+    public void deleteExisitingChild(String uniqueId)
+    {
+      Cursor cursor = utility.getDatabase().rawQuery("DELETE FROM registration WHERE mother_id = '"+uniqueId+"'", null);
+            cursor.getCount();
     }
 
 }

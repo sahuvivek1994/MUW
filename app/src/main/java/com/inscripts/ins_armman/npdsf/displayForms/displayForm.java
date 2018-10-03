@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -475,9 +476,14 @@ public class displayForm extends AppCompatActivity {
     public void NextButtonValidations() {
         try {
             if (Backup_answerTyped1.containsKey("child_count")) {
+                SQLiteDatabase db = utility.getDatabase();
+                db.beginTransaction();
+                questionInteractor.deleteExisitingChild(uniqueId);
                 for (int i = 0; i < Integer.valueOf(Backup_answerTyped1.get("child_count")); i++) {
                     childUniqueId = questionInteractor.saveRegistrationDetails("", "", "", "", "", "", uniqueId, 0);
                 }
+                db.setTransactionSuccessful();
+                db.endTransaction();
             }
 
             int counter = 0;
@@ -2021,85 +2027,8 @@ public class displayForm extends AppCompatActivity {
                         }
 
                     }
+                    Log.d("Testiknh", "testing");
 
-                    /**
-                     * I am an alien and i have manipulated the system enough to cause problems.
-                     * If you can detect those, you are saved or else,
-                     * you will see something when you "try" to release the app which will definitely not serve your purpose
-                     *
-                     * Someone has said - "The problem is not the problem; the problem is your attitude about the problem."
-                     */
-//                    String Messages = dbhelper.getHighRiskConditionForRadio("" + m.getKeyword());
-                    String Messages = questionInteractor.getHighRiskCondition("" + m.getKeyword());
-                    String counsel_message = null;
-
-                    /**
-                     * This logic is used to check whether there is any High risk,Counselling or Diagnostic referral on button click
-                     */
-
-                    if (Messages != null && Messages.length() > 0) {
-                        StoredHighRiskRanges = new ArrayList<>();
-
-                        JSONObject highRisk_conditions = new JSONObject(Messages);
-                        if (highRisk_conditions.optJSONArray("highrisk") != null) {
-                            JSONArray highRisk_conditionsArray = highRisk_conditions.optJSONArray("highrisk");
-
-                            //System.out.println("jsonArray3 options"+jsonArray3.length());
-                            for (int k = 0; k < highRisk_conditionsArray.length(); k++) {
-                                JSONObject main_ques_options_key = highRisk_conditionsArray.getJSONObject(0);
-                                //System.out.println("main_ques_options_key High risk lang = " + main_ques_options_key.optString("languages").toString());
-
-                                highrisklist.put(quesid, "" + formid + delimeter + setid + delimeter + keyword + delimeter + m.getKeyword() + delimeter + main_ques_options_key.optString("languages").toString() + delimeter + "highrisk" + delimeter + "0");
-
-                            }
-                        } else {
-                            highrisklist.remove(quesid);
-                        }
-
-                        if (highRisk_conditions.optJSONArray("counselling") != null) {
-                            JSONArray counseling_conditionsArray = highRisk_conditions.optJSONArray("counselling");
-                            for (int k = 0; k < counseling_conditionsArray.length(); k++) {
-                                JSONObject main_ques_options_key = counseling_conditionsArray.getJSONObject(0);
-                                counsel_message = main_ques_options_key.optString("languages").toString();
-
-                                if (main_ques_options_key.has("show_popup")) {
-                                    JSONObject obj = new JSONObject(counsel_message);
-                                    String language = obj.getString(mAppLanguage);
-                                    if (!noDialogFirst) {
-                                        criticalCounsellingMsg(language);
-                                    }
-                                }
-                            }
-                        }
-
-                        if (highRisk_conditions.optJSONArray("diagnosticrefer") != null) {
-                            JSONArray diagnosticrefer_conditionsArray = highRisk_conditions.optJSONArray("diagnosticrefer");
-                            for (int k = 0; k < diagnosticrefer_conditionsArray.length(); k++) {
-                                JSONObject diagnosticrefer_options_key = diagnosticrefer_conditionsArray.getJSONObject(0);
-                                highrisklist.put(quesid, "" + formid + delimeter + setid + delimeter + keyword + delimeter + m.getKeyword() + delimeter + diagnosticrefer_options_key.optString("languages").toString() + delimeter + "diagnosticReffer" + delimeter + "0");
-                                referrallist.put(quesid, diagnosticrefer_options_key.optString("languages").toString());
-                            }
-                        } else {
-                            referrallist.remove(quesid);
-                        }
-
-                        if (highRisk_conditions.optJSONArray("patientVisitSummary") != null) {
-                            JSONArray patientVisitSummary_conditionsArray = highRisk_conditions.optJSONArray("patientVisitSummary");
-                            for (int k = 0; k < patientVisitSummary_conditionsArray.length(); k++) {
-                                JSONObject patientVisitSummary_options_key = patientVisitSummary_conditionsArray.getJSONObject(0);
-                                patientvisitlist.put(keyword, patientVisitSummary_options_key.optString("languages").toString());
-
-                            }
-
-                        } else {
-//
-                            patientvisitlist.remove(keyword);
-                        }
-                    } else {
-                        highrisklist.remove(quesid);
-                        referrallist.remove(quesid);
-                        patientvisitlist.remove(keyword);
-                    }
                     if (pos != 0) {
                         String clickKeyword = m.getKeyword();
                         String checkNullDependentQuestion = QuestionInteractor.getCheckItemSelectedOption(clickKeyword);
@@ -2107,6 +2036,7 @@ public class displayForm extends AppCompatActivity {
                             removedepentQuestion(view);
                         }
                     } else {
+                        Backup_answerTyped1.remove(keyword);
                         removedepentQuestion(view);
                     }
 
@@ -2139,7 +2069,7 @@ public class displayForm extends AppCompatActivity {
 
                                 layoutids.put("" + m.getKeyword(), "" + ll_sub);
 
-                                displayCounsellingForSpinner(counsel_message, view, keyword);
+                                //  displayCounsellingForSpinner(counsel_message, view, keyword);
 
                                 DisplayDependantQuestions(dependantList);
 
@@ -2149,7 +2079,7 @@ public class displayForm extends AppCompatActivity {
 
                     }
 
-                    displayCounsellingMsg(counsel_message, view, keyword);
+                    //         displayCounsellingMsg(counsel_message, view, keyword);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -2164,7 +2094,6 @@ public class displayForm extends AppCompatActivity {
                 dependantKeywordPresent.remove(keyword);
 
                 womendetails.remove(keyword);
-                Backup_answerTyped1.remove(keyword);
                 questionInteractor.deleteAnswer(uniqueId, formid, keyword);
 
             }
@@ -2332,15 +2261,12 @@ public class displayForm extends AppCompatActivity {
 
                     if (!(chechboxlist.contains(cb.getTag().toString()))) {
                         chechboxlist.add(cb.getTag().toString());
-                        if(Backup_answerTyped1.containsKey(keyword))
-                        {
+                        if (Backup_answerTyped1.containsKey(keyword)) {
                             String value = Backup_answerTyped1.get(keyword);
-                            String newValue = value +","+cb.getTag().toString();
-                            Backup_answerTyped1.put(keyword,newValue);
-                        }
-                        else
-                        {
-                            Backup_answerTyped1.put(keyword,cb.getTag().toString());
+                            String newValue = value + "," + cb.getTag().toString();
+                            Backup_answerTyped1.put(keyword, newValue);
+                        } else {
+                            Backup_answerTyped1.put(keyword, cb.getTag().toString());
                         }
                         validationlist.remove(keyword);
                         NextButtonvalidationlist.remove(keyword);
@@ -4107,7 +4033,82 @@ public class displayForm extends AppCompatActivity {
 
         try {
 
-            final Dialog dialog = new Dialog(displayForm.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+            builder
+                    .setTitle(displayForm.this.getString(R.string.save_form))
+                    .setMessage(displayForm.this.getString(R.string.save_form_message))
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(displayForm.this.getString(R.string.yes), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //finish();
+                            if (number_of_children == 0) {
+
+                                if (FormID > 5) {
+                                    Intent intent = new Intent(displayForm.this, MainActivity.class);
+                                    startActivity(intent);
+                                } else if (FormID == 10) {
+                                    Intent intent = new Intent(displayForm.this, MainActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    String formNumber = String.valueOf(FormID + 1);
+                                    Intent intent2 = new Intent(displayForm.this, displayForm.class);
+                                    intent2.putExtra(UNIQUE_ID, uniqueId);
+                                    intent2.putExtra(FORM_ID, formNumber);
+                                    intent2.putExtra("child", "0");
+                                    intent2.putExtra("childcounter", "1");
+                                    startActivity(intent2);
+                                }
+
+                            } else {
+                                if (child_entry_counter <= number_of_children) {
+                                    if (FormID == 9 && child_entry_counter != number_of_children) {
+                                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
+                                        intent2.putExtra(UNIQUE_ID, uniqueId);
+                                        intent2.putExtra(FORM_ID, "6");
+                                        String no_of_child = String.valueOf(number_of_children);
+                                        String child_entry = String.valueOf(child_entry_counter + 1);
+                                        intent2.putExtra("child", no_of_child);
+                                        intent2.putExtra("childcounter", child_entry);
+                                        startActivity(intent2);
+                                    } else if (FormID == 10) {
+                                        Intent intent = new Intent(displayForm.this, MainActivity.class);
+                                        startActivity(intent);
+                                    } else if (FormID == 9 && child_entry_counter > number_of_children) {
+                                        String formNumber = String.valueOf(FormID + 1);
+                                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
+                                        intent2.putExtra(UNIQUE_ID, uniqueId);
+                                        intent2.putExtra(FORM_ID, formNumber);
+                                        String no_of_child = String.valueOf(number_of_children);
+                                        String child_entry = String.valueOf(child_entry_counter);
+                                        intent2.putExtra("child", no_of_child);
+                                        intent2.putExtra("childcounter", child_entry);
+                                        startActivity(intent2);
+                                    } else {
+                                        String formNumber = String.valueOf(FormID + 1);
+                                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
+                                        intent2.putExtra(UNIQUE_ID, uniqueId);
+                                        intent2.putExtra(FORM_ID, formNumber);
+                                        String no_of_child = String.valueOf(number_of_children);
+                                        String child_entry = String.valueOf(child_entry_counter);
+                                        intent2.putExtra("child", no_of_child);
+                                        intent2.putExtra("childcounter", child_entry);
+                                        startActivity(intent2);
+                                    }
+
+                                }
+                            }
+
+                        }
+                    })
+                    .setNegativeButton(displayForm.this.getString(R.string.no), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //finish();
+                        }
+                    })
+
+                    .show();
+
+          /*  final Dialog dialog = new Dialog(displayForm.this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.custome_pvs);
             dialog.setTitle(displayForm.this.getString(R.string.Important_Note));
@@ -4337,7 +4338,7 @@ public class displayForm extends AppCompatActivity {
 
 
             dialog.show();
-
+*/
         } catch (Exception e) {
             e.printStackTrace();
         }
