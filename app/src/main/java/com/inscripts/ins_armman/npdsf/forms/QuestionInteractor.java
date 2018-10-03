@@ -536,4 +536,10 @@ public class QuestionInteractor {
         else return null;
     }
 
+    public void deleteExisitingChild(String uniqueId)
+    {
+      Cursor cursor = utility.getDatabase().rawQuery("DELETE FROM registration WHERE mother_id = '"+uniqueId+"'", null);
+            cursor.getCount();
+    }
+
 }

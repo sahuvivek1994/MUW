@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -475,9 +476,14 @@ public class displayForm extends AppCompatActivity {
     public void NextButtonValidations() {
         try {
             if (Backup_answerTyped1.containsKey("child_count")) {
+                SQLiteDatabase db = utility.getDatabase();
+                db.beginTransaction();
+                questionInteractor.deleteExisitingChild(uniqueId);
                 for (int i = 0; i < Integer.valueOf(Backup_answerTyped1.get("child_count")); i++) {
                     childUniqueId = questionInteractor.saveRegistrationDetails("", "", "", "", "", "", uniqueId, 0);
                 }
+                db.setTransactionSuccessful();
+                db.endTransaction();
             }
 
             int counter = 0;
@@ -4027,7 +4033,82 @@ public class displayForm extends AppCompatActivity {
 
         try {
 
-            final Dialog dialog = new Dialog(displayForm.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+            builder
+                    .setTitle(displayForm.this.getString(R.string.save_form))
+                    .setMessage(displayForm.this.getString(R.string.save_form_message))
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(displayForm.this.getString(R.string.yes), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //finish();
+                            if (number_of_children == 0) {
+
+                                if (FormID > 5) {
+                                    Intent intent = new Intent(displayForm.this, MainActivity.class);
+                                    startActivity(intent);
+                                } else if (FormID == 10) {
+                                    Intent intent = new Intent(displayForm.this, MainActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    String formNumber = String.valueOf(FormID + 1);
+                                    Intent intent2 = new Intent(displayForm.this, displayForm.class);
+                                    intent2.putExtra(UNIQUE_ID, uniqueId);
+                                    intent2.putExtra(FORM_ID, formNumber);
+                                    intent2.putExtra("child", "0");
+                                    intent2.putExtra("childcounter", "1");
+                                    startActivity(intent2);
+                                }
+
+                            } else {
+                                if (child_entry_counter <= number_of_children) {
+                                    if (FormID == 9 && child_entry_counter != number_of_children) {
+                                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
+                                        intent2.putExtra(UNIQUE_ID, uniqueId);
+                                        intent2.putExtra(FORM_ID, "6");
+                                        String no_of_child = String.valueOf(number_of_children);
+                                        String child_entry = String.valueOf(child_entry_counter + 1);
+                                        intent2.putExtra("child", no_of_child);
+                                        intent2.putExtra("childcounter", child_entry);
+                                        startActivity(intent2);
+                                    } else if (FormID == 10) {
+                                        Intent intent = new Intent(displayForm.this, MainActivity.class);
+                                        startActivity(intent);
+                                    } else if (FormID == 9 && child_entry_counter > number_of_children) {
+                                        String formNumber = String.valueOf(FormID + 1);
+                                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
+                                        intent2.putExtra(UNIQUE_ID, uniqueId);
+                                        intent2.putExtra(FORM_ID, formNumber);
+                                        String no_of_child = String.valueOf(number_of_children);
+                                        String child_entry = String.valueOf(child_entry_counter);
+                                        intent2.putExtra("child", no_of_child);
+                                        intent2.putExtra("childcounter", child_entry);
+                                        startActivity(intent2);
+                                    } else {
+                                        String formNumber = String.valueOf(FormID + 1);
+                                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
+                                        intent2.putExtra(UNIQUE_ID, uniqueId);
+                                        intent2.putExtra(FORM_ID, formNumber);
+                                        String no_of_child = String.valueOf(number_of_children);
+                                        String child_entry = String.valueOf(child_entry_counter);
+                                        intent2.putExtra("child", no_of_child);
+                                        intent2.putExtra("childcounter", child_entry);
+                                        startActivity(intent2);
+                                    }
+
+                                }
+                            }
+
+                        }
+                    })
+                    .setNegativeButton(displayForm.this.getString(R.string.no), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //finish();
+                        }
+                    })
+
+                    .show();
+
+          /*  final Dialog dialog = new Dialog(displayForm.this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.custome_pvs);
             dialog.setTitle(displayForm.this.getString(R.string.Important_Note));
@@ -4257,7 +4338,7 @@ public class displayForm extends AppCompatActivity {
 
 
             dialog.show();
-
+*/
         } catch (Exception e) {
             e.printStackTrace();
         }
