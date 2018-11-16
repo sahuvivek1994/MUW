@@ -3,9 +3,11 @@ package com.inscripts.ins_armman.npdsf.data.model;
 public class completeFiledForm {
 
     String name;
+    String unique_id;
 
-    public completeFiledForm(String name) {
+    public completeFiledForm(String name,String unique_id) {
         this.name = name;
+        this.unique_id = unique_id;
     }
 
     public String getName() {
@@ -15,4 +17,13 @@ public class completeFiledForm {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getUnique_id() {
+        return unique_id;
+    }
+
+    public void setUnique_id(String unique_id) {
+        this.unique_id = unique_id;
+    }
+
 }

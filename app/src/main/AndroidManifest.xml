@@ -11,8 +11,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:configChanges="layoutDirection|locale"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -43,7 +43,8 @@
         <activity android:name=".registration.EnrollmentQuestions" />
         <activity android:name=".displayForms.displayForm" />
         <activity android:name=".incompleteForm.IncompleteForm" />
-        <activity android:name=".completedForm.completedForm"></activity>
+        <activity android:name=".completedForm.completedForm" />
+        <activity android:name=".completeFormDisplayDetails.completeFormDisplayDetails"></activity>
     </application>
 
 </manifest>

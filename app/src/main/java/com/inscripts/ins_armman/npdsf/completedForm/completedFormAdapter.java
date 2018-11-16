@@ -2,6 +2,7 @@ package com.inscripts.ins_armman.npdsf.completedForm;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,29 +47,29 @@ public class completedFormAdapter extends RecyclerView.Adapter<completedFormAdap
     }
 
     public interface OnItemClickListener {
-        void onItemClick();
+        void onItemClick(String unique_id);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewName;
         ConstraintLayout constraintLayout;
+        CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textview_name);
             constraintLayout = itemView.findViewById(R.id.constraint_layout_root);
+            cardView = itemView.findViewById(R.id.card_view_completeList);
         }
 
         private void bindData(final completeFiledForm listModel) {
             if (listModel != null) {
                 textViewName.setText(listModel.getName());
-
-
-                constraintLayout.setOnClickListener(new View.OnClickListener() {
+                cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        Toast.makeText(mContext, "Hello", Toast.LENGTH_SHORT).show();
+                        mOnItemClickListener.onItemClick(listModel.getUnique_id());
                     }
                 });
             }

@@ -1,6 +1,7 @@
 package com.inscripts.ins_armman.npdsf.completedForm;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,9 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.inscripts.ins_armman.npdsf.R;
+import com.inscripts.ins_armman.npdsf.completeFormDisplayDetails.completeFormDisplayDetails;
 import com.inscripts.ins_armman.npdsf.data.model.completeFiledForm;
 
 import java.util.List;
+import static com.inscripts.ins_armman.npdsf.utility.Constants.UNIQUE_ID;
 
 public class completedForm extends AppCompatActivity implements IcompletedFormView {
 
@@ -65,7 +68,14 @@ public class completedForm extends AppCompatActivity implements IcompletedFormVi
         }
 
       if(womenList != null) {
-            mcompleteFormAdapter = new completedFormAdapter(getContext(),womenList,null);
+            mcompleteFormAdapter = new completedFormAdapter(getContext(),womenList, new completedFormAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(String unique_id) {
+                    Intent intent = new Intent(completedForm.this, completeFormDisplayDetails.class);
+                intent.putExtra(UNIQUE_ID, unique_id);
+                startActivity(intent);
+                }
+            });
           mRecyclerView.setAdapter(mcompleteFormAdapter);
       }
       else {
