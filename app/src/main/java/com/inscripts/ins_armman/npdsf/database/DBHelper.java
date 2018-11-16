@@ -101,11 +101,35 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getChildIdFromMotherId(String motherId) {
-        return utility.getDatabase().rawQuery("SELECT id,unique_id FROM " + RegistrationTable.TABLE_NAME + " WHERE mother_id ='" + motherId + "'", null);
+        return utility.getDatabase().rawQuery("SELECT name,unique_id FROM " + RegistrationTable.TABLE_NAME + " WHERE mother_id ='" + motherId + "'", null);
     }
 
     public Cursor getuniqueIdFormId(String uniqueId) {
         return utility.getDatabase().rawQuery("SELECT max(form_id) as form_id FROM " + FilledFormStatusTable.TABLE_NAME + " WHERE unique_id = '" + uniqueId + "' AND form_completion_status = 1", null);
     }
+    public Cursor getCompleteFormDetails(String unique_id, int form_id) {
+        return utility.getDatabase().rawQuery("SELECT main_questions.question_label,question_options.option_label,question_answers.unique_id " +
+                "FROM question_answers" +
+                " JOIN main_questions ON question_answers.question_keyword=main_questions.keyword " +
+                "JOIN question_options ON question_answers.answer_keyword=question_options.keyword " +
+                "WHERE question_answers.unique_id='"+unique_id+"' and question_answers.form_id="+form_id,null);
 
+    }
+
+    /**
+     *form 6 contains question label but does'nt contain answer label so only
+     main_questions and question_answers involved in query and not question_option
+     * @param unique_id=child unique_id
+     * @param form_id=child form_id
+     * @return
+     */
+    public Cursor getForm6Details(String unique_id,int form_id){
+        return utility.getDatabase().rawQuery("SELECT main_questions.question_label,question_answers.answer_keyword,question_answers.unique_id " +
+                "FROM question_answers" +
+                " JOIN main_questions ON question_answers.question_keyword=main_questions.keyword " +
+                "WHERE question_answers.unique_id='"+unique_id+"' and question_answers.form_id="+form_id,null);
+    }
+    public Cursor getFormsList(){
+        return utility.getDatabase().rawQuery("select visit_name,form_id from form_details order by cast(form_id as int) asc",null);
+    }
 }

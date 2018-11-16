@@ -44,7 +44,8 @@
         <activity android:name=".displayForms.displayForm" />
         <activity android:name=".incompleteForm.IncompleteForm" />
         <activity android:name=".completedForm.completedForm" />
-        <activity android:name=".completeFormDisplayDetails.completeFormDisplayDetails"></activity>
+        <activity android:name=".completedFormList.CompletedFormsList"></activity>
+ <activity android:name=".completedFormDetails.CompletedFormDetails"></activity>
     </application>
 
 </manifest>
