@@ -9,6 +9,8 @@
     <string name="no_internet_connection">No internet connectivity. Please check your network
     </string>
     <string name="yes">Yes</string>
+    <string name="continue_filling_forms">Continue Filling Forms</string>
+    <string name="view_filled_form">View filled Forms</string>
     <string name="error">Error</string>
     <string name="authentication_error_msg">Invalid Username and Password</string>
     <string name="authentication_failed">Authentication failed</string>

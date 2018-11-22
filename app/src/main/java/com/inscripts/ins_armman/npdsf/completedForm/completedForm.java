@@ -16,13 +16,16 @@ import com.inscripts.ins_armman.npdsf.data.model.completeFiledForm;
 
 import java.util.List;
 
-public class completedForm extends AppCompatActivity implements IcompletedFormView {
+/**
+ * This activity is to get the details of Complete forms of mother and her child
+ */
+public class completedForm extends AppCompatActivity implements IcompletedFormView, completedFormAdapter.ClickListener {
 
     IcompletedPresenter icompletedPresenter;
-    private RecyclerView mRecyclerView;
     completedFormAdapter mcompleteFormAdapter;
     ProgressBar mProgressBar;
     RelativeLayout emptyLayout;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class completedForm extends AppCompatActivity implements IcompletedFormVi
         setTitle("Completed Form");
         mProgressBar = findViewById(R.id.child_list_progress_bar);
         emptyLayout = findViewById(R.id.empty_layout);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(completedForm.this);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -62,21 +65,24 @@ public class completedForm extends AppCompatActivity implements IcompletedFormVi
             TextView emptyTextView = findViewById(R.id.text_empty_list);
             emptyTextView.setText(R.string.Reg_women_com);
             return;
+        }if(womenList != null) {
+            mcompleteFormAdapter = new completedFormAdapter(getContext(), womenList);
+            mRecyclerView.setAdapter(mcompleteFormAdapter);
+            mcompleteFormAdapter.setClickListener(this);
+        } else {
+            mcompleteFormAdapter.swapDataList(womenList);
+            mcompleteFormAdapter.notifyDataSetChanged();
         }
-
-      if(womenList != null) {
-            mcompleteFormAdapter = new completedFormAdapter(getContext(),womenList,null);
-          mRecyclerView.setAdapter(mcompleteFormAdapter);
-      }
-      else {
-          mcompleteFormAdapter.swapDataList(womenList);
-          mcompleteFormAdapter.notifyDataSetChanged();
-      }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         icompletedPresenter.getListCompleteForm();
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+
     }
 }

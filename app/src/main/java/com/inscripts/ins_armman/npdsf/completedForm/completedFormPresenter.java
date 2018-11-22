@@ -23,13 +23,16 @@ public class completedFormPresenter implements IcompletedPresenter<completedForm
         icompletedFormView = null;
     }
 
+    /**
+     * to get the list of mothers whose forms are completely filled.
+     */
     @Override
     public void getListCompleteForm() {
         List<completeFiledForm> womenList = new ArrayList<>();
         Cursor cursor = completedFormInteractor.fetchListcompleteForm();
         if (cursor != null && cursor.moveToFirst())
             do {
-                womenList.add(new completeFiledForm(cursor.getString(cursor.getColumnIndex("name"))));
+                womenList.add(new completeFiledForm(cursor.getString(cursor.getColumnIndex("name")),cursor.getString(cursor.getColumnIndex("unique_id"))));
             } while (cursor.moveToNext());
 
         icompletedFormView.setAdapter(womenList);

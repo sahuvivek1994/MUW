@@ -64,8 +64,16 @@ public class IncompleteFormPresenter implements IncompletePresenter<IncompleteVi
                         incompleteView.openActivity(uniqueId, form_to_open, String.valueOf(childList.size()), childCounter);
                         break;
                     }
+                    else if (form_id == 9 && ((i+1)== childList.size()))
+                    {
+                        String childCounter = String.valueOf(i + 1);
+                        int form_to_open = form_id + 1;
+                        incompleteView.openActivity(uniqueId, form_to_open, String.valueOf(childList.size()), childCounter);
+                        break;
+                    }
+
                 } catch (NumberFormatException a) {
-                    // This condition if used for only form 6 Handling
+                    // This condition is used only when the mother's completed max(form id)=5 but form 6 has never opened
                     String childCounter = String.valueOf(i + 1);
                     incompleteView.openActivity(uniqueId, 6, String.valueOf(childList.size()), childCounter);
                     break;
