@@ -33,8 +33,7 @@ public class CompleteFormDetailsPresentor implements ICompleteFormDetailsPresent
      */
     @Override
     public void displayFIlledForm(String unique_id, int form_id) {
-        //form 6 contain only keyword of answer and not label
-        if (form_id == 6) {
+      if (form_id == 6) {
             Cursor cur = interactor.displayForm6Details(unique_id, form_id);
             if (cur != null && cur.moveToFirst()) {
                 do {
@@ -52,12 +51,25 @@ public class CompleteFormDetailsPresentor implements ICompleteFormDetailsPresent
             if (cur != null && cur.moveToFirst()) {
                 do {
                     CompleteFormQnA completeFormQnA = new CompleteFormQnA();
-                    completeFormQnA.setQuestion(cur.getString(cur.getColumnIndex("question_label")));
-                    completeFormQnA.setAnswer(cur.getString(cur.getColumnIndex("option_label")));
-                    String que = cur.getString(cur.getColumnIndex("question_label"));
-                    String ans = cur.getString(cur.getColumnIndex("option_label"));
-                    System.out.println("question :" + que + "\n" + "answer :" + ans);
+                    String que=cur.getString(cur.getColumnIndex("question_label"));
+                    if(que==null){
+                        que=cur.getString(cur.getColumnIndex("question_keyword"));
+                        completeFormQnA.setQuestion(que);
+                    }
+                    else
+                    {
+                        completeFormQnA.setQuestion(cur.getString(cur.getColumnIndex("question_label")));
+                    }
+                    String ans= cur.getString(cur.getColumnIndex("option_label"));
+                    if(ans==null) {
+                        ans= cur.getString(cur.getColumnIndex("answer_keyword"));
+                        completeFormQnA.setAnswer(ans);
+                    }
+                    else{
+                        completeFormQnA.setAnswer(cur.getString(cur.getColumnIndex("option_label")));
+                    }
                     formDetails.add(completeFormQnA);
+                    System.out.println("question :" + que + "\n" + "answer :" + ans);
                 } while (cur.moveToNext());
             }
         }

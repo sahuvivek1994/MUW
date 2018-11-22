@@ -46,6 +46,7 @@
         <activity android:name=".completedForm.completedForm" />
         <activity android:name=".completedFormList.CompletedFormsList"></activity>
  <activity android:name=".completedFormDetails.CompletedFormDetails"></activity>
+        <activity android:name=".incompleteFormList.IncompleteFormList"></activity>
     </application>
 
 </manifest>

@@ -50,8 +50,7 @@ public class CompletedFormsListPresentor implements ICompletedFormsListPresentor
             } while (res.moveToNext());
         }
 
-        //if child count is greater than one
-        if (childNumber.size() > 1) {
+        //get forms
             res = interactor.getCompleteFormList();
             //to display forms 1 to 5
             if (res != null & res.moveToFirst()) {
@@ -64,71 +63,41 @@ public class CompletedFormsListPresentor implements ICompletedFormsListPresentor
                         formDetails.add(obj);
                     } else {
                         //to display forms 6 to 9
-                        getChildData();
+                        res = interactor.getCompleteFormList();
+                        //to display child forms depending on children number
+                        while (count < c) {
+                            if (res != null & res.moveToFirst()) {
+                                do {
+                                    CompleteFormQnA obj1 = new CompleteFormQnA();
+                                    obj1.setFormName(res.getString(res.getColumnIndex("visit_name")));
+                                    obj1.setForm_id(res.getInt(res.getColumnIndex("form_id")));
+                                    int formId1 = res.getInt(res.getColumnIndex("form_id"));
+                                    formName = res.getString(res.getColumnIndex("visit_name"));
+                                    if (formId1 >= 6 && formId1 <= 9) {
+                                        formDetails.add(obj1);
+                                        child_name = childNumber.get(count).getChildNAme();
+                                    }
+                                } while (res.moveToNext());
+                            }
+                            count++;
+                        }
+                        //to display form 10
+                        if (res != null & res.moveToFirst()) {
+                            do {
+                                CompleteFormQnA obj1 = new CompleteFormQnA();
+                                obj1.setFormName(res.getString(res.getColumnIndex("visit_name")));
+                                obj1.setForm_id(res.getInt(res.getColumnIndex("form_id")));
+                                int formId1 = res.getInt(res.getColumnIndex("form_id"));
+                                if (formId1 == 10) {
+                                    formDetails.add(obj1);
+                                }
+                            } while (res.moveToNext());
+                        }
                     }
                 } while (res.moveToNext());
-            } else {
-                while (count < childNumber.size()) {
-                    if (res != null & res.moveToFirst()) {
-                        do {
-                            CompleteFormQnA obj = new CompleteFormQnA();
-                            obj.setFormName(res.getString(res.getColumnIndex("visit_name")));
-                            obj.setForm_id(res.getInt(res.getColumnIndex("form_id")));
-                            int formId = res.getInt(res.getColumnIndex("form_id"));
-                            if (formId >= 6 && formId <= 9) {
-                                formDetails.add(obj);
-
-
-                            }
-                        } while (res.moveToNext());
-                    }
-                    count++;
-                }
             }
-        }
         if (!formDetails.isEmpty() || !childNumber.isEmpty()) {
             view.getData(formDetails, childNumber);
-        }
-
-    }//end of getCompleteFormList()
-
-    void getChildData() {
-        res = interactor.getCompleteFormList();
-        int i = 0;
-        //to display child forms depending on children number
-        while (count < c) {
-//childNumber.size()
-            //to display forms 6 to 9
-            if (res != null & res.moveToFirst()) {
-                do {
-                    CompleteFormQnA obj1 = new CompleteFormQnA();
-                    obj1.setFormName(res.getString(res.getColumnIndex("visit_name")));
-                    obj1.setForm_id(res.getInt(res.getColumnIndex("form_id")));
-                    int formId1 = res.getInt(res.getColumnIndex("form_id"));
-                    formName = res.getString(res.getColumnIndex("visit_name"));
-                    if (formId1 >= 6 && formId1 <= 9) {
-
-                        formDetails.add(obj1);
-                        child_name = childNumber.get(count).getChildNAme();
-                    }
-                } while (res.moveToNext());
-            }
-            count++;
-        }
-        //to display form 10
-        if (res != null & res.moveToFirst()) {
-            do {
-                CompleteFormQnA obj1 = new CompleteFormQnA();
-                obj1.setFormName(res.getString(res.getColumnIndex("visit_name")));
-                obj1.setForm_id(res.getInt(res.getColumnIndex("form_id")));
-                int formId1 = res.getInt(res.getColumnIndex("form_id"));
-                if (formId1 == 10) {
-                    formDetails.add(obj1);
-                }
-            } while (res.moveToNext());
-        }
-    }
-
-
+        } }//end of getCompleteFormList()
 }
 

@@ -60,7 +60,6 @@ public class CompletedFormsList extends AppCompatActivity implements ICompletedF
     @Override
     public void getData(ArrayList<CompleteFormQnA> formDetails, ArrayList<CompleteFormQnA> childNo) {
         adapter = new FormListAdapter(formDetails, childNo, this, id, form_id);
-        Toast.makeText(CompletedFormsList.this, "" + form_id + "\n" + childId, Toast.LENGTH_SHORT).show();
         recyclerView.setAdapter(adapter);
         adapter.setClickListener(this);
     }

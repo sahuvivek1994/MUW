@@ -65,11 +65,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor getIncompleteFormListList() {
 
-        return utility.getDatabase().rawQuery("SELECT * FROM \n" +
-                "\t(SELECT current.unique_id,current.form_id,reg.name, current.form_completion_status \n" +
-                "\tFROM filled_forms_status AS current \n" +
-                " JOIN registration AS reg on current.unique_id = reg.unique_id AND (reg.mother_id is null OR reg.mother_id = '') \n" +
-                " AND current.unique_id NOT IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10 AND form_completion_status = 1))\n" +
+        return utility.getDatabase().rawQuery("SELECT * FROM " +
+                "(SELECT current.unique_id,current.form_id,reg.name, current.form_completion_status " +
+                "FROM filled_forms_status AS current " +
+                " JOIN registration AS reg on current.unique_id = reg.unique_id AND (reg.mother_id is null OR reg.mother_id = '') " +
+                " AND current.unique_id NOT IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10 AND form_completion_status = 1))" +
                 " GROUP BY unique_id", null);
     }
 
@@ -107,14 +107,17 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getuniqueIdFormId(String uniqueId) {
         return utility.getDatabase().rawQuery("SELECT max(form_id) as form_id FROM " + FilledFormStatusTable.TABLE_NAME + " WHERE unique_id = '" + uniqueId + "' AND form_completion_status = 1", null);
     }
-    public Cursor getCompleteFormDetails(String unique_id, int form_id) {
-        return utility.getDatabase().rawQuery("SELECT main_questions.question_label,question_options.option_label,question_answers.unique_id " +
+    /*public Cursor getCompleteFormDetails(String unique_id, int form_id) {
+        return utility.getDatabase().rawQuery("SELECT main_questions.question_label," +
+                "question_options.option_label,question_answers.unique_id " +
                 "FROM question_answers" +
-                " JOIN main_questions ON question_answers.question_keyword=main_questions.keyword " +
-                "JOIN question_options ON question_answers.answer_keyword=question_options.keyword " +
-                "WHERE question_answers.unique_id='"+unique_id+"' and question_answers.form_id="+form_id,null);
-
-    }
+                " JOIN main_questions" +
+                " ON question_answers.question_keyword=main_questions.keyword " +
+                "JOIN question_options" +
+                " ON question_answers.answer_keyword=question_options.keyword " +
+                "WHERE question_answers.unique_id='"+unique_id+"' " +
+                "and question_answers.form_id="+form_id,null);
+    }*/
 
     /**
      *form 6 contains question label but does'nt contain answer label so only
@@ -130,6 +133,23 @@ public class DBHelper extends SQLiteOpenHelper {
                 "WHERE question_answers.unique_id='"+unique_id+"' and question_answers.form_id="+form_id,null);
     }
     public Cursor getFormsList(){
-        return utility.getDatabase().rawQuery("select visit_name,form_id from form_details order by cast(form_id as int) asc",null);
+        return utility.getDatabase().rawQuery("select visit_name,form_id from form_details group by(form_id) order by cast(form_id as int) asc",null);
+    }
+    public Cursor getIncompleteFormList(String unique_id){
+        return utility.getDatabase().rawQuery("select filled_forms_status.form_id,visit_name" +
+                " from filled_forms_status join form_details on" +
+                " filled_forms_status.form_id=form_details.form_id" +
+                " where unique_id='"+unique_id+"' and form_completion_status=1" +
+                " group by(filled_forms_status.form_id)",null);
+    }
+    public Cursor getCompleteFormDetails(String unique_id, int Form_id)
+    {
+        return utility.getDatabase().rawQuery( "select r.unique_id ,mq.question_label,qo.option_label,qa.answer_keyword,qa.question_keyword" +
+                " from question_answers as qa" +
+                " left join registration as r on r.unique_id=qa.unique_id" +
+                " left join main_questions as mq on mq.keyword = qa.question_keyword" +
+                " left join question_options as qo on qo.keyword = qa.answer_keyword" +
+                " where qa.unique_id='"+unique_id+"'" +
+                " and qa.form_id="+Form_id+" group by(qa.question_keyword)",null);
     }
 }

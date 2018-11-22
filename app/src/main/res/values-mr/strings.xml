@@ -12,6 +12,8 @@
         कनेक्शन तपासा
     </string>
     <string name="yes">होय</string>
+    <string name="continue_filling_forms">फॉर्म भरणे सुरु ठेवा</string>
+    <string name="view_filled_form">भरलेले फॉर्म पहा</string>
     <string name="error">त्रुटी</string>
     <string name="authentication_error_msg">अवैध वापरकर्ता चे नाव आणि पासवर्ड</string>
     <string name="authentication_failed">प्रमाणीकरण अयशस्वी</string>

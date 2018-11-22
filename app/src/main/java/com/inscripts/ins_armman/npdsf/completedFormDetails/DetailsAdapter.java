@@ -38,9 +38,31 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CompleteFormQnA c = mDetails.get(position);
-        // form 6 contains questions(in json format) and the answers(which does not have json format and are in format of keyword)
-        if (formId == 6) {
-            answer = c.getAnswer();
+        answer = c.getAnswer();
+        question=c.getQuestion();
+        if ((answer.contains("{") && question.contains("{")) ) {
+            try {
+                JSONObject obj = new JSONObject(c.getQuestion());
+                JSONObject obj1 = new JSONObject(c.getAnswer());
+                language = utility.getLanguagePreferance(mContext);
+        if (language.isEmpty()) {
+                    utility.setApplicationLocale(mContext, "en");
+                } else {
+                    utility.setApplicationLocale(mContext, language);
+                }
+                question = obj.getString(this.language);
+            answer = obj1.getString(this.language);
+                holder.txtQuestion.setText(question);
+                holder.txtAnswer.setText(answer);
+                System.out.println("settext question :" + question);
+                System.out.println("settext answer :" + answer);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else if(question.contains("{") && !answer.contains("{") ){
             try {
                 JSONObject objQue = new JSONObject(c.getQuestion());
                 language = utility.getLanguagePreferance(mContext);
@@ -57,27 +79,26 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
                 e.printStackTrace();
             }
         }
-        //forms except 6 contains question and answer both is json format.
-        else {
+        else if(!question.contains("{") && answer.contains("{") ) {
             try {
-                JSONObject obj = new JSONObject(c.getQuestion());
-                JSONObject obj1 = new JSONObject(c.getAnswer());
+                JSONObject objAns = new JSONObject(c.getAnswer());
                 language = utility.getLanguagePreferance(mContext);
                 if (language.isEmpty()) {
                     utility.setApplicationLocale(mContext, "en");
                 } else {
                     utility.setApplicationLocale(mContext, language);
                 }
-                question = obj.getString(this.language);
-                answer = obj1.getString(this.language);
+                answer = objAns.getString(this.language);
                 holder.txtQuestion.setText(question);
                 holder.txtAnswer.setText(answer);
-                System.out.println("settext question :" + question);
-                System.out.println("settext answer :" + answer);
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+        }
+        else {
+            holder.txtQuestion.setText(question);
+            holder.txtAnswer.setText(answer);
         }
     }
 

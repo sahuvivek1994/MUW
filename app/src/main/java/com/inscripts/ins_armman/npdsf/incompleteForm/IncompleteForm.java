@@ -1,6 +1,8 @@
 package com.inscripts.ins_armman.npdsf.incompleteForm;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.inscripts.ins_armman.npdsf.R;
 import com.inscripts.ins_armman.npdsf.data.model.IncompleteFiledForm;
 import com.inscripts.ins_armman.npdsf.displayForms.displayForm;
+import com.inscripts.ins_armman.npdsf.incompleteFormList.IncompleteFormList;
 
 import java.util.List;
 
@@ -78,11 +81,31 @@ public class IncompleteForm extends AppCompatActivity implements IncompleteView 
             mIncompleteFormAdapter = new IncompleteFormAdapter(IncompleteForm.this, womenList, new IncompleteFormAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(String uniqueId, int form_id) {
-                    if ((form_id > 1 && form_id <= 5) || (form_id == 10)) {
-                        openActivity(uniqueId, form_id, "0", "1");
-                    } else {
-                        incompletePresenter.getUniqueIdFormId(uniqueId);
-                    }
+                    final int formId=form_id;
+                    final String unique_id=uniqueId;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(IncompleteForm.this);
+                    builder
+                            .setTitle("Form Details")
+                            .setMessage("do you want to continue filling the incomplete forms ?")
+                            .setPositiveButton(IncompleteForm.this.getString(R.string.continue_filling_forms), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if ((formId > 1 && formId <= 5) || (formId == 10)) {
+                                        openActivity(unique_id, formId, "0", "1");
+                                    } else {
+                                        incompletePresenter.getUniqueIdFormId(unique_id);
+                                    }
+                                }
+                            })
+                            .setNegativeButton(IncompleteForm.this.getString(R.string.view_filled_form), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    Intent intent = new Intent(IncompleteForm.this, IncompleteFormList.class);
+                                    String uniqueId=unique_id;
+                                    intent.putExtra("unique_id", unique_id);
+                                    intent.putExtra("form_id", formId);
+                                    startActivity(intent);
+                                    }
+                            }).show();
                 }
             });
             mRecyclerView.setAdapter(mIncompleteFormAdapter);
