@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NPDSF</string>
+    <string name="app_name">MUW</string>
     <string name="button_login">Login</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>

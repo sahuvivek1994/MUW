@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Npdsf</string>
+    <string name="app_name">MUW</string>
     <string name="button_login">लॉग इन करें</string>
     <string name="hint_username">उपयोगकर्ता नाम</string>
     <string name="hint_password">पारण शब्द</string>

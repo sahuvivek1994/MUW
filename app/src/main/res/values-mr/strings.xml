@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">एनपीडीएसफ़</string>
+    <string name="app_name">म्यूडब्ल्यू</string>
     <string name="button_login">लॉग इन</string>
     <string name="hint_username">वापरकर्ता चे नाव</string>
     <string name="hint_password">पासवर्ड</string>
