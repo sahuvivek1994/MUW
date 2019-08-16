@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * This is model class of UserDetails used to create json and pass parameter in retrofit api request
  *
- * @author Aniket & Vivek  Created on 4/9/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class UserDetails {

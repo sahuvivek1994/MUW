@@ -4,7 +4,7 @@ import com.inscripts.ins_armman.muw.utility.IMvpView;
 
 
 /**
- * @author Aniket & Vivek  Created on 21/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public interface ISettingView extends IMvpView {

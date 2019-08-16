@@ -1,7 +1,7 @@
 package com.inscripts.ins_armman.muw.data;
 
 /**
- * @author Aniket & Vivek  Created on 16/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public interface Url {
@@ -9,7 +9,7 @@ public interface Url {
     //API V2 added after data sync error message structure changed
 
     // String BASE_URL = "http://aww.armman.org/nutrition_API/";
-    String BASE_URL = "http://aww.armman.org/nutrition_API/";
+    String BASE_URL = "http://192.168.0.60/muw/MUW_API/";
 
     String AUTHENTICATE = "authenticate";
     String DOWNLOAD_FORMS = "newjson";

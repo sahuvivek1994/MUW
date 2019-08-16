@@ -25,7 +25,7 @@ import com.inscripts.ins_armman.muw.utility.utility;
 
 /**
  * Main screen of the project which contain different menu of different functionality
- * @author Aniket & Vivek  Created on 15/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class MainActivity extends AppCompatActivity implements IMainView, View.OnClickListener {

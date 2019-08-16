@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 /**
- * @author Aniket & Vivek  Created on 4/9/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class BeneficiariesList {

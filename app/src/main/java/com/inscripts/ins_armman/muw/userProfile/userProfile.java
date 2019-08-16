@@ -10,7 +10,7 @@ import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.data.model.syncing.beneficiaries;
 
 /**
- * @author Aniket & Vivek  Created on 21/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class userProfile extends AppCompatActivity implements IuserProfileView {

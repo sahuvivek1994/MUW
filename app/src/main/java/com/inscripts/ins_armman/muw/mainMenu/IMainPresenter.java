@@ -5,7 +5,7 @@ import android.database.Cursor;
 import com.inscripts.ins_armman.muw.utility.IBasePresenter;
 
 /**
- * @author Aniket & Vivek  Created on 15/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public interface IMainPresenter<V> extends IBasePresenter<V> {

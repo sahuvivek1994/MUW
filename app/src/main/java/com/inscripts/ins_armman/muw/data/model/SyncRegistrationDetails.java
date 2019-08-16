@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import static com.inscripts.ins_armman.muw.utility.Constants.BENEFICIARIES;
 
 /**
- * @author Aniket & Vivek  Created on 4/9/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class SyncRegistrationDetails extends UserDetails {

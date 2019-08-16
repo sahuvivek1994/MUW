@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 import static com.inscripts.ins_armman.muw.data.Url.AUTHENTICATE;
 
 /**
- * @author Aniket & Vivek  Created on 16/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public interface LoginServiceAPI {
