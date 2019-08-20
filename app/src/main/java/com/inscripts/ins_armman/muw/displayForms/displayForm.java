@@ -4039,7 +4039,19 @@ public class displayForm extends AppCompatActivity {
                     .setPositiveButton(displayForm.this.getString(R.string.yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             //finish();
-                            if (number_of_children == 0) {
+                           if(FormID != 10) {
+                               String formNumber = String.valueOf(FormID + 1);
+                               Intent intent2 = new Intent(displayForm.this, displayForm.class);
+                               intent2.putExtra(UNIQUE_ID, uniqueId);
+                               intent2.putExtra(FORM_ID, formNumber);
+                               intent2.putExtra("child", "0");
+                               intent2.putExtra("childcounter", "1");
+                               startActivity(intent2);
+                           }
+                            else if (FormID == 10) {
+                                Intent intent = new Intent(displayForm.this, MainActivity.class);
+                                startActivity(intent);
+                           /* if (number_of_children == 0) {
 
                                 if (FormID > 5) {
                                     Intent intent = new Intent(displayForm.this, MainActivity.class);
@@ -4093,7 +4105,7 @@ public class displayForm extends AppCompatActivity {
                                         startActivity(intent2);
                                     }
 
-                                }
+                                }*/
                             }
 
                         }
@@ -5802,8 +5814,8 @@ public class displayForm extends AppCompatActivity {
 
             storePrevAncId = Integer.parseInt(formid);
             FormID = Integer.parseInt(formid);
-            number_of_children = Integer.valueOf(b.getString("child"));
-            child_entry_counter = Integer.valueOf(b.getString("childcounter"));
+//            number_of_children = Integer.valueOf(b.getString("child"));
+//            child_entry_counter = Integer.valueOf(b.getString("childcounter"));
             uniqueId = b.getString(UNIQUE_ID);
 
 
@@ -5837,17 +5849,17 @@ public class displayForm extends AppCompatActivity {
             DMYFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
             String uniqueIDToUse = uniqueId;
-            if (formid.equals("6") || formid.equals("7")
-                    || formid.equals("8") || formid.equals("9")) {
-                childsUniqueIds = questionInteractor.getChildrenUniqueID(uniqueId);
-
-                if (child_entry_counter == 0)
-                    child_entry_counter = 1;
-
-                number_of_children = childsUniqueIds.size();
-                childUniqueId = childsUniqueIds.get(child_entry_counter - 1);
-                uniqueIDToUse = childUniqueId;
-            }
+//            if (formid.equals("6") || formid.equals("7")
+//                    || formid.equals("8") || formid.equals("9")) {
+//                childsUniqueIds = questionInteractor.getChildrenUniqueID(uniqueId);
+//
+//                if (child_entry_counter == 0)
+//                    child_entry_counter = 1;
+//
+//                number_of_children = childsUniqueIds.size();
+//                childUniqueId = childsUniqueIds.get(child_entry_counter - 1);
+//                uniqueIDToUse = childUniqueId;
+//            }
 
 
             maxautoId = questionInteractor.getFilledFormReferenceId(uniqueIDToUse, String.valueOf(FormID));

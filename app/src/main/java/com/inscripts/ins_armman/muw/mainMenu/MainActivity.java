@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         setContentView(R.layout.activity_main);
         mainPresenter = new MainPresenter();
         mainPresenter.attachView(this);
+        setTitle(R.string.app_name);
         init();
     }
 
