@@ -29,5 +29,13 @@
     <color name="grey">#888</color>
     <color name="lightgrey">#e6e4e4</color>
     <color name="color_incomplete">#FF9800</color>
+    <color name="startblue">#1F3530</color>
+    <color name="centertblue">#70C6D3</color>
+    <color name="endblue">#67867A</color>
+    <color name="transparent">#51000000</color>
+<color name="home_bg_start">#378378</color>
+<color name="home_bg_end">#24312E</color>
+<color name="home_bg">#3C10382E</color>
+<color name="light_bg">#45E5EEB2</color>
 
 </resources>

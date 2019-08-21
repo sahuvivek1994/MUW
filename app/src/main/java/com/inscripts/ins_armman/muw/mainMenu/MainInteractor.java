@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import static com.inscripts.ins_armman.muw.utility.Constants.INVALID_DATA;
 import static com.inscripts.ins_armman.muw.utility.Constants.RESPONSE;
 import static com.inscripts.ins_armman.muw.utility.Constants.STATUS;
@@ -76,6 +78,18 @@ public class MainInteractor implements IMainInteractor, LoaderManager.LoaderCall
     public Integer fetchUnsentFormsCount() {
         String count = dbHelper.fetchCount();
         return Integer.valueOf(count);
+    }
+
+    @Override
+    public ArrayList<Integer> getCounts() {
+        Cursor cur1  = dbHelper.getcompleteFormListList();
+        Cursor cur2 = dbHelper.getIncompleteFormListList();
+        int completeCount=cur1.getCount();
+        int incompleteCount=cur2.getCount();
+        ArrayList<Integer> count=new ArrayList<>();
+        count.add(completeCount);
+        count.add(incompleteCount);
+        return count;
     }
 
     @Override

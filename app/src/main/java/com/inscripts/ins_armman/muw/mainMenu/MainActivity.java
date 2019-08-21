@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,19 +24,24 @@ import com.inscripts.ins_armman.muw.settingActivity.Settings;
 import com.inscripts.ins_armman.muw.userProfile.userProfile;
 import com.inscripts.ins_armman.muw.utility.utility;
 
+import java.util.ArrayList;
+
 /**
  * Main screen of the project which contain different menu of different functionality
- * @author Vivek & Juilee  Created on 14/8/2019
+ * @author Aniket & Vivek  Created on 15/8/2018
  */
 
 public class MainActivity extends AppCompatActivity implements IMainView, View.OnClickListener {
     MainPresenter mainPresenter;
     Context ctx = this;
+    TextView textTotalReg, textTotalIncomplete;
+    int complete=0,incomplete=0;
+    ArrayList<Integer> totalCounts=new ArrayList<>();
     private LayerDrawable mSyncDrawable;
-    private CardView registration;
-    private CardView incompleteForm;
-    private CardView completeForm;
-    private CardView userProfile;
+    private ConstraintLayout registration;
+    private ConstraintLayout incompleteForm;
+    private ConstraintLayout completeForm;
+    private ConstraintLayout userProfile;
     private AlertDialog mProgressDialog;
 
     @Override
@@ -44,19 +50,26 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         setContentView(R.layout.activity_main);
         mainPresenter = new MainPresenter();
         mainPresenter.attachView(this);
-        setTitle(R.string.app_name);
+        totalCounts= mainPresenter.getCounts();
+        complete=totalCounts.get(0);
+        incomplete=totalCounts.get(1);
         init();
     }
 
     public void init() {
-        registration = (CardView) findViewById(R.id.card1);
+        registration = (ConstraintLayout) findViewById(R.id.layout1);
         registration.setOnClickListener(this);
-        incompleteForm = (CardView) findViewById(R.id.card2);
+        incompleteForm = (ConstraintLayout) findViewById(R.id.layout2);
         incompleteForm.setOnClickListener(this);
-        completeForm = (CardView) findViewById(R.id.card3);
+        completeForm = (ConstraintLayout) findViewById(R.id.layout3);
         completeForm.setOnClickListener(this);
-        userProfile = (CardView) findViewById(R.id.card4);
+        userProfile = (ConstraintLayout) findViewById(R.id.layout4);
         userProfile.setOnClickListener(this);
+        textTotalIncomplete=findViewById(R.id.textIncompleteCount);
+        textTotalReg=findViewById(R.id.textRegCount);
+        textTotalIncomplete.setText(String.valueOf(incomplete));
+        textTotalReg.setText(String.valueOf(complete));
+
     }
 
 
@@ -97,30 +110,23 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
     public void onClick(View v) {
         switch (v.getId()) {
 
-
-            case R.id.card1:
+            case R.id.layout1:
                 Intent intent1 = new Intent(MainActivity.this, EnrollmentQuestions.class);
                 startActivity(intent1);
                 finish();
                 break;
 
-            case R.id.card2:
+            case R.id.layout2:
                 Intent intent2 = new Intent(MainActivity.this, IncompleteForm.class);
                 startActivity(intent2);
-//                Intent intent2 = new Intent(MainActivity.this, displayForm.class);
-//                intent2.putExtra(UNIQUE_ID, "1535524404388.10");
-//                intent2.putExtra(FORM_ID, "5");
-//                startActivity(intent2);
-//                finish();
                 break;
 
-            case R.id.card3:
+            case R.id.layout3:
                  Intent intent3 = new Intent(MainActivity.this, completedForm.class);
                   startActivity(intent3);
+                  break;
 
-                break;
-
-            case R.id.card4:
+            case R.id.layout4:
                 Intent intent = new Intent(MainActivity.this, userProfile.class);
                 startActivity(intent);
                 break;
@@ -133,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
     protected void onPostResume() {
         super.onPostResume();
         mainPresenter.fetchUnsentFormsCount();
+
     }
 
 
