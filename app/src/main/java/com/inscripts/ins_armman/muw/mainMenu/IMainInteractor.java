@@ -8,6 +8,8 @@ import com.inscripts.ins_armman.muw.data.model.syncing.FormDetails;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * @author Aniket & Vivek  Created on 15/8/2018
  */
@@ -15,7 +17,7 @@ import org.json.JSONObject;
 public interface IMainInteractor {
 
     Integer fetchUnsentFormsCount();
-
+    ArrayList<Integer> getCounts();
     void resetFailureStatus();
 
     void fetchRegistrationDetails(int id);

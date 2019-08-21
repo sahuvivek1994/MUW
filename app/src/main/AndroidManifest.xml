@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.inscripts.ins_armman.muw">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,18 +17,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+       <activity android:name=".mainMenu.SplashScreen"
+           android:theme="@style/AppTheme.NoActionBar">
+           <intent-filter>
+               <action android:name="android.intent.action.MAIN" />
+
+               <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>
+       </activity>
         <activity
             android:name="com.inscripts.ins_armman.muw.login.Login"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher"
             android:windowSoftInputMode="stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+           </activity>
         <activity
             android:name="com.inscripts.ins_armman.muw.mainMenu.MainActivity"
             android:screenOrientation="portrait" />
@@ -44,9 +49,9 @@
         <activity android:name="com.inscripts.ins_armman.muw.displayForms.displayForm" />
         <activity android:name="com.inscripts.ins_armman.muw.incompleteForm.IncompleteForm" />
         <activity android:name="com.inscripts.ins_armman.muw.completedForm.completedForm" />
-        <activity android:name="com.inscripts.ins_armman.muw.completedFormList.CompletedFormsList"></activity>
- <activity android:name="com.inscripts.ins_armman.muw.completedFormDetails.CompletedFormDetails"></activity>
-        <activity android:name="com.inscripts.ins_armman.muw.incompleteFormList.IncompleteFormList"></activity>
+        <activity android:name="com.inscripts.ins_armman.muw.completedFormList.CompletedFormsList" />
+        <activity android:name="com.inscripts.ins_armman.muw.completedFormDetails.CompletedFormDetails" />
+        <activity android:name="com.inscripts.ins_armman.muw.incompleteFormList.IncompleteFormList" />
     </application>
 
 </manifest>
