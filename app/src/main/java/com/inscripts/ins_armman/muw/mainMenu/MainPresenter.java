@@ -199,6 +199,12 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
         }
     }
 
+    @Override
+    public ArrayList<Integer> getCounts() {
+     ArrayList<Integer> count= mainInteractor.getCounts();
+     return count;
+    }
+
     private void markImproperVisitToSync(String uniqueId, String formId, String errorMsg) {
         mainInteractor.updateFormFailureStatus(uniqueId, formId, errorMsg);
         syncUnsentForms();

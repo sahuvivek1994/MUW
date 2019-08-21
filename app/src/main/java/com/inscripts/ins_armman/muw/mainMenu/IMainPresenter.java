@@ -4,6 +4,8 @@ import android.database.Cursor;
 
 import com.inscripts.ins_armman.muw.utility.IBasePresenter;
 
+import java.util.ArrayList;
+
 /**
  * @author Aniket & Vivek  Created on 15/8/2018
  */
@@ -17,6 +19,7 @@ public interface IMainPresenter<V> extends IBasePresenter<V> {
     void onFetchedRegistrationData(Cursor cursor);
 
     void syncUnsentForms();
+    ArrayList<Integer> getCounts();
 
     interface OnQueryFinished {
 
