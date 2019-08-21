@@ -3,7 +3,7 @@ package com.inscripts.ins_armman.muw.utility;
 /**
  * This interface is used for attachView and detch function to follow mvp structure
  *
- * @author Aniket & Vivek  Created on 15/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public interface IBasePresenter<V> {

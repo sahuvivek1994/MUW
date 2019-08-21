@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 /**
  * This class is used to fetch and provide the imei number of device
  *
- * @author Aniket & Vivek  Created on 16/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public final class TelephonyInfo {

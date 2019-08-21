@@ -16,7 +16,7 @@ import com.inscripts.ins_armman.muw.R;
 /**
  * BadgeDrawable is used to draw of display the notification of remaining to sync entry
  *
- * @author Aniket & Vivek  Created on 21/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class BadgeDrawable extends Drawable {

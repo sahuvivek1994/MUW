@@ -13,7 +13,7 @@ import android.support.v4.content.AsyncTaskLoader;
  * <p>
  * This was based on the CursorLoader class
  *
- * @author Aniket & Vivek  Created on 4/9/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 public abstract class BaseCursorLoader extends AsyncTaskLoader<Cursor> {
 

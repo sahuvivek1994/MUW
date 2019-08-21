@@ -26,7 +26,7 @@ import static com.inscripts.ins_armman.muw.database.DatabaseContract.Validations
 /**
  * This class is used to create and update local database
  *
- * @author Aniket & Vivek  Created on 15/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class DBHelper extends SQLiteOpenHelper {

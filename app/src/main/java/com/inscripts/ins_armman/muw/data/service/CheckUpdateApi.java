@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import static com.inscripts.ins_armman.muw.data.Url.RELEASE;
 
 /**
- * @author Aniket & Vivek  Created on 4/9/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public interface CheckUpdateApi {
