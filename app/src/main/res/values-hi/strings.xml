@@ -23,7 +23,8 @@
     <string name="oops_some_thing_happened_wrong">उफ़ !! कुछ हुआ। कृपया पुन: प्रयास करें</string>
     <string name="sync">सिंक</string>
     <string name="action_settings">सेटिंग</string>
-
+    <string name="total_complete_forms">कुल अपूर्ण फॉर्म</string>
+    <string name="total_incomplete_forms">कुल पूर्ण फॉर्म</string>
     <string name="category_personal">निजी</string>
     <string name="category_sync">सिंक डेटा</string>
     <string name="category_account">खाता</string>

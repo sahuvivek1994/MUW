@@ -5836,7 +5836,7 @@ public class displayForm extends AppCompatActivity {
             YMDFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             DMYFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
-            String uniqueIDToUse = uniqueId;
+            /*String uniqueIDToUse = uniqueId;
             if (formid.equals("6") || formid.equals("7")
                     || formid.equals("8") || formid.equals("9")) {
                 childsUniqueIds = questionInteractor.getChildrenUniqueID(uniqueId);
@@ -5856,8 +5856,9 @@ public class displayForm extends AppCompatActivity {
                 maxautoId = questionInteractor.saveFilledFormStatus(uniqueIDToUse, FormID, 0, 0, utility.getCurrentDateTime());
             }
 
-            previousVisitDetails = questionInteractor.getFormFilledData(uniqueIDToUse, (FormID - 1));
-            womendetails = questionInteractor.getFormFilledData(uniqueIDToUse, FormID);
+            previousVisitDetails = questionIinscripts
+            nteractor.getFormFilledData(uniqueIDToUse, (FormID - 1));
+            womendetails = questionInteractor.getFormFilledData(uniqueIDToUse, FormID);*/
             Frame = (FrameLayout) findViewById(R.id.frame);
             next = (Button) findViewById(R.id.btnNext);
             previous = (Button) findViewById(R.id.btnpre);

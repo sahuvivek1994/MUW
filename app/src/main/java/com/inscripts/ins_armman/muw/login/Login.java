@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.inscripts.ins_armman.muw.R;
@@ -28,7 +29,7 @@ import com.inscripts.ins_armman.muw.utility.utility;
 public class Login extends AppCompatActivity implements ILoginview {
 
     LoginPresenter loginPresenter;
-    View progressOverlay;
+    ProgressBar progressOverlay;
     private EditText mEditTextUserName;
     private EditText mEditTextPassword;
     private TextInputLayout mTextInputLayoutUsername;
@@ -59,7 +60,7 @@ public class Login extends AppCompatActivity implements ILoginview {
         mTextInputLayoutUsername = (TextInputLayout) findViewById(R.id.textinputlayout_username);
         mTextInputLayoutPassword = (TextInputLayout) findViewById(R.id.textinputlayout_password);
         mButtonLogin = (Button) findViewById(R.id.button_login);
-        progressOverlay = findViewById(R.id.progress_overlay);
+        progressOverlay=findViewById(R.id.progress_bar);
 
 
         mEditTextPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {

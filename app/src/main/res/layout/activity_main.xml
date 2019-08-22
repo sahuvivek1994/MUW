@@ -250,13 +250,13 @@
             android:background="@color/light_bg">
 
             <TextView
-                android:id="@+id/textReg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/textcomplete"
+                android:layout_width="219dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="44dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Total Registration"
+                android:text="@string/total_complete_forms"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -265,17 +265,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textRegCount"
+                android:id="@+id/textIncompleteCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="7dp"
                 android:text="10"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textIncompleteCount"
-                app:layout_constraintHorizontal_bias="0.529"
-                app:layout_constraintStart_toStartOf="@+id/textIncompleteCount"
-                app:layout_constraintTop_toBottomOf="@+id/textIncompleteCount" />
+                app:layout_constraintEnd_toEndOf="@+id/textcompleteCount"
+                app:layout_constraintStart_toStartOf="@+id/textcompleteCount"
+                app:layout_constraintTop_toBottomOf="@+id/textcompleteCount" />
 
             <TextView
                 android:id="@+id/textIncomplete"
@@ -283,27 +282,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="Total Incomplete"
+                android:text="@string/total_incomplete_forms"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textReg"
+                app:layout_constraintEnd_toEndOf="@+id/textcomplete"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textReg"
-                app:layout_constraintTop_toBottomOf="@+id/textReg" />
+                app:layout_constraintStart_toStartOf="@+id/textcomplete"
+                app:layout_constraintTop_toBottomOf="@+id/textcomplete" />
 
             <TextView
-                android:id="@+id/textIncompleteCount"
+                android:id="@+id/textcompleteCount"
                 android:layout_width="102dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="268dp"
+                android:layout_marginStart="244dp"
                 android:text="5"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textReg"
-                app:layout_constraintStart_toEndOf="@+id/textReg"
-                app:layout_constraintTop_toTopOf="@+id/textReg"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintBottom_toBottomOf="@+id/textcomplete"
+                app:layout_constraintStart_toEndOf="@+id/textcomplete"
+                app:layout_constraintTop_toTopOf="@+id/textcomplete"
+                app:layout_constraintVertical_bias="1.0" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
