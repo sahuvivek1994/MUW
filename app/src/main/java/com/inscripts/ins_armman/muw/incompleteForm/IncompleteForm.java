@@ -89,7 +89,7 @@ public class IncompleteForm extends AppCompatActivity implements IncompleteView 
                             .setMessage("do you want to continue filling the incomplete forms ?")
                             .setPositiveButton(IncompleteForm.this.getString(R.string.continue_filling_forms), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if ((formId > 1 && formId <= 5) || (formId == 10)) {
+                                    if ((formId <= 10)) {
                                         openActivity(unique_id, formId, "0", "1");
                                     } else {
                                         incompletePresenter.getUniqueIdFormId(unique_id);

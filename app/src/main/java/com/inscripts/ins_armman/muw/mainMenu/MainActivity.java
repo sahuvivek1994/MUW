@@ -9,7 +9,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         userProfile = (ConstraintLayout) findViewById(R.id.layout4);
         userProfile.setOnClickListener(this);
         textTotalIncomplete=findViewById(R.id.textIncompleteCount);
-        textTotalReg=findViewById(R.id.textRegCount);
+        textTotalReg=findViewById(R.id.textcompleteCount);
         textTotalIncomplete.setText(String.valueOf(incomplete));
         textTotalReg.setText(String.valueOf(complete));
 

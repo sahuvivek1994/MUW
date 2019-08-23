@@ -4,6 +4,21 @@
     android:layout_height="match_parent">
 
     <PreferenceCategory
+        android:key="about_category"
+        android:title="@string/category_about">
+
+        <Preference
+            android:key="version"
+            android:persistent="false"
+            android:selectable="false"
+
+            android:summary="1.1"
+            android:title="@string/version" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
         android:key="personal_category"
         android:title="@string/category_personal">
 
@@ -35,6 +50,9 @@
 
     </PreferenceCategory>
 
+
+
+
     <PreferenceCategory
         android:key="account_category"
         android:title="@string/category_account">
@@ -50,19 +68,4 @@
             android:title="@string/logout"></Preference>
 
     </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="about_category"
-        android:title="@string/category_about">
-
-        <Preference
-            android:key="version"
-            android:persistent="false"
-            android:selectable="false"
-            android:summary="1.1"
-            android:title="@string/version" />
-
-    </PreferenceCategory>
-
-
 </PreferenceScreen>
