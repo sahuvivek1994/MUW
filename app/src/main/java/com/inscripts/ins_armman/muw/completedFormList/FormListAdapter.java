@@ -76,19 +76,7 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
             formName = obj.getString(this.language);
             formName = formName.toUpperCase();
             int count = 0;
-
-
-            if (form_id >= 6 && form_id <= 9) {
-                String child = childIdList.get(status).getChildNAme();
-                holder.formName.setText(formName + " (" + child + ")");
-                status = status + 1;
-            }
-
-
-            if (form_id >= 1 && form_id <= 5 || form_id == 10) {
-                holder.formName.setText(formName);
-            }
-
+            holder.formName.setText(formName);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -125,13 +113,13 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
             if (clickListener != null) {
                 clickListener.itemClicked(v, getPosition());
                 int formId = mDetails.get(getPosition()).getForm_id();
-                if (formId >= 6 && formId <= 9) {
-                    uniqueId = childIdList.get(getPosition() - 5).getUnique_id();
+                /*if (formId >= 6 && formId <= 9) {
+                   // uniqueId = childIdList.get(getPosition() - 5).getUnique_id();
                     System.out.println("child id :" + formId);
                     System.out.println("child id :" + uniqueId);
                 } else if (formId >= 1 && formId <= 9 || formId == 10) {
-                    uniqueId = participant_id;
-                }
+                */    uniqueId = participant_id;
+                //}
                 intent.putExtra("unique_id", uniqueId);
                 intent.putExtra("form_id", formId);
                 mContext.startActivity(intent);
