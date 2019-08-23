@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.inscripts.ins_armman.muw.data.model.UserDetails;
 
 /**
- * @author Aniket & Vivek  Created on 4/9/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class RestoreDataRequest extends UserDetails {

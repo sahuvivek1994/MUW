@@ -36,7 +36,7 @@ import static com.inscripts.ins_armman.muw.utility.Constants.UNIQUE_MEMBER_ID_SE
 /**
  * This class is used for storing shared Preference language,check internet connect and many other things also
  *
- * @author Aniket & Vivek  Created on 15/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class utility {

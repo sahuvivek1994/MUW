@@ -12,7 +12,7 @@ import com.inscripts.ins_armman.muw.mainMenu.MainActivity;
 /**
  * Setting this class is used to deal with setting fragment is used for easy code and less coding is required then normal coding standard
  *
- * @author Aniket & Vivek  Created on 21/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 
 public class Settings extends AppCompatActivity {

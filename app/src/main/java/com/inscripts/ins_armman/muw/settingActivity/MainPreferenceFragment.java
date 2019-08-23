@@ -20,7 +20,7 @@ import com.inscripts.ins_armman.muw.utility.utility;
 /**
  * MainPreferenceFragment this class is used to display setting menu and handle it onclick also
  *
- * @author Aniket & Vivek  Created on 21/8/2018
+ * @author Vivek & Juilee  Created on 14/8/2019
  */
 public class MainPreferenceFragment extends PreferenceFragment implements ISettingView {
 
