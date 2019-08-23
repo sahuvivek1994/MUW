@@ -33,7 +33,7 @@ public class CompleteFormDetailsPresentor implements ICompleteFormDetailsPresent
      */
     @Override
     public void displayFIlledForm(String unique_id, int form_id) {
-      if (form_id == 6) {
+     /* if (form_id == 6) {
             Cursor cur = interactor.displayForm6Details(unique_id, form_id);
             if (cur != null && cur.moveToFirst()) {
                 do {
@@ -47,7 +47,7 @@ public class CompleteFormDetailsPresentor implements ICompleteFormDetailsPresent
                 } while (cur.moveToNext());
             }
         } else {
-            Cursor cur = interactor.displayFormDetails(unique_id, form_id);
+*/            Cursor cur = interactor.displayFormDetails(unique_id, form_id);
             if (cur != null && cur.moveToFirst()) {
                 do {
                     CompleteFormQnA completeFormQnA = new CompleteFormQnA();
@@ -72,7 +72,7 @@ public class CompleteFormDetailsPresentor implements ICompleteFormDetailsPresent
                     System.out.println("question :" + que + "\n" + "answer :" + ans);
                 } while (cur.moveToNext());
             }
-        }
+       // }
 
         if (!formDetails.isEmpty()) {
             completeFormView.getFormdetails(formDetails);

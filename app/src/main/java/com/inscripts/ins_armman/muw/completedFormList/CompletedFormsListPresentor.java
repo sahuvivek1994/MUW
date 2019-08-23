@@ -52,14 +52,14 @@ public class CompletedFormsListPresentor implements ICompletedFormsListPresentor
 
         //get forms
             res = interactor.getCompleteFormList();
-            //to display forms 1 to 5
+
             if (res != null & res.moveToFirst()) {
                 do {
                     CompleteFormQnA obj = new CompleteFormQnA();
                     obj.setFormName(res.getString(res.getColumnIndex("visit_name")));
                     obj.setForm_id(res.getInt(res.getColumnIndex("form_id")));
                     int formId = res.getInt(res.getColumnIndex("form_id"));
-                    if ((formId >= 1 && formId <= 5)) {
+                    /*if ((formId >= 1 && formId <= 5)) {
                         formDetails.add(obj);
                     } else {
                         //to display forms 6 to 9
@@ -93,7 +93,7 @@ public class CompletedFormsListPresentor implements ICompletedFormsListPresentor
                                 }
                             } while (res.moveToNext());
                         }
-                    }
+                    }*/
                 } while (res.moveToNext());
             }
         if (!formDetails.isEmpty() || !childNumber.isEmpty()) {

@@ -562,7 +562,7 @@ public class displayForm extends AppCompatActivity {
                         && !formid.equals("8") && !formid.equals("9"))
                     questionInteractor.saveQuestionAnswers(Backup_answerTyped1, maxautoId, uniqueId, Integer.parseInt(formid), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(new Date()));
                 else
-                    questionInteractor.saveQuestionAnswers(Backup_answerTyped1, maxautoId, childUniqueId, Integer.parseInt(formid), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(new Date()));
+                    questionInteractor.saveQuestionAnswers(Backup_answerTyped1, maxautoId, uniqueId, Integer.parseInt(formid), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(new Date()));
 
 
                 Backup_answerTyped1.clear();
