@@ -65,17 +65,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor getIncompleteFormListList() {
 
-     String str= "select c.unique_id,c.form_id,r.name,c.form_completion_status " +
+     /*String str= "select c.unique_id,c.form_id,r.name,c.form_completion_status " +
              "from filled_forms_status as c join registration as r  on c.unique_id=r.unique_id " +
              "and form_id>=2 and form_id<=10 and form_completion_status=0 " +
              "group by c.unique_id ";
         return utility.getDatabase().rawQuery(str,null);
-        /*return utility.getDatabase().rawQuery("SELECT * FROM " +
+     */return utility.getDatabase().rawQuery("SELECT * FROM " +
                 "(SELECT current.unique_id,current.form_id,reg.name, current.form_completion_status " +
                 "FROM filled_forms_status AS current " +
-                " JOIN registration AS reg on current.unique_id = reg.unique_id AND (reg.mother_id is null OR reg.mother_id = '') " +
+                " JOIN registration AS reg on current.unique_id = reg.unique_id "+
                 " AND current.unique_id NOT IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10 AND form_completion_status = 1))" +
-                " GROUP BY unique_id", null);*/
+                " GROUP BY unique_id", null);
     }
 
 

@@ -193,6 +193,8 @@ public class displayForm extends AppCompatActivity {
     Double length_min;
     Double length_max;
     String length_lang;
+    String miniLength = "",maxiLength="",dependantError;
+    int minLength=0,maxLength=0;
     String view_check = "";
     boolean HighriskStatus = false;
     boolean RefferalStatus = false;
@@ -2560,11 +2562,11 @@ public class displayForm extends AppCompatActivity {
                     break;
 
                 case "int":
-                    ll = createdependentInt(1, qstnData.getQuestionText(), qstnData.getAnswerType(), qstnData.getParentQstnKeyword(), qstnData.getFormid(), qstnData.getSetId(), qstnData.getKeyword(), qstnData.getValidationCondition(), qstnData.getMessages(), displayCondition, qstnData.getPageScrollId(), qstnData.getOrientation());
+                    ll = createdependentInt(1, qstnData.getQuestionText(), qstnData.getAnswerType(), qstnData.getParentQstnKeyword(), qstnData.getFormid(), qstnData.getSetId(), qstnData.getKeyword(), qstnData.getValidationCondition(), qstnData.getMessages(), displayCondition, qstnData.getPageScrollId(), qstnData.getOrientation(),qstnData.getKeyword());
                     break;
 
                 case "float":
-                    ll = createdependentInt(1, qstnData.getQuestionText(), qstnData.getAnswerType(), qstnData.getParentQstnKeyword(), qstnData.getFormid(), qstnData.getSetId(), qstnData.getKeyword(), qstnData.getValidationCondition(), qstnData.getMessages(), displayCondition, qstnData.getPageScrollId(), qstnData.getOrientation());
+                    ll = createdependentInt(1, qstnData.getQuestionText(), qstnData.getAnswerType(), qstnData.getParentQstnKeyword(), qstnData.getFormid(), qstnData.getSetId(), qstnData.getKeyword(), qstnData.getValidationCondition(), qstnData.getMessages(), displayCondition, qstnData.getPageScrollId(), qstnData.getOrientation(),qstnData.getKeyword());
                     break;
 
                 case "text":
@@ -3208,7 +3210,9 @@ public class displayForm extends AppCompatActivity {
      * @param messages             = this field contains json with multiple highrisk,counselling,referral conditions
      * @return ll
      */
-    public LinearLayout createdependentInt(int i, String language, final String answerType, final String radiotag, final String formid, final String setid, final String dependantQuesKeyword, final String validationConditions, final String messages, String displayCondition, final String PageScrollID, final int orientation) {
+    public LinearLayout createdependentInt(int i, String language, final String answerType, final String radiotag, final String formid, final String setid,
+                                           final String dependantQuesKeyword, final String validationConditions, final String messages, String displayCondition,
+                                           final String PageScrollID, final int orientation,final String keyword) {
 
         System.out.println("inside method count createdependentInt **" + i + "*** keyword**" + answerType + "***radiotag***" + radiotag + "***dependantQuesKeyword**" + dependantQuesKeyword + "***validationConditions***" + validationConditions + "*** pageScrollID***" + PageScrollID);
 
@@ -3279,27 +3283,42 @@ public class displayForm extends AppCompatActivity {
             JSONObject validationobj = new JSONObject(validationConditions);
 
             if (validationobj.optString("required") != null && validationobj.optString("required").length() > 0) {
+                if (validationobj.optString("length") != null && validationobj.optString("length").length() > 0) {
 
-                if (validationobj.optString("languages") != null && validationobj.optString("languages").length() > 0) {
-                    et.setError(validationobj.optString("languages"));
-                } else {
-                    et.setError(displayForm.this.getString(R.string.default_validation_msg));
+                    JSONObject lengthobject = validationobj.getJSONObject("length");
+
+                    if (lengthobject.optString("languages") != null && lengthobject.optString("languages").length() > 0) {
+                        et.setError(validationobj.optString("languages"));
+
+                        JSONObject langObj = lengthobject.getJSONObject("languages");
+
+                        String langVar = utility.getLanguagePreferance(ctx);
+
+                        if (language.isEmpty()) {
+                            utility.setApplicationLocale(ctx, "en");
+                        } else {
+                            utility.setApplicationLocale(ctx, langVar);
+                        }
+
+                        dependantError = langObj.getString(langVar);
+                    } else {
+                        et.setError(displayForm.this.getString(R.string.default_validation_msg));
+                    }
+
+                    tv.setError("");
+                    isCompulsory = true;
+
+                    validationlist.put("" + et.getTag(), "");
+                    NextButtonvalidationlist.put("" + et.getTag(), ScrollPageId);
                 }
-
-                tv.setError("");
-                isCompulsory = true;
-
-                validationlist.put("" + et.getTag(), "");
-                //NextButtonvalidationlist.put(""+et.getTag(),runtimevalidationlist.get(et.getId()));
-                NextButtonvalidationlist.put("" + et.getTag(), ScrollPageId);
-
-            }
-
-            if (validationobj.optString("length") != null && validationobj.optString("length").length() > 0) {
+            } else if (validationobj.optString("length") != null && validationobj.optString("length").length() > 0) {
 
                 JSONObject lengthobject = validationobj.getJSONObject("length");
 //
-                int maxLength = lengthobject.optInt("max");
+                 maxLength = lengthobject.optInt("max");
+                 minLength = lengthobject.optInt("min");
+                 miniLength = String.valueOf(minLength);
+                 maxiLength = String.valueOf(maxLength);
 
                 if (maxLength > 0) {
                     et.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
@@ -3308,6 +3327,10 @@ public class displayForm extends AppCompatActivity {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+
+        if (minLength>et.getText().toString().length()){
+            et.setError(dependantError);
         }
 
         if (womendetails.containsKey(dependantQuesKeyword)) {
@@ -3369,7 +3392,12 @@ public class displayForm extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-
+                if (maxLength > 0) {
+                    et.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
+                }
+                if (minLength>et.getText().toString().length()){
+                    et.setError(dependantError);
+                }
             }
 
             @Override
@@ -3383,50 +3411,25 @@ public class displayForm extends AppCompatActivity {
 
                 try {
 
-
+                    String enteredValue = et.getText().toString();
                     if (validation_Conditions != null && validation_Conditions.length() > 0) {
 
-//						if (et.getText().toString().equals("")) {
-//							et.setError(null);
-//							validationlist.remove("" + et.getTag());
-//							NextButtonvalidationlist.remove("" + et.getTag());
-//						}
-
-                        if (et.getText().toString() != null && et.getText().length() > 0) {
-
+                        if (enteredValue != null && enteredValue.length() > 0) {
                             et.setError(null);
                             tv.setError(null);
                             validationlist.put("" + et.getTag(), et.getText().toString());
                             NextButtonvalidationlist.put("" + et.getTag(), ScrollPageId);
 
-//							if ((length_min < et.getText().toString().length()) && (et.getText().toString().length() <= length_max)) {
-//								et.setError(null);
-//								validationlist.put("" + et.getTag(), et.getText().toString());
-//								NextButtonvalidationlist.put("" + et.getTag(), ScrollPageId);
-//
-//							} else {
-////
-//								et.setError(length_lang);
-//								//next.setEnabled(false);
-//
-//								validationlist.put("" + et.getTag(), "");
-//								NextButtonvalidationlist.put("" + et.getTag(), ScrollPageId);
-//							}
+                            if (maxLength > 0) {
 
-
-                            if (range_max > 0) {
-
-                                if ((range_min <= Double.parseDouble(et.getText().toString())) && (Double.parseDouble(et.getText().toString()) <= range_max)) {
+                                if (minLength <= enteredValue.length() && enteredValue.length() <= maxLength) {
                                     et.setError(null);
                                     tv.setError(null);
                                     //next.setEnabled(true);
 
                                     validationlist.put("" + et.getTag(), et.getText().toString());
-//						NextButtonvalidationlist.put(et.getId(), scroll.getId());
-
                                 } else {
-
-                                    et.setError(range_lang);
+                                    et.setError(dependantError);
                                     tv.setError("");
                                     validationlist.put("" + et.getTag(), "");
                                     NextButtonvalidationlist.put("" + et.getTag(), ScrollPageId);
@@ -3465,74 +3468,7 @@ public class displayForm extends AppCompatActivity {
                     }
 
                 }
-
-                if (!et.getText().toString().equals("")) {
-
-                    if (et.getTag().equals("infant_alive")) {
-
-                        String outcomeKeyword = womendetails.get("number_of_children_born");
-                        int outcome = Integer.parseInt(outcomeKeyword.substring(outcomeKeyword.length() - 1));
-                        int enteredValue = Integer.parseInt(String.valueOf(et.getText()));
-                        if (enteredValue <= outcome) {
-                            tv.setError(null);
-                            et.setError(null);
-                            validationlist.remove(dependantQuesKeyword);
-                            NextButtonvalidationlist.remove(dependantQuesKeyword);
-                        } else {
-                            tv.setError("");
-                            validationlist.put("" + et.getTag(), "");
-                            NextButtonvalidationlist.put("" + et.getTag(), ScrollPageId);
-                            womendetails.remove(dependantQuesKeyword);
-                            Backup_answerTyped1.remove(dependantQuesKeyword);
-                        }
-                    } else if (et.getTag().equals("infant_breastfeed") && womendetails.containsKey("infant_alive")) {
-                        if (!womendetails.get("infant_alive").equals("")) {
-                            int outcome = Integer.parseInt(womendetails.get("infant_alive"));
-                            int enteredValue = Integer.parseInt(String.valueOf(et.getText()));
-                            if (enteredValue <= outcome) {
-                                tv.setError(null);
-                                et.setError(null);
-                                validationlist.remove(dependantQuesKeyword);
-                                NextButtonvalidationlist.remove(dependantQuesKeyword);
-                            } else {
-                                tv.setError("");
-                                validationlist.put("" + et.getTag(), "");
-                                NextButtonvalidationlist.put("" + et.getTag(), ScrollPageId);
-                                womendetails.remove(dependantQuesKeyword);
-                                Backup_answerTyped1.remove(dependantQuesKeyword);
-                            }
-                        }
-                    }
-                }
-
-                switch ("" + et.getTag()) {
-                    case "weight_of_women":
-                    case "height_of_women":
-                    case "height_in_feet":
-
-                        if (womendetails.containsKey("weight_of_women") && womendetails.containsKey("height_of_women")) {
-                            womanWeight = Double.parseDouble(womendetails.get("weight_of_women"));
-                            womanHeight = Double.parseDouble(womendetails.get("height_of_women"));
-                            bmiCalculation(true, setid);
-                        } else if (womendetails.containsKey("weight_of_women") && womendetails.containsKey("height_in_feet")) {
-                            womanWeight = Double.parseDouble(womendetails.get("weight_of_women"));
-                            Double heightInFeet = Double.parseDouble(womendetails.get("height_in_feet"));
-                            Double heightInInch = heightInFeet * 12;
-                            womanHeight = heightInInch * 2.54;
-                            bmiCalculation(true, setid);
-                        } else {
-                            bmiCalculation(false, setid);
-                        }
-
-                        break;
-
-                    default:
-                        break;
-                }
-
             }
-
-
         });
 
         return ll;

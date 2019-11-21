@@ -57,7 +57,7 @@
         android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
         android:text="MUW"
-        android:textColor="#8DF5DD"
+        android:textColor="@color/login_text"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"

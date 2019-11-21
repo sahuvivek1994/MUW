@@ -476,10 +476,12 @@ public class SettingInteractor implements ISettingInteractor, LoaderManager.Load
 
         void deleteOldFormData() {
             utility.getDatabase().execSQL("DROP TABLE IF EXISTS " + DatabaseContract.DependentQuestionsTable.TABLE_NAME);
+            utility.getDatabase().execSQL("DROP TABLE IF EXISTS " + DatabaseContract.FormDetailsTable.TABLE_NAME);
             utility.getDatabase().execSQL("DROP TABLE IF EXISTS " + DatabaseContract.MainQuestionsTable.TABLE_NAME);
             utility.getDatabase().execSQL("DROP TABLE IF EXISTS " + DatabaseContract.QuestionOptionsTable.TABLE_NAME);
             utility.getDatabase().execSQL("DROP TABLE IF EXISTS " + DatabaseContract.ValidationsTable.TABLE_NAME);
 
+            utility.getDatabase().execSQL(DatabaseContract.FormDetailsTable.CREATE_TABLE);
             utility.getDatabase().execSQL(DatabaseContract.MainQuestionsTable.CREATE_TABLE);
             utility.getDatabase().execSQL(DatabaseContract.DependentQuestionsTable.CREATE_TABLE);
             utility.getDatabase().execSQL(DatabaseContract.QuestionOptionsTable.CREATE_TABLE);
