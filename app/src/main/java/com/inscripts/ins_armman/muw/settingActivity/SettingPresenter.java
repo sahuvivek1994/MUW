@@ -9,6 +9,8 @@ import android.database.Cursor;
 import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.data.model.RequestFormModel;
 import com.inscripts.ins_armman.muw.data.model.UpdateModel;
+import com.inscripts.ins_armman.muw.data.model.UserDetails;
+import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RegisteredData;
 import com.inscripts.ins_armman.muw.data.model.restoredata.BeneficiariesList;
 import com.inscripts.ins_armman.muw.data.model.restoredata.RestoreDataRequest;
 import com.inscripts.ins_armman.muw.data.model.restoredata.RestoreRegistration;
@@ -32,8 +34,10 @@ import static com.inscripts.ins_armman.muw.utility.Constants.HASH_ITEM_FORM;
 
 public class SettingPresenter implements ISettingPresenter<ISettingView>
         , ISettingInteractor.OnFormDownloadFinished, ISettingInteractor.onCheckUpdateFinished,
-        ISettingInteractor.OnRegistrationsDownloadFinished, ISettingInteractor.OnVisitsDownloadFinished {
+        ISettingInteractor.OnRegistrationsDownloadFinished, ISettingInteractor.OnVisitsDownloadFinished,
+        ISettingInteractor.OndownloadAllRegistrationData {
 
+    private UserDetails userDetail;
     private static final int FETCH_USER_DATA = 101;
     private static final int FETCH_FORM_HASH = 102;
     SettingInteractor settingInteractor;
@@ -277,5 +281,14 @@ public class SettingPresenter implements ISettingPresenter<ISettingView>
             mSettingsView.hideProgressBar();
             settingInteractor.saveDownloadedData(listRegistrations, listVisits);
         }
+    }
+    @Override
+    public void fetchData() {
+        settingInteractor.downloadAllRegistrationData(userDetail,this);
+    }
+
+    @Override
+    public void onSuccessDownloadData(RegisteredData data) {
+    mSettingsView.showProgressBar(mSettingsView.getContext().getString(R.string.downloading_data));
     }
 }

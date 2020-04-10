@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.inscripts.ins_armman.muw.data.model.RequestFormModel;
 import com.inscripts.ins_armman.muw.data.model.UpdateModel;
+import com.inscripts.ins_armman.muw.data.model.UserDetails;
+import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RegisteredData;
 import com.inscripts.ins_armman.muw.data.model.restoredata.BeneficiariesList;
 import com.inscripts.ins_armman.muw.data.model.restoredata.RestoreDataRequest;
 import com.inscripts.ins_armman.muw.data.model.restoredata.RestoreRegistration;
@@ -66,8 +68,19 @@ public interface ISettingInteractor {
 
     interface OnVisitsDownloadFinished {
         void onSuccessVisitsDownloading(RestoreVisits visits);
-
         void onFailure(String message);
     }
 
+    void downloadAllRegistrationData(UserDetails request, OndownloadAllRegistrationData downloadData);
+
+    interface OndownloadAllRegistrationData
+    {
+        void onSuccessDownloadData(RegisteredData data);
+        void onFailure(String message);
+    }
+
+    /*
+        This method is used to store the data in Database of all registered Women
+     */
+    void saveAllRegisteredData(ArrayList<RegisteredData> listRegistrations);
 }

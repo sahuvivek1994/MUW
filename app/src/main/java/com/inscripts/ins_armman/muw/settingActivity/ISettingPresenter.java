@@ -17,6 +17,8 @@ public interface ISettingPresenter<V> extends IBasePresenter<V> {
 
     void logout();
 
+    void fetchData();
+
     void checkUpdate();
 
     void setApkDownloadProgress(int progress);

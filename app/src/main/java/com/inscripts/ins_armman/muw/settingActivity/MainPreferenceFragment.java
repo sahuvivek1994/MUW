@@ -27,7 +27,7 @@ public class MainPreferenceFragment extends PreferenceFragment implements ISetti
     private SettingPresenter mSettingsPresentor;
     private ListPreference mListPreference;
     private Preference mPreferenceSyncForm, mPreferenceVersion;
-    private Preference mPreferenceCheckUpdate, mPreferenceHelpManual, mPreferenceRestoreData;
+    private Preference mPreferenceCheckUpdate, mPreferenceHelpManual, mPreferenceRestoreData,mPreferenceFetchData;
     private ProgressBar mProgressBar;
     private AlertDialog mProgressDialog;
 
@@ -44,6 +44,14 @@ public class MainPreferenceFragment extends PreferenceFragment implements ISetti
     }
 
     void linkViewsId() {
+        mPreferenceFetchData = findPreference("fetch_data");
+        mPreferenceFetchData.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                mSettingsPresentor.fetchData();
+                return false;
+            }
+        });
         mListPreference = (ListPreference) findPreference("language");
         mListPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override

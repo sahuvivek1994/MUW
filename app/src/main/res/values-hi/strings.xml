@@ -31,6 +31,7 @@
     <string name="category_about">इस के बारे में</string>
     <string name="language">भाषा</string>
     <string name="sync_forms">फॉर्म को अपडेट करें</string>
+    <string name="fetch_data">डेटा प्राप्त करें</string>
     <string name="get_help_mannual">संसाधन की मदद लें</string>
     <string name="restore_data">डेटा को पुनर्स्थापित करें</string>
     <string name="check_update">नया अपडेट खोजें</string>

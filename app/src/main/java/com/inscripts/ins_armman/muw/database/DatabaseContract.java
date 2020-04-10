@@ -272,4 +272,20 @@ public final class DatabaseContract {
                 ")";
     }
 
+    public static final class AllregistrationDetail {
+        public static final String TABLE_NAME = "all_registration_detail";
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_UNIQUE_ID = "unique_id";
+        public static final String COLUMN_USER_ID = "user_id";
+        public static final String COLUMN_FORM_REGISTRATION_NAME = "registration_name";
+
+        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+                "(" +
+                COLUMN_ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
+                COLUMN_UNIQUE_ID + TEXT_TYPE + COMMA_SEP +
+                COLUMN_USER_ID + INTEGER_TYPE + COMMA_SEP +
+                COLUMN_FORM_REGISTRATION_NAME + TEXT_TYPE +
+                ")";
+    }
+
 }
