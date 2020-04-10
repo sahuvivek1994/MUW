@@ -42,6 +42,7 @@
     <string name="mainMenu_Incomplet">अपूर्ण फॉर्म</string>
     <string name="mainMenu_Completed">पूर्ण फॉर्म</string>
     <string name="mainMenu_userProfile">वापरकर्ता प्रोफाइल</string>
+    <string name="mainMenu_midline">मिडलाइन मुलाखत</string>
     <string name="title_activity_setting">सेटिंग्ज</string>
 
     <string name="an_initiative_by">एक पुढाकार</string>
@@ -106,4 +107,10 @@
     </string>
     <string name="Reg_women_com">एकही संपूर्ण भेट सापडली नाही</string>
     <string name="incompleteformtitle">अपूर्ण फॉर्म</string>
+    <string name="midline_unique_id">सहभागीची 5 अंकी आयडी</string>
+    <string name="midline_participant_name">सहभागीचे पूर्ण नाव</string>
+    <string name="midline_popup_msg">कृपया मिडलाइन मुलाखत भरण्यासाठी सहभागीची आयडी प्रविष्ट करा </string>
+    <string name="midline_continue">सुरू ठेवा</string>
+    <string name="midline_empty">रेकॉर्ड आढळली नाहीत.. \n कृपया मुलाखत सुरू करण्यासाठी खालील बटणावर क्लिक करा.</string>
+
 </resources>

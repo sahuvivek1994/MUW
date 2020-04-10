@@ -41,6 +41,7 @@
     <string name="mainMenu_Incomplet">अपूर्ण रूप</string>
     <string name="mainMenu_Completed">फार्म पूरा करें</string>
     <string name="mainMenu_userProfile">उपयोगकर्ता प्रोफ़ाइल</string>
+    <string name="mainMenu_midline">िडलाइन मुलाखत</string>
     <string name="title_activity_setting">सेटिंग्स</string>
 
 
@@ -105,4 +106,9 @@
     </string>
     <string name="Reg_women_com">कोई पूर्ण दौरा नहीं मिला</string>
     <string name="incompleteformtitle">अधूरा फॉर्म</string>
+    <string name="midline_unique_id">प्रतिभागी की 5 अंकों की आईडी</string>
+    <string name="midline_participant_name">प्रतिभागी का पूरा नाम</string>
+    <string name="midline_popup_msg">मिडलाइन इंटरव्यू भरने के लिए कृपया प्रतिभागी की आईडी दर्ज करें </string>
+    <string name="midline_continue">जारी रखें</string>
+    <string name="midline_empty">कोई रिकॉर्ड नहीं मिला। \n इंटरव्यू शुरू करने के लिए कृपया निम्नलिखित बटन पर क्लिक करें।</string>
 </resources>

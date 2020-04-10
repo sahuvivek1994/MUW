@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.inscripts.ins_armman.muw.utility.utility;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static com.inscripts.ins_armman.muw.database.DatabaseContract.DATABASE_NAME;
 import static com.inscripts.ins_armman.muw.database.DatabaseContract.DATABASE_VERSION;
@@ -102,7 +103,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor getcompleteFormListList() {
 
-        return utility.getDatabase().rawQuery("SELECT name,unique_id from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10 and form_completion_status = 1 )", null);
+       // return utility.getDatabase().rawQuery("SELECT name,unique_id from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10 and form_completion_status = 1 )", null);
+       //for testing
+        return utility.getDatabase().rawQuery("SELECT name,unique_id from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 1 and form_completion_status = 1 )", null);
     }
 
     public Cursor getChildIdFromMotherId(String motherId) {
@@ -156,5 +159,21 @@ public class DBHelper extends SQLiteOpenHelper {
                 " left join question_options as qo on qo.keyword = qa.answer_keyword" +
                 " where qa.unique_id='"+unique_id+"'" +
                 " and qa.form_id="+Form_id+" group by(qa.question_keyword)",null);
+    }
+
+    public Cursor fetchAllParticipants(){
+        return utility.getDatabase().rawQuery("SELECT name,unique_id from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 11 and form_completion_status = 1 )", null);
+    }
+
+    /**
+     * this method returns the participant details of given 5 digit participant id for verification
+     * @param participantId
+     * @return
+     */
+    public ArrayList<String> participantDetails(String participantId){
+        /**
+         * return participant name and phone number in arraylist
+         */
+        return null;
     }
 }

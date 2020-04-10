@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.completedForm.completedForm;
 import com.inscripts.ins_armman.muw.incompleteForm.IncompleteForm;
+import com.inscripts.ins_armman.muw.midlineInterview.MidlineInterviewActivity;
 import com.inscripts.ins_armman.muw.registration.EnrollmentQuestions;
 import com.inscripts.ins_armman.muw.settingActivity.Settings;
 import com.inscripts.ins_armman.muw.userProfile.userProfile;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
     private ConstraintLayout incompleteForm;
     private ConstraintLayout completeForm;
     private ConstraintLayout userProfile;
+    private ConstraintLayout midlineInterview;
     private AlertDialog mProgressDialog;
 
     @Override
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         completeForm.setOnClickListener(this);
         userProfile = (ConstraintLayout) findViewById(R.id.layout4);
         userProfile.setOnClickListener(this);
+        midlineInterview = (ConstraintLayout) findViewById(R.id.layout5);
+        midlineInterview.setOnClickListener(this);
         textTotalIncomplete=findViewById(R.id.textIncompleteCount);
         textTotalReg=findViewById(R.id.textcompleteCount);
         textTotalIncomplete.setText(String.valueOf(incomplete));
@@ -128,6 +132,11 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
             case R.id.layout4:
                 Intent intent = new Intent(MainActivity.this, userProfile.class);
                 startActivity(intent);
+                break;
+
+                case R.id.layout5:
+                Intent intent5 = new Intent(MainActivity.this, MidlineInterviewActivity.class);
+                startActivity(intent5);
                 break;
 
 
