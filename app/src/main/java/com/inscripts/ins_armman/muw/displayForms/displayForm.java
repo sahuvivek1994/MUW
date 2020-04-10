@@ -61,6 +61,7 @@ import com.inscripts.ins_armman.muw.forms.QuestionInteractor;
 import com.inscripts.ins_armman.muw.forms.Visit;
 import com.inscripts.ins_armman.muw.forms.Visits;
 import com.inscripts.ins_armman.muw.mainMenu.MainActivity;
+import com.inscripts.ins_armman.muw.midlineInterview.MidlineInterviewActivity;
 import com.inscripts.ins_armman.muw.utility.utility;
 
 import org.joda.time.DateTime;
@@ -165,7 +166,8 @@ public class displayForm extends AppCompatActivity {
     HashMap<String, String> layoutids = new HashMap<>();
     Pattern pattern;
     String Optionlanguage;
-    int layoutcounter = 0;
+    int layoutcounter = 0,midlineFlag = 0;
+    String participant_id="";
     String PreviousQuesAnswertype;
     TreeMap<Integer, Integer> runtimevalidationlist = new TreeMap<>();// this treemap is used to store all scroll id's associated for edittext
     //    List<CalculateVisit> calculatevisitList = null;
@@ -1377,6 +1379,12 @@ public class displayForm extends AppCompatActivity {
             case "bmi":
                 et.setEnabled(false);
                 break;
+
+            case "participant_id " :
+                et.setText(participant_id);
+                et.setEnabled(false);
+                et.setError(null);
+                tv.setError(null);
         }
 
 
@@ -3975,27 +3983,13 @@ public class displayForm extends AppCompatActivity {
                     .setPositiveButton(displayForm.this.getString(R.string.yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             //finish();
-                           if(FormID != 10) {
-                               String formNumber = String.valueOf(FormID + 1);
-                               Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                               intent2.putExtra(UNIQUE_ID, uniqueId);
-                               intent2.putExtra(FORM_ID, formNumber);
-                               intent2.putExtra("child", "0");
-                               intent2.putExtra("childcounter", "1");
-                               startActivity(intent2);
-                           }
-                            else if (FormID == 10) {
-                                Intent intent = new Intent(displayForm.this, MainActivity.class);
-                                startActivity(intent);
-                           /* if (number_of_children == 0) {
-
-                                if (FormID > 5) {
-                                    Intent intent = new Intent(displayForm.this, MainActivity.class);
+                            if (FormID == 11) {
+                                if (midlineFlag == 100) {
+                                    Intent intent = new Intent(displayForm.this, MidlineInterviewActivity.class);
                                     startActivity(intent);
-                                } else if (FormID == 10) {
-                                    Intent intent = new Intent(displayForm.this, MainActivity.class);
-                                    startActivity(intent);
-                                } else {
+                                }
+                            } else {
+                                if (FormID != 10) {
                                     String formNumber = String.valueOf(FormID + 1);
                                     Intent intent2 = new Intent(displayForm.this, displayForm.class);
                                     intent2.putExtra(UNIQUE_ID, uniqueId);
@@ -4003,47 +3997,11 @@ public class displayForm extends AppCompatActivity {
                                     intent2.putExtra("child", "0");
                                     intent2.putExtra("childcounter", "1");
                                     startActivity(intent2);
+                                } else if (FormID == 10) {
+                                    Intent intent = new Intent(displayForm.this, MainActivity.class);
+                                    startActivity(intent);
                                 }
-
-                            } else {
-                                if (child_entry_counter <= number_of_children) {
-                                    if (FormID == 9 && child_entry_counter != number_of_children) {
-                                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                                        intent2.putExtra(UNIQUE_ID, uniqueId);
-                                        intent2.putExtra(FORM_ID, "6");
-                                        String no_of_child = String.valueOf(number_of_children);
-                                        String child_entry = String.valueOf(child_entry_counter + 1);
-                                        intent2.putExtra("child", no_of_child);
-                                        intent2.putExtra("childcounter", child_entry);
-                                        startActivity(intent2);
-                                    } else if (FormID == 10) {
-                                        Intent intent = new Intent(displayForm.this, MainActivity.class);
-                                        startActivity(intent);
-                                    } else if (FormID == 9 && child_entry_counter > number_of_children) {
-                                        String formNumber = String.valueOf(FormID + 1);
-                                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                                        intent2.putExtra(UNIQUE_ID, uniqueId);
-                                        intent2.putExtra(FORM_ID, formNumber);
-                                        String no_of_child = String.valueOf(number_of_children);
-                                        String child_entry = String.valueOf(child_entry_counter);
-                                        intent2.putExtra("child", no_of_child);
-                                        intent2.putExtra("childcounter", child_entry);
-                                        startActivity(intent2);
-                                    } else {
-                                        String formNumber = String.valueOf(FormID + 1);
-                                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                                        intent2.putExtra(UNIQUE_ID, uniqueId);
-                                        intent2.putExtra(FORM_ID, formNumber);
-                                        String no_of_child = String.valueOf(number_of_children);
-                                        String child_entry = String.valueOf(child_entry_counter);
-                                        intent2.putExtra("child", no_of_child);
-                                        intent2.putExtra("childcounter", child_entry);
-                                        startActivity(intent2);
-                                    }
-
-                                }*/
                             }
-
                         }
                     })
                     .setNegativeButton(displayForm.this.getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -4054,237 +4012,6 @@ public class displayForm extends AppCompatActivity {
 
                     .show();
 
-          /*  final Dialog dialog = new Dialog(displayForm.this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.custome_pvs);
-            dialog.setTitle(displayForm.this.getString(R.string.Important_Note));
-//            final LinearLayout ll = (LinearLayout) dialog.findViewById(R.id.linearLayout2);
-//
-//            patientvisitlist.remove("bmi");
-//
-//            for (Map.Entry<String, String> entry : patientvisitlist.entrySet()) {
-//
-//                try {
-//
-//                    JSONObject obj = new JSONObject(entry.getValue());
-//
-//                    Optionlanguage = obj.getString(mAppLanguage);
-//
-//                    Log.d(TAG, "OptionLanguage: " + Optionlanguage + " key " + entry.getKey());
-//
-//                    if (Optionlanguage.contains(entry.getKey())) {
-//
-//                        if (Optionlanguage.matches(".*[/,=:;-].*")) {
-//
-//                            String[] splited = Optionlanguage.split("[\\s,/=:;-]+");
-//
-//                            for (String s : splited) {
-//
-//                                if (womendetails.containsKey(s.trim())) {
-//
-//                                    Optionlanguage = Optionlanguage.replace(s.trim(), womendetails.get(s.trim())).trim();
-//
-//                                    String answerKeyword = Optionlanguage.split(":")[1];
-//
-//                                    for (Map.Entry answerSet : dependentAnswerMap.entrySet()) {
-//
-//                                        if (answerKeyword.trim().equals(answerSet.getKey())) {
-//
-//                                            JSONObject dependentAnsObject = new JSONObject(dependentAnswerMap.get(answerKeyword.trim()));
-//
-//                                            String answer = dependentAnsObject.getString(mAppLanguage);
-//
-//                                            Optionlanguage = Optionlanguage.replaceAll(answerKeyword, "  " + answer);
-//                                            break;
-//
-//                                        }
-//
-//                                    }
-//
-//                                }
-//                            }
-//                        } else {
-//                            Optionlanguage = Optionlanguage.replace(entry.getKey(), womendetails.get(entry.getKey()));
-//                            Log.e("ANCVisit"," In the Important Dialog else "+Optionlanguage);
-//                        }
-//                    }
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                CheckBox cb = new CheckBox(displayForm.this);
-//
-//                cb.setText(Optionlanguage);
-//                cb.setTextSize(20);
-//                cb.setPadding(10, 10, 10, 10);
-//                ll.addView(cb);
-//
-//            }
-//
-//            if (ll.getChildCount() == 0) {
-//                ll.setVisibility(View.GONE);
-//                final LinearLayout ll1 = (LinearLayout) dialog.findViewById(R.id.linearLayout3);
-//                ll1.setVisibility(View.VISIBLE);
-//                TextView tv = (TextView) dialog.findViewById(R.id.textView);
-//                tv.setVisibility(View.VISIBLE);
-//            }
-
-            Button referbut = (Button) dialog.findViewById(R.id.referral_button);
-            referbut.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-
-                    if (number_of_children == 0) {
-
-                        if (FormID > 5) {
-                            Intent intent = new Intent(displayForm.this, MainActivity.class);
-                            startActivity(intent);
-//            AlertDialog.Builder builder = new AlertDialog.Builder(displayForm.this);
-//
-//            LayoutInflater inflater = getLayoutInflater();
-//            View dialogView = inflater.inflate(R.layout.custome_child_dialogbox,null);
-//
-//            // Specify alert dialog is not cancelable/not ignorable
-//            builder.setCancelable(false);
-//
-//            // Set the custom layout as alert dialog view
-//            builder.setView(dialogView);
-//
-//            // Get the custom alert dialog view widgets reference
-//            Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
-//            Button btn_negative = (Button) dialogView.findViewById(R.id.dialog_negative_btn);
-//            final EditText et_name = (EditText) dialogView.findViewById(R.id.et_no_child);
-//
-//            // Create the alert dialog
-//            final AlertDialog dialog = builder.create();
-//
-//            // Set positive/yes button click listener
-//            btn_positive.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    // Dismiss the alert dialog
-//                    dialog.cancel();
-//                    number_of_children = Integer.parseInt(et_name.getText().toString());
-//                    if(number_of_children == 0)
-//                    {
-//                        Intent intent = new Intent(displayForm.this, MainActivity.class);
-//                        startActivity(intent);
-//                    }
-//                    else
-//                    {
-//
-//
-//
-//                        String formNumber = String.valueOf(FormID + 1);
-//                        Intent intent2 = new Intent(displayForm.this, displayForm.class);
-//                        intent2.putExtra(UNIQUE_ID, uniqueId);
-//                        intent2.putExtra(FORM_ID, formNumber);
-//                        intent2.putExtra("child",number_of_children);
-//                        intent2.putExtra("childcounter",child_entry_counter);
-//                        startActivity(intent2);
-//                    }
-//                }
-//            });
-//
-//            // Set negative/no button click listener
-//            btn_negative.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dialog.dismiss();
-//                    Intent intent = new Intent(displayForm.this, MainActivity.class);
-//                    startActivity(intent);
-//                }
-//            });
-//
-//            // Display the custom alert dialog on interface
-//            dialog.show();
-
-                        } else if (FormID == 10) {
-                            Intent intent = new Intent(displayForm.this, MainActivity.class);
-                            startActivity(intent);
-                        } else {
-                            String formNumber = String.valueOf(FormID + 1);
-                            Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                            intent2.putExtra(UNIQUE_ID, uniqueId);
-                            intent2.putExtra(FORM_ID, formNumber);
-                            intent2.putExtra("child", "0");
-                            intent2.putExtra("childcounter", "1");
-                            startActivity(intent2);
-                        }
-
-                    } else {
-                        if (child_entry_counter <= number_of_children) {
-                            if (FormID == 9 && child_entry_counter != number_of_children) {
-                                Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                                intent2.putExtra(UNIQUE_ID, uniqueId);
-                                intent2.putExtra(FORM_ID, "6");
-                                String no_of_child = String.valueOf(number_of_children);
-                                String child_entry = String.valueOf(child_entry_counter + 1);
-                                intent2.putExtra("child", no_of_child);
-                                intent2.putExtra("childcounter", child_entry);
-                                startActivity(intent2);
-                            } else if (FormID == 10) {
-                                Intent intent = new Intent(displayForm.this, MainActivity.class);
-                                startActivity(intent);
-                            } else if (FormID == 9 && child_entry_counter > number_of_children) {
-                                String formNumber = String.valueOf(FormID + 1);
-                                Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                                intent2.putExtra(UNIQUE_ID, uniqueId);
-                                intent2.putExtra(FORM_ID, formNumber);
-                                String no_of_child = String.valueOf(number_of_children);
-                                String child_entry = String.valueOf(child_entry_counter);
-                                intent2.putExtra("child", no_of_child);
-                                intent2.putExtra("childcounter", child_entry);
-                                startActivity(intent2);
-                            } else {
-                                String formNumber = String.valueOf(FormID + 1);
-                                Intent intent2 = new Intent(displayForm.this, displayForm.class);
-                                intent2.putExtra(UNIQUE_ID, uniqueId);
-                                intent2.putExtra(FORM_ID, formNumber);
-                                String no_of_child = String.valueOf(number_of_children);
-                                String child_entry = String.valueOf(child_entry_counter);
-                                intent2.putExtra("child", no_of_child);
-                                intent2.putExtra("childcounter", child_entry);
-                                startActivity(intent2);
-                            }
-
-                        }
-                    }
-
-//                    int count = ll.getChildCount();
-//                    Boolean flag = true;
-//
-//                    for (int i = 0; i < count; i++) {
-//                        if (ll.getChildAt(i) instanceof CheckBox) {
-//                            CheckBox cb = (CheckBox) ll.getChildAt(i);
-//                            if (!cb.isChecked()) {
-//                                flag = false;
-//                                break;
-//                            }
-//                        }
-//                    }
-//
-//                    if (flag) {
-//                        Log.e("ANCVisit"," In the Important Dialog in flag "+flag);
-//                        if (!HighriskStatus) {
-//                            Log.e("ANCVisit"," In the Important Dialog !highriskstatus "+HighriskStatus);
-//                            highriskdialog();
-//                            dialog.dismiss();
-//                            ImportantDialogStatus = true;
-//                        }
-//
-//                    } else {
-//                        Toast.makeText(displayForm.this, displayForm.this.getString(R.string.checkbox_select_msg), Toast.LENGTH_SHORT).show();
-//                    }
-
-                }
-            });
-
-
-            dialog.show();
-*/
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -5748,6 +5475,11 @@ public class displayForm extends AppCompatActivity {
             //formid= dbhelper.getSelectedAncForm(b.getString("ANCVisit")); // gets id of the form after passing visit_name (eg.ANC Visit1 id is 2 in db)
             formid = b.getString(FORM_ID);
 
+            /** midlineFlag is used to check from where the intent is passed. If the intent is passed from @MidlineInterviewActivity
+             * then after form is completely filled the intent must be passed back to  @MidlineInterviewActivity*/
+            midlineFlag = b.getInt("midlineFlag");
+            if(midlineFlag == 100)
+                participant_id = b.getString("participant_id");
             storePrevAncId = Integer.parseInt(formid);
             FormID = Integer.parseInt(formid);
 //            number_of_children = Integer.valueOf(b.getString("child"));

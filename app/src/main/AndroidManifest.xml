@@ -52,6 +52,8 @@
         <activity android:name="com.inscripts.ins_armman.muw.completedFormList.CompletedFormsList" />
         <activity android:name="com.inscripts.ins_armman.muw.completedFormDetails.CompletedFormDetails" />
         <activity android:name="com.inscripts.ins_armman.muw.incompleteFormList.IncompleteFormList" />
+        <activity android:name="com.inscripts.ins_armman.muw.midlineInterview.MidlineInterviewActivity"/>
+        <activity android:name="com.inscripts.ins_armman.muw.midlineInterview.MidlineVerifyActivity"/>
     </application>
 
 </manifest>
