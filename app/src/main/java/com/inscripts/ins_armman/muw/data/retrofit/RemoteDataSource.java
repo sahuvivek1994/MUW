@@ -4,6 +4,8 @@ package com.inscripts.ins_armman.muw.data.retrofit;
 import com.inscripts.ins_armman.muw.data.service.AuthService;
 import com.inscripts.ins_armman.muw.data.service.CheckUpdateApi;
 import com.inscripts.ins_armman.muw.data.service.CheckUpdateService;
+import com.inscripts.ins_armman.muw.data.service.FetchAllRegisteredData;
+import com.inscripts.ins_armman.muw.data.service.FetchAllRegisteredDataAPI;
 import com.inscripts.ins_armman.muw.data.service.FormDownloadService;
 import com.inscripts.ins_armman.muw.data.service.FormDownloadServiceAPI;
 import com.inscripts.ins_armman.muw.data.service.LoginServiceAPI;
@@ -68,6 +70,10 @@ public class RemoteDataSource {
 
     public RestoreVisitsService restoreVisitsService() {
         return new RestoreVisitsService(createApiService(RestoreVisitsServiceAPI.class));
+    }
+
+    public FetchAllRegisteredData fetchAllRegisteredData() {
+        return new FetchAllRegisteredData(createApiService(FetchAllRegisteredDataAPI.class));
     }
 
   /*

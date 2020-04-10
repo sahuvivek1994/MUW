@@ -25,5 +25,6 @@ public interface Url {
     String GET_VISITS = "getvisits";
     String GET_REFERRALS = "getreferrals";
     String GET_CHILD_GRWOTH = "getchildgrowth";
+    String SYNC_ALL_REGISTERED_DATA = "getAllRegisteredData";
 
 }

@@ -39,6 +39,7 @@
     <string name="category_sync">Sync</string>
     <string name="sync_forms">Update Forms</string>
     <string name="restore_data">Restore Data</string>
+    <string name="fetch_data">Fetch Data</string>
     <string name="check_update">Check Update</string>
     <string name="logout">Logout</string>
     <string name="version">Version</string>

@@ -25,6 +25,8 @@ import android.widget.TextView;
 import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.data.model.Form;
 import com.inscripts.ins_armman.muw.data.model.RequestFormModel;
+import com.inscripts.ins_armman.muw.data.model.UserDetails;
+import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RegisteredData;
 import com.inscripts.ins_armman.muw.data.model.restoredata.BeneficiariesList;
 import com.inscripts.ins_armman.muw.data.model.restoredata.RestoreDataRequest;
 import com.inscripts.ins_armman.muw.data.model.restoredata.VisitsList;
@@ -32,6 +34,7 @@ import com.inscripts.ins_armman.muw.data.model.syncing.QuestionAnswer;
 import com.inscripts.ins_armman.muw.data.model.syncing.beneficiaries;
 import com.inscripts.ins_armman.muw.data.retrofit.RemoteDataSource;
 import com.inscripts.ins_armman.muw.data.service.CheckUpdateService;
+import com.inscripts.ins_armman.muw.data.service.FetchAllRegisteredData;
 import com.inscripts.ins_armman.muw.data.service.FormDownloadService;
 import com.inscripts.ins_armman.muw.data.service.RestoreRegistrationService;
 import com.inscripts.ins_armman.muw.data.service.RestoreVisitsService;
@@ -913,4 +916,73 @@ public class SettingInteractor implements ISettingInteractor, LoaderManager.Load
         }
     }
 
+    @Override
+    public void downloadAllRegistrationData(UserDetails request, OndownloadAllRegistrationData downloadData) {
+        RemoteDataSource remoteDataSource = RemoteDataSource.getInstance();
+        FetchAllRegisteredData service = remoteDataSource.fetchAllRegisteredData();
+        service.downloadVisitsData(mContext, request, downloadData);
+    }
+
+    @Override
+    public void saveAllRegisteredData(ArrayList<RegisteredData> listRegistrations) {
+        new SaveAllRegistrationData(listRegistrations).execute();
+    }
+
+    class SaveAllRegistrationData extends AsyncTask<ArrayList<Object>, Integer, Void>
+    {
+        ProgressBar progressBar;
+        ArrayList<RegisteredData> listRegistrations;
+        private AlertDialog mProgressDialog;
+        private int mProgress;
+
+        public SaveAllRegistrationData(ArrayList<RegisteredData> listRegistration) {
+            this.listRegistrations = listRegistration;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View dialogView = inflater.inflate(R.layout.progress_dialog_layout, null);
+            TextView textView = dialogView.findViewById(R.id.textView_label);
+            progressBar = dialogView.findViewById(R.id.progressBar);
+            textView.setText(R.string.saving_forms);
+            progressBar.setIndeterminate(false);
+            AlertDialog.Builder mAlertDialogBuilder = new AlertDialog.Builder(mContext);
+            mAlertDialogBuilder.setView(dialogView);
+            mAlertDialogBuilder.setCancelable(false);
+            mProgressDialog = mAlertDialogBuilder.create();
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            mProgressDialog.dismiss();
+        }
+
+        @Override
+        protected Void doInBackground(ArrayList<Object>... arrayLists) {
+            deleteOldRecords();
+            utility.getDatabase().beginTransaction();
+            for (RegisteredData details :
+                    listRegistrations) {
+                saveAllRegistrated(details);
+                publishProgress(++mProgress);
+            }
+            utility.getDatabase().setTransactionSuccessful();
+            utility.getDatabase().endTransaction();
+            return null;
+        }
+    }
+
+    void deleteOldRecords() {
+        utility.getDatabase().execSQL("DROP TABLE IF EXISTS " + DatabaseContract.AllregistrationDetail.TABLE_NAME);
+        utility.getDatabase().execSQL(DatabaseContract.AllregistrationDetail.CREATE_TABLE);
+    }
+    void saveAllRegistrated(RegisteredData data) {
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.AllregistrationDetail.COLUMN_UNIQUE_ID, data.getUnique_id());
+        values.put(DatabaseContract.AllregistrationDetail.COLUMN_ID, data.getUser_id());
+        values.put(DatabaseContract.AllregistrationDetail.COLUMN_FORM_REGISTRATION_NAME, data.getName());
+        utility.getDatabase().insert(DatabaseContract.AllregistrationDetail.TABLE_NAME, null, values);
+    }
 }

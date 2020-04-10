@@ -23,6 +23,7 @@ import static com.inscripts.ins_armman.muw.database.DatabaseContract.QuestionAns
 import static com.inscripts.ins_armman.muw.database.DatabaseContract.QuestionOptionsTable;
 import static com.inscripts.ins_armman.muw.database.DatabaseContract.RegistrationTable;
 import static com.inscripts.ins_armman.muw.database.DatabaseContract.ValidationsTable;
+import static com.inscripts.ins_armman.muw.database.DatabaseContract.AllregistrationDetail;
 
 /**
  * This class is used to create and update local database
@@ -51,6 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(QuestionAnswerTable.CREATE_TABLE);
         db.execSQL(ValidationsTable.CREATE_TABLE);
         db.execSQL(FilledFormStatusTable.CREATE_TABLE);
+        db.execSQL(AllregistrationDetail.CREATE_TABLE);
     }
 
     @Override
@@ -58,10 +60,18 @@ public class DBHelper extends SQLiteOpenHelper {
         if (oldVersion < 2) {
             upgradeVersion2(db);
         }
+        if (oldVersion < 3) {
+            upgradeVersion3(db);
+        }
     }
 
     private void upgradeVersion2(SQLiteDatabase db) {
         db.execSQL("DROP TABLE " + DatabaseContract.CurrentFormStatus.TABLE_NAME);
+    }
+
+    private void upgradeVersion3(SQLiteDatabase db)
+    {
+        db.execSQL(AllregistrationDetail.CREATE_TABLE);
     }
 
     public Cursor getIncompleteFormListList() {

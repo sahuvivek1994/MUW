@@ -27,6 +27,7 @@
     <string name="total_complete_forms">एकूण पूर्ण फॉर्म</string>
     <string name="total_incomplete_forms">एकूण अपूर्ण फॉर्म</string>
     <string name="category_personal">वैयक्तिक</string>
+    <string name="fetch_data">डेटा आणा</string>
     <string name="category_sync">डेटा समक्रमित करा</string>
     <string name="category_account">खाता</string>
     <string name="category_about">बद्दल</string>

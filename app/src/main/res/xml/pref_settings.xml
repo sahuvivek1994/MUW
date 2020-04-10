@@ -48,6 +48,12 @@
             android:key="restore_data"
             android:title="@string/restore_data"></Preference>
 
+
+        <Preference
+            android:icon="@drawable/ic_sync_black_24dp"
+            android:key="fetch_data"
+            android:title="@string/fetch_data"></Preference>
+
     </PreferenceCategory>
 
 
