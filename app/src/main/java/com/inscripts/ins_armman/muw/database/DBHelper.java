@@ -4,7 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.ArrayMap;
 
+import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RegisteredData;
 import com.inscripts.ins_armman.muw.utility.utility;
 
 import java.io.File;
@@ -180,10 +182,27 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param participantId
      * @return
      */
-    public ArrayList<String> participantDetails(String participantId){
+    public ArrayMap<String, String> participantDetails(String participantId){
+        RegisteredData registeredData;
+        registeredData = new RegisteredData();
         /**
          * return participant name and phone number in arraylist
          */
-        return null;
+        String value,unique_id;
+        Cursor cursor=  utility.getDatabase().rawQuery("SELECT registration_name,unique_id from all_registration_detail WHERE user_id = "+participantId, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            value = cursor.getString(cursor.getColumnIndex("registration_name"));
+            unique_id = cursor.getString(cursor.getColumnIndex("unique_id"));
+        }
+        else {
+            value = "NA";
+            unique_id = "";
+        }
+
+      ArrayMap<String,String> mul_val = new ArrayMap<String,String>();
+        mul_val.put("name",value);
+        mul_val.put("unique_id",unique_id);
+        return mul_val;
     }
 }
