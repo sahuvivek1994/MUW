@@ -81,6 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:gravity="center|center_vertical"
                     android:text="search result"
                     android:textColor="#FFFF"
                     android:textSize="20sp"
@@ -96,7 +97,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Juilee Ramdas Shinde"
+                    android:text=""
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline27"
@@ -122,13 +123,14 @@
 -->
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/imgName"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/guideline27"
                     app:layout_constraintEnd_toStartOf="@+id/guideline26"
                     app:layout_constraintStart_toStartOf="parent"

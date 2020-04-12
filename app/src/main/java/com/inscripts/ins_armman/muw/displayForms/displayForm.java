@@ -1380,7 +1380,7 @@ public class displayForm extends AppCompatActivity {
                 et.setEnabled(false);
                 break;
 
-            case "participant_id " :
+            case "participant_id" :
                 et.setText(participant_id);
                 et.setEnabled(false);
                 et.setError(null);
