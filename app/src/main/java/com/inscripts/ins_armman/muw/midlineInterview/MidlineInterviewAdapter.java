@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.inscripts.ins_armman.muw.R;
+import com.inscripts.ins_armman.muw.completedFormList.CompletedFormsList;
 import com.inscripts.ins_armman.muw.data.model.completeFiledForm;
 
 import java.util.List;
@@ -71,7 +72,7 @@ public class MidlineInterviewAdapter extends RecyclerView.Adapter<MidlineIntervi
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(mContext, MidlineInterviewActivity.class);
+            Intent intent = new Intent(mContext, CompletedFormsList.class);
             if (clickListener != null) {
                 clickListener.itemClicked(v,getPosition());
                 int i = mWomenList.size();
