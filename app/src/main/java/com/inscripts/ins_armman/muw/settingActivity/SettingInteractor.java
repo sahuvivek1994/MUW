@@ -981,7 +981,7 @@ public class SettingInteractor implements ISettingInteractor, LoaderManager.Load
     void saveAllRegistrated(RegisteredData data) {
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.AllregistrationDetail.COLUMN_UNIQUE_ID, data.getUnique_id());
-        values.put(DatabaseContract.AllregistrationDetail.COLUMN_ID, data.getUser_id());
+        values.put(DatabaseContract.AllregistrationDetail.COLUMN_USER_ID, data.getUser_id());
         values.put(DatabaseContract.AllregistrationDetail.COLUMN_FORM_REGISTRATION_NAME, data.getName());
         utility.getDatabase().insert(DatabaseContract.AllregistrationDetail.TABLE_NAME, null, values);
     }

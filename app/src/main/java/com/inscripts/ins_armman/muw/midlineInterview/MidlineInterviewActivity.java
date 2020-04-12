@@ -102,6 +102,12 @@ public class MidlineInterviewActivity extends AppCompatActivity implements IMidl
 
     @Override
     public void itemClicked(View view, int position) {
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_OK, new Intent().putExtra("EXIT", true));
+        finish();
     }
 }

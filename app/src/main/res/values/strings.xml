@@ -120,10 +120,14 @@
         might result in loss of data.\nPress Cancel to send unsent forms or Press OK to proceed.
     </string>
     <string name="incompleteformtitle">Incomplete Form</string>
-    <string name="midline_unique_id">Participant 5 digit Id</string>
+    <string name="midline_unique_id">Participant Id</string>
     <string name="midline_participant_name">Participant name</string>
     <string name="midline_popup_msg">Please enter the id of the participant to fill the Midline Interview </string>
     <string name="midline_continue">Continue</string>
     <string name="midline_empty">No Records found. \n Please click on the following button to start the interview.</string>
+    <string name="search_result">search result</string>
+    <string name="search_found">Search result  found.</string>
+    <string name="search_not_found">Search result not found. \n Please enter valid Participant Id and try again.</string>
+    <string name="participant_data_stored">Participant data stored successfully..</string>
 
 </resources>

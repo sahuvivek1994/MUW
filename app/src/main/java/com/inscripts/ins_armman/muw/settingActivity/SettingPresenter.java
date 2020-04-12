@@ -288,15 +288,23 @@ public class SettingPresenter implements ISettingPresenter<ISettingView>
     }
     @Override
     public void fetchData() {
-        userDetail = new UserDetails();
-        userDetail.setUserName(mUsername);
-        userDetail.setPassword(mPassword);
-        userDetail.setImei(utility.getDeviceImeiNumber(mSettingsView.getContext()));
-        settingInteractor.downloadAllRegistrationData(userDetail,this);
+        if (utility.hasInternetConnectivity(mSettingsView.getContext())) {
+            mSettingsView.showProgressBar(mSettingsView.getContext().getString(R.string.downloading_data));
+            userDetail = new UserDetails();
+            userDetail.setUserName(mUsername);
+            userDetail.setPassword(mPassword);
+            userDetail.setImei(utility.getDeviceImeiNumber(mSettingsView.getContext()));
+            settingInteractor.downloadAllRegistrationData(userDetail, this);
+        } else {
+            mSettingsView.hideProgressBar();
+            mSettingsView.showSnackBar(mSettingsView.getContext().getString(R.string.no_internet_connection));
+        }
     }
-
     @Override
     public void onSuccessDownloadData(RestoreAllRegistration data) {
+        mSettingsView.hideProgressBar();
+        mSettingsView.showSnackBar(mSettingsView.getContext().getString(R.string.participant_data_stored));
+
         AllRegistrationData.addAll(data.getAllRegistrationData());
         settingInteractor.saveAllRegisteredData(AllRegistrationData);
     }

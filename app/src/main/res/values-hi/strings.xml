@@ -107,9 +107,14 @@
     </string>
     <string name="Reg_women_com">कोई पूर्ण दौरा नहीं मिला</string>
     <string name="incompleteformtitle">अधूरा फॉर्म</string>
-    <string name="midline_unique_id">प्रतिभागी की 5 अंकों की आईडी</string>
+    <string name="midline_unique_id">प्रतिभागी की आईडी</string>
     <string name="midline_participant_name">प्रतिभागी का पूरा नाम</string>
     <string name="midline_popup_msg">मिडलाइन इंटरव्यू भरने के लिए कृपया प्रतिभागी की आईडी दर्ज करें </string>
     <string name="midline_continue">जारी रखें</string>
     <string name="midline_empty">कोई रिकॉर्ड नहीं मिला। \n इंटरव्यू शुरू करने के लिए कृपया निम्नलिखित बटन पर क्लिक करें।</string>
+    <string name="search_result">खोज परिणाम</string>
+    <string name="search_found">खोज परिणाम मिला।</string>
+    <string name="search_not_found">खोज परिणाम नहीं मिला। \n कृपया मान्य प्रतिभागी आईडी दर्ज करें और पुनः प्रयास करें।</string>
+    <string name="participant_data_stored">प्रतिभागी डेटा को सफलतापूर्वक संग्रहीत किया गया ..</string>
+
 </resources>
