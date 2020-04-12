@@ -1,15 +1,21 @@
 package com.inscripts.ins_armman.muw.data.model.download_registrationed_data;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.ArrayList;
 
 public class RegisteredData {
 
     @SerializedName("unique_id")
     String unique_id;
-    @SerializedName("user_id")
+    @SerializedName("uid")
     String user_id;
     @SerializedName("name")
     String name;
+    private ArrayList<RegisteredData> registrationData;
+
+    public ArrayList<RegisteredData> AllRegistrationData() {
+        return registrationData;
+    }
 
 
     public String getUnique_id() {

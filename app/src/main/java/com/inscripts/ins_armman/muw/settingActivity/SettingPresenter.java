@@ -11,6 +11,7 @@ import com.inscripts.ins_armman.muw.data.model.RequestFormModel;
 import com.inscripts.ins_armman.muw.data.model.UpdateModel;
 import com.inscripts.ins_armman.muw.data.model.UserDetails;
 import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RegisteredData;
+import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RestoreAllRegistration;
 import com.inscripts.ins_armman.muw.data.model.restoredata.BeneficiariesList;
 import com.inscripts.ins_armman.muw.data.model.restoredata.RestoreDataRequest;
 import com.inscripts.ins_armman.muw.data.model.restoredata.RestoreRegistration;
@@ -77,6 +78,8 @@ public class SettingPresenter implements ISettingPresenter<ISettingView>
     private boolean totalPagesCalculated;
     private int totalPages;
     private int pageCounter;
+    private ArrayList<RegisteredData> AllRegistrationData = new ArrayList<>();
+    private ArrayList<RestoreAllRegistration> allregisterlist = new ArrayList<>();
     private ArrayList<beneficiaries> listRegistrations = new ArrayList<>();
     private ArrayList<BeneficiariesList> listVisits = new ArrayList<>();
 
@@ -227,6 +230,7 @@ public class SettingPresenter implements ISettingPresenter<ISettingView>
         totalPages = 0;
         totalPagesCalculated = false;
         listRegistrations.clear();
+        AllRegistrationData.clear();
         listVisits.clear();
     }
 
@@ -284,11 +288,18 @@ public class SettingPresenter implements ISettingPresenter<ISettingView>
     }
     @Override
     public void fetchData() {
+        userDetail = new UserDetails();
+        userDetail.setUserName(mUsername);
+        userDetail.setPassword(mPassword);
+        userDetail.setImei(utility.getDeviceImeiNumber(mSettingsView.getContext()));
         settingInteractor.downloadAllRegistrationData(userDetail,this);
     }
 
     @Override
-    public void onSuccessDownloadData(RegisteredData data) {
-    mSettingsView.showProgressBar(mSettingsView.getContext().getString(R.string.downloading_data));
+    public void onSuccessDownloadData(RestoreAllRegistration data) {
+        AllRegistrationData.addAll(data.getAllRegistrationData());
+        settingInteractor.saveAllRegisteredData(AllRegistrationData);
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.inscripts.ins_armman.muw.data.service;
 
 import com.inscripts.ins_armman.muw.data.model.UserDetails;
 import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RegisteredData;
+import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RestoreAllRegistration;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -16,6 +17,6 @@ public interface FetchAllRegisteredDataAPI {
             "Content-Type: application/json"
     })
 @POST(SYNC_ALL_REGISTERED_DATA)
-    Call<RegisteredData> registeredData(@Body UserDetails userDetails);
+    Call<RestoreAllRegistration> registeredData(@Body UserDetails userDetails);
 
 }
