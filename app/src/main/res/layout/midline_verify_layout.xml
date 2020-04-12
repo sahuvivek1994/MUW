@@ -104,6 +104,7 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline26"
                     app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
+<!--
                 <TextView
                     android:id="@+id/txtParticipantPhone"
                     android:layout_width="0dp"
@@ -118,6 +119,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline26"
                     app:layout_constraintTop_toTopOf="@+id/guideline27" />
+-->
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -161,7 +163,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintGuide_percent="0.50" />
 
-                <ImageView
+        <!--        <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -174,7 +176,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline27"
                     app:srcCompat="@drawable/participant_phone" />
-            </android.support.constraint.ConstraintLayout>
+         -->   </android.support.constraint.ConstraintLayout>
 
             <Button
                 android:id="@+id/btnContinue"

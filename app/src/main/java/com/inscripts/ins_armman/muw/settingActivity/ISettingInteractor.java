@@ -6,6 +6,7 @@ import com.inscripts.ins_armman.muw.data.model.RequestFormModel;
 import com.inscripts.ins_armman.muw.data.model.UpdateModel;
 import com.inscripts.ins_armman.muw.data.model.UserDetails;
 import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RegisteredData;
+import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RestoreAllRegistration;
 import com.inscripts.ins_armman.muw.data.model.restoredata.BeneficiariesList;
 import com.inscripts.ins_armman.muw.data.model.restoredata.RestoreDataRequest;
 import com.inscripts.ins_armman.muw.data.model.restoredata.RestoreRegistration;
@@ -75,12 +76,9 @@ public interface ISettingInteractor {
 
     interface OndownloadAllRegistrationData
     {
-        void onSuccessDownloadData(RegisteredData data);
+        void onSuccessDownloadData(RestoreAllRegistration data);
         void onFailure(String message);
     }
 
-    /*
-        This method is used to store the data in Database of all registered Women
-     */
     void saveAllRegisteredData(ArrayList<RegisteredData> listRegistrations);
 }

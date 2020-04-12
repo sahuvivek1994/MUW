@@ -5,6 +5,7 @@ import android.content.Context;
 import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.data.model.UserDetails;
 import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RegisteredData;
+import com.inscripts.ins_armman.muw.data.model.download_registrationed_data.RestoreAllRegistration;
 import com.inscripts.ins_armman.muw.settingActivity.ISettingInteractor;
 
 import java.io.IOException;
@@ -21,10 +22,10 @@ public class FetchAllRegisteredData {
     }
 
     public void downloadVisitsData(final Context context, UserDetails request, final ISettingInteractor.OndownloadAllRegistrationData downloadFinished) {
-        Call<RegisteredData> call = mServiceAPI.registeredData(request);
-        call.enqueue(new Callback<RegisteredData>() {
+        Call<RestoreAllRegistration> call = mServiceAPI.registeredData(request);
+        call.enqueue(new Callback<RestoreAllRegistration>() {
             @Override
-            public void onResponse(Call<RegisteredData> call, Response<RegisteredData> response) {
+            public void onResponse(Call<RestoreAllRegistration> call, Response<RestoreAllRegistration> response) {
                 if (response.code() == 200) {
                     downloadFinished.onSuccessDownloadData(response.body());
                 } else {
@@ -37,7 +38,7 @@ public class FetchAllRegisteredData {
             }
 
             @Override
-            public void onFailure(Call<RegisteredData> call, Throwable t) {
+            public void onFailure(Call<RestoreAllRegistration> call, Throwable t) {
                 downloadFinished.onFailure(context.getString(R.string.oops_some_thing_happened_wrong));
             }
         });
