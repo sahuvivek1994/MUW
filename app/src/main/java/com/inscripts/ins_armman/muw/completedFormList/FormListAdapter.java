@@ -120,7 +120,7 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
                 } else if (formId >= 1 && formId <= 9 || formId == 10) {
                 */    uniqueId = participant_id;
                 //}
-                intent.putExtra("unique_id", uniqueId);
+                intent.putExtra("unique_id", participant_id);
                 intent.putExtra("form_id", formId);
                 mContext.startActivity(intent);
             }

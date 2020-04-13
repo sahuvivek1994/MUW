@@ -3985,7 +3985,7 @@ public class displayForm extends AppCompatActivity {
                             //finish();
                             if (FormID == 11) {
                                 if (midlineFlag == 100) {
-                                    Intent intent = new Intent(displayForm.this, MidlineInterviewActivity.class);
+                                    Intent intent = new Intent(displayForm.this, MainActivity.class);
                                     startActivity(intent);
                                 }
                             } else {

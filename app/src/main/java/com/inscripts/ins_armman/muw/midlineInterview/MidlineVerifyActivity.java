@@ -88,32 +88,46 @@ public class MidlineVerifyActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 final String enteredValue = etParticipantId.getText().toString();
                 if(enteredValue.length() == 4 || enteredValue.length() == 5 ){
-                    n = dbHelper.participantDetails(enteredValue);
-                    participantName = (String) n.get("name");
-                    u_id = (String)n.get("unique_id");
-                    if(participantName.equals("NA") || u_id.equals("NA")) {
-                        searchResult = 101;
-                        txtSearchResult.setText(getResources().getString(R.string.search_not_found));
-                        txtSearchResult.setTextColor(getResources().getColor(R.color.color_incomplete));
-                        txtParticipantName.setText("");
-                        imgName.setVisibility(View.INVISIBLE);
-                        btnContinue.setVisibility(View.INVISIBLE);
-                    } else {
+                    int count = dbHelper.checkAlreadyfilled(enteredValue);
+                    if(count == 0) {
+
+                        n = dbHelper.participantDetails(enteredValue);
+                        participantName = (String) n.get("name");
+                        u_id = (String) n.get("unique_id");
+                        if (participantName.equals("NA") || u_id.equals("NA")) {
+                            searchResult = 101;
+                            txtSearchResult.setText(getResources().getString(R.string.search_not_found));
+                            txtSearchResult.setTextColor(getResources().getColor(R.color.color_incomplete));
+                            txtParticipantName.setText("");
+                            imgName.setVisibility(View.INVISIBLE);
+                            btnContinue.setVisibility(View.INVISIBLE);
+                        } else {
+                            searchResult = 100;
+                            txtSearchResult.setText(getResources().getString(R.string.search_found));
+                            txtSearchResult.setTextColor(getResources().getColor(R.color.green));
+                            btnContinue.setVisibility(View.VISIBLE);
+                            imgName.setVisibility(View.VISIBLE);
+                            txtParticipantName.setText(participantName);
+                            //     txtParticipantPhone.setText("value");
+                        }
+                        /** this is to hide the keyboard once the input is given to search*/
+                        InputMethodManager imm = (InputMethodManager)
+                                getSystemService(Context.INPUT_METHOD_SERVICE);
+                        if (imm != null) {
+                            imm.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                        }
+                    }
+                    else
+                    {
                         searchResult = 100;
-                        txtSearchResult.setText(getResources().getString(R.string.search_found));
+                        txtSearchResult.setText(getResources().getString(R.string.search_already_filled));
                         txtSearchResult.setTextColor(getResources().getColor(R.color.green));
-                        btnContinue.setVisibility(View.VISIBLE);
-                        imgName.setVisibility(View.VISIBLE);
-                        txtParticipantName.setText(participantName);
-                        //     txtParticipantPhone.setText("value");
+                        btnContinue.setVisibility(View.GONE);
+                        imgName.setVisibility(View.GONE);
+                        //txtParticipantName.setText(participantName);
                     }
-                    /** this is to hide the keyboard once the input is given to search*/
-                    InputMethodManager imm = (InputMethodManager)
-                            getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if(imm != null){
-                        imm.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                    }
-                }else if(enteredValue.length() > 5){
+                }
+                else if(enteredValue.length() > 5){
                     etParticipantId.setError("Please enter valid participant id");
                 } else{
                     txtParticipantName.setText("");
@@ -121,7 +135,6 @@ public class MidlineVerifyActivity extends AppCompatActivity {
                     txtSearchResult.setTextColor(getResources().getColor(R.color.color_white));
                     imgName.setVisibility(View.INVISIBLE);
                     btnContinue.setVisibility(View.INVISIBLE);
-
                 }
             }
         });

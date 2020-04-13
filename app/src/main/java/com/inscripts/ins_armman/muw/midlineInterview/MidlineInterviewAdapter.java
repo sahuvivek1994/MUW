@@ -76,8 +76,11 @@ public class MidlineInterviewAdapter extends RecyclerView.Adapter<MidlineIntervi
             if (clickListener != null) {
                 clickListener.itemClicked(v,getPosition());
                 int i = mWomenList.size();
-                /*intent.putExtra("id",mWomenList.get(getPosition()).getUnique_id());
-                intent.putExtra("name",mWomenList.get(getPosition()).getName());*/
+                String u_id = mWomenList.get(getPosition()).getUnique_id();
+                String name = mWomenList.get(getPosition()).getName();
+                intent.putExtra("unique_id",u_id);
+                intent.putExtra("name",name);
+                intent.putExtra("form_id",11);
             }
             mContext.startActivity(intent);
         }
