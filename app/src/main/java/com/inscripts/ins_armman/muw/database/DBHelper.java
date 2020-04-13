@@ -176,7 +176,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor fetchAllParticipants(){
-        return utility.getDatabase().rawQuery("SELECT name,unique_id from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 11 and form_completion_status = 1 )", null);
+        return utility.getDatabase().rawQuery("SELECT registration_name,unique_id From all_registration_detail where unique_id IN(SELECT unique_id FROM filled_forms_status WHERE form_id = 11 and form_completion_status = 1 )", null);
     }
 
     /**
@@ -204,5 +204,18 @@ public class DBHelper extends SQLiteOpenHelper {
         mul_val.put("name",value);
         mul_val.put("unique_id",unique_id);
         return mul_val;
+    }
+
+    public int checkAlreadyfilled(String participantId)
+    {
+        int flag = 0;
+        Cursor cursor =  utility.getDatabase().rawQuery("SELECT count(unique_id) FROM filled_forms_status WHERE form_id = 11\n" +
+                " AND unique_id IN (SELECT unique_id from all_registration_detail WHERE user_id = "+participantId +")", null);
+        if (cursor != null && cursor.moveToFirst()) {
+            flag = cursor.getInt(cursor.getColumnIndex("count(unique_id)"));
+        } else {
+            flag = 0;
+        }
+        return flag;
     }
 }

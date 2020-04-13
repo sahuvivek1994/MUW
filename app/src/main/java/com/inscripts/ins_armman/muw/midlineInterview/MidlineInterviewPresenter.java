@@ -29,7 +29,7 @@ public class MidlineInterviewPresenter implements IMidlineInterviewPresenter<Mid
         Cursor cursor = interactor.fetchAllParticipants();
         if (cursor != null && cursor.moveToFirst())
             do {
-                womenList.add(new completeFiledForm(cursor.getString(cursor.getColumnIndex("name")),cursor.getString(cursor.getColumnIndex("unique_id"))));
+                womenList.add(new completeFiledForm(cursor.getString(cursor.getColumnIndex("registration_name")),cursor.getString(cursor.getColumnIndex("unique_id"))));
             } while (cursor.moveToNext());
 
         view.setAdapter(womenList);

@@ -43,7 +43,7 @@ public class CompletedFormsList extends AppCompatActivity implements ICompletedF
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        id = getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("unique_id");
         name = getIntent().getStringExtra("name");
         form_id = getIntent().getIntExtra("form_id", 0);
         presentor.getCompleteFormList(id);

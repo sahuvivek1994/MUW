@@ -127,6 +127,7 @@
     <string name="midline_empty">No Records found. \n Please click on the following button to start the interview.</string>
     <string name="search_result">search result</string>
     <string name="search_found">Search result  found.</string>
+    <string name="search_already_filled">Form Already filled</string>
     <string name="search_not_found">Search result not found. \n Please enter valid Participant Id and try again.</string>
     <string name="participant_data_stored">Participant data stored successfully..</string>
 

@@ -40,7 +40,7 @@ public class MidlineInterviewActivity extends AppCompatActivity implements IMidl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.midline_interview_layout);
-        setTitle("Participants List");
+        setTitle("Filled Participants List");
         emptyLayout = findViewById(R.id.empty_midline_list);
         mRecyclerView = findViewById(R.id.recycler_view);
         interviewFormBtn = findViewById(R.id.floating_action_button);
@@ -107,7 +107,6 @@ public class MidlineInterviewActivity extends AppCompatActivity implements IMidl
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        setResult(RESULT_OK, new Intent().putExtra("EXIT", true));
         finish();
     }
 }
