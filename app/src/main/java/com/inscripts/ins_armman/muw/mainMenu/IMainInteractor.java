@@ -51,4 +51,6 @@ public interface IMainInteractor {
 
         void onFailure(String message);
     }
+    public Cursor fetchUserDetails();
+
 }

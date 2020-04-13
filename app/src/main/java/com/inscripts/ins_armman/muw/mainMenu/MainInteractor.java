@@ -270,5 +270,10 @@ public class MainInteractor implements IMainInteractor, LoaderManager.LoaderCall
         bundle.putStringArray(Constants.QUERY_ARGS_SELECTION_ARGS, null);
         ((AppCompatActivity) mContext).getSupportLoaderManager().restartLoader(id, bundle, this);
     }
+
+    @Override
+    public Cursor fetchUserDetails() {
+        return dbHelper.fetchUserDetails();
+    }
 }
 

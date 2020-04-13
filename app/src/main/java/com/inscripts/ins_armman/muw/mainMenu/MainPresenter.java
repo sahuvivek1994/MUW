@@ -205,6 +205,22 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
      return count;
     }
 
+    @Override
+    public beneficiaries fetchUserDetails() {
+        beneficiaries details = new beneficiaries();
+        Cursor cursor = mainInteractor.fetchUserDetails();
+        if (cursor.moveToFirst() && cursor != null) {
+            details.setMobNo(cursor.getString(cursor.getColumnIndex("phone_no")));
+            details.setName(cursor.getString(cursor.getColumnIndex("name")));
+            cursor.close();
+        } else {
+            details.setName("ERROR");
+            details.setMobNo("error");
+        }
+        return details;
+
+    }
+
     private void markImproperVisitToSync(String uniqueId, String formId, String errorMsg) {
         mainInteractor.updateFormFailureStatus(uniqueId, formId, errorMsg);
         syncUnsentForms();
