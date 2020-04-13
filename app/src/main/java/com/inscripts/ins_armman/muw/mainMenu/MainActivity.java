@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.completedForm.completedForm;
+import com.inscripts.ins_armman.muw.data.model.syncing.beneficiaries;
 import com.inscripts.ins_armman.muw.incompleteForm.IncompleteForm;
 import com.inscripts.ins_armman.muw.midlineInterview.MidlineInterviewActivity;
 import com.inscripts.ins_armman.muw.registration.EnrollmentQuestions;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements IMainView, View.OnClickListener {
     MainPresenter mainPresenter;
     Context ctx = this;
-    TextView textTotalReg, textTotalIncomplete;
+    TextView textTotalReg, textTotalIncomplete,tname,tnumber;
     int complete=0,incomplete=0;
     ArrayList<Integer> totalCounts=new ArrayList<>();
     private LayerDrawable mSyncDrawable;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         complete=totalCounts.get(0);
         incomplete=totalCounts.get(1);
         init();
+        setUserDetails();
     }
 
     public void init() {
@@ -64,14 +66,16 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         incompleteForm.setOnClickListener(this);
         completeForm = (ConstraintLayout) findViewById(R.id.layout3);
         completeForm.setOnClickListener(this);
-        userProfile = (ConstraintLayout) findViewById(R.id.layout4);
+       /* userProfile = (ConstraintLayout) findViewById(R.id.layout4);
         userProfile.setOnClickListener(this);
-        midlineInterview = (ConstraintLayout) findViewById(R.id.layout5);
+       */ midlineInterview = (ConstraintLayout) findViewById(R.id.layout5);
         midlineInterview.setOnClickListener(this);
         textTotalIncomplete=findViewById(R.id.textIncompleteCount);
         textTotalReg=findViewById(R.id.textcompleteCount);
         textTotalIncomplete.setText(String.valueOf(incomplete));
         textTotalReg.setText(String.valueOf(complete));
+        tname = findViewById(R.id.tname);
+        tnumber = findViewById(R.id.tnumber);
 
     }
 
@@ -129,10 +133,10 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
                   startActivity(intent3);
                   break;
 
-            case R.id.layout4:
+           /* case R.id.layout4:
                 Intent intent = new Intent(MainActivity.this, userProfile.class);
                 startActivity(intent);
-                break;
+                break;*/
 
                 case R.id.layout5:
                 Intent intent5 = new Intent(MainActivity.this, MidlineInterviewActivity.class);
@@ -186,6 +190,13 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         Snackbar snackbar = Snackbar
                 .make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
         snackbar.show();
+    }
+
+    @Override
+    public void setUserDetails() {
+        beneficiaries details = mainPresenter.fetchUserDetails();
+        tname.setText(details.getName());
+        tnumber.setText(details.getMobNo());
     }
 
     @Override

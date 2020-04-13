@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00a1a0</color>
-    <color name="colorPrimaryDark">#003f42</color>
+    <color name="colorPrimary">#032029</color>
+    <color name="colorPrimaryDark">#001112</color>
 
     <!--<color name="colorPrimary">#3F51B5</color>-->
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
@@ -44,4 +44,5 @@
     <color name="settings_icon">#D5275688</color>
     <color name="login_text">#63E9D9</color>
     <color name="login_cred_color">#0E2E27</color>
+    <color name="home_button_text">#112925</color>
 </resources>

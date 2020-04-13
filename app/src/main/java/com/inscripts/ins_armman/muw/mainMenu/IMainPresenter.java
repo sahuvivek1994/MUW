@@ -2,6 +2,7 @@ package com.inscripts.ins_armman.muw.mainMenu;
 
 import android.database.Cursor;
 
+import com.inscripts.ins_armman.muw.data.model.syncing.beneficiaries;
 import com.inscripts.ins_armman.muw.utility.IBasePresenter;
 
 import java.util.ArrayList;
@@ -34,4 +35,6 @@ public interface IMainPresenter<V> extends IBasePresenter<V> {
 
         void onResetCompleted();
     }
+    public beneficiaries fetchUserDetails();
+
 }

@@ -15,4 +15,7 @@ public interface IMainView extends IMvpView {
     void hideProgressBar();
 
     void showSnackBar(String message);
+
+    void setUserDetails();
+
 }
