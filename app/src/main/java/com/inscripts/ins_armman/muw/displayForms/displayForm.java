@@ -1385,6 +1385,10 @@ public class displayForm extends AppCompatActivity {
                 et.setEnabled(false);
                 et.setError(null);
                 tv.setError(null);
+                womendetails.put(keyword, "" + participant_id);
+                Backup_answerTyped1.put(keyword, "" + participant_id);
+                validationlist.put(keyword, et.getText().toString());
+                break;
         }
 
 
@@ -3985,7 +3989,7 @@ public class displayForm extends AppCompatActivity {
                             //finish();
                             if (FormID == 11) {
                                 if (midlineFlag == 100) {
-                                    Intent intent = new Intent(displayForm.this, MainActivity.class);
+                                    Intent intent = new Intent(displayForm.this, MidlineInterviewActivity.class);
                                     startActivity(intent);
                                 }
                             } else {

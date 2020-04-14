@@ -66,14 +66,12 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         incompleteForm.setOnClickListener(this);
         completeForm = (ConstraintLayout) findViewById(R.id.layout3);
         completeForm.setOnClickListener(this);
-       /* userProfile = (ConstraintLayout) findViewById(R.id.layout4);
-        userProfile.setOnClickListener(this);
-       */ midlineInterview = (ConstraintLayout) findViewById(R.id.layout5);
+        midlineInterview = (ConstraintLayout) findViewById(R.id.layout5);
         midlineInterview.setOnClickListener(this);
         textTotalIncomplete=findViewById(R.id.textIncompleteCount);
         textTotalReg=findViewById(R.id.textcompleteCount);
-        textTotalIncomplete.setText(String.valueOf(incomplete));
-        textTotalReg.setText(String.valueOf(complete));
+        textTotalIncomplete.setText("("+String.valueOf(incomplete)+")");
+        textTotalReg.setText("("+String.valueOf(complete)+")");
         tname = findViewById(R.id.tname);
         tnumber = findViewById(R.id.tnumber);
 
@@ -132,11 +130,6 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
                  Intent intent3 = new Intent(MainActivity.this, completedForm.class);
                   startActivity(intent3);
                   break;
-
-           /* case R.id.layout4:
-                Intent intent = new Intent(MainActivity.this, userProfile.class);
-                startActivity(intent);
-                break;*/
 
                 case R.id.layout5:
                 Intent intent5 = new Intent(MainActivity.this, MidlineInterviewActivity.class);

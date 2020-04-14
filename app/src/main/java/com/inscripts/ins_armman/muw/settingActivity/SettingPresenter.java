@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 
+import com.inscripts.ins_armman.muw.BuildConfig;
 import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.data.model.RequestFormModel;
 import com.inscripts.ins_armman.muw.data.model.UpdateModel;
@@ -44,6 +45,7 @@ public class SettingPresenter implements ISettingPresenter<ISettingView>
     SettingInteractor settingInteractor;
     private ISettingView mSettingsView;
     private String mUsername, mPassword, mFormHash;
+    String versionName = BuildConfig.VERSION_NAME;
     OnQueryFinished onQueryFinished = new OnQueryFinished() {
 
         @Override
@@ -117,6 +119,7 @@ public class SettingPresenter implements ISettingPresenter<ISettingView>
             details.setUserName(mUsername);
             details.setPassword(mPassword);
             details.setImei(utility.getDeviceImeiNumber(mSettingsView.getContext()));
+            details.setVersionName(versionName);
             details.setHash(settingInteractor.getHash(HASH_ITEM_FORM));
             details.setShowdata("true");
 
@@ -223,6 +226,7 @@ public class SettingPresenter implements ISettingPresenter<ISettingView>
         mRequest = new RestoreDataRequest();
         mRequest.setUserName(mUsername);
         mRequest.setPassword(mPassword);
+        mRequest.setVersionName(versionName);
         mRequest.setImei(utility.getDeviceImeiNumber(mSettingsView.getContext()));
         mRequest.setLimit(FORM_DOWNLOAD_LIMIT);
 
@@ -294,6 +298,7 @@ public class SettingPresenter implements ISettingPresenter<ISettingView>
             userDetail.setUserName(mUsername);
             userDetail.setPassword(mPassword);
             userDetail.setImei(utility.getDeviceImeiNumber(mSettingsView.getContext()));
+            userDetail.setVersionName(versionName);
             settingInteractor.downloadAllRegistrationData(userDetail, this);
         } else {
             mSettingsView.hideProgressBar();

@@ -3,6 +3,7 @@ package com.inscripts.ins_armman.muw.midlineInterview;
 import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.inscripts.ins_armman.muw.R;
+import com.inscripts.ins_armman.muw.completedFormDetails.CompletedFormDetails;
 import com.inscripts.ins_armman.muw.completedFormList.CompletedFormsList;
 import com.inscripts.ins_armman.muw.data.model.completeFiledForm;
 
@@ -37,6 +39,11 @@ public class MidlineInterviewAdapter extends RecyclerView.Adapter<MidlineIntervi
     @Override
     public void onBindViewHolder(MidlineInterviewAdapter.ViewHolder holder, int i) {
         holder.bindData(mWomenList.get(i));
+        if(i%2==0)
+            holder.cardview.setCardBackgroundColor(mContext.getResources().getColor(R.color.light_bg1));
+        else
+            holder.cardview.setCardBackgroundColor(mContext.getResources().getColor(R.color.light_bg2));
+
     }
 
     @Override
@@ -55,6 +62,8 @@ public class MidlineInterviewAdapter extends RecyclerView.Adapter<MidlineIntervi
 
         TextView textViewName;
         ConstraintLayout constraintLayout;
+        CardView cardview;
+
 
 
         public ViewHolder(View itemView) {
@@ -62,6 +71,8 @@ public class MidlineInterviewAdapter extends RecyclerView.Adapter<MidlineIntervi
             itemView.setOnClickListener(this);
             textViewName = itemView.findViewById(R.id.textview_name);
             constraintLayout = itemView.findViewById(R.id.constraint_layout_root);
+            cardview = itemView.findViewById(R.id.card_view_completeList);
+
         }
 
         private void bindData(final completeFiledForm listModel) {
@@ -72,7 +83,7 @@ public class MidlineInterviewAdapter extends RecyclerView.Adapter<MidlineIntervi
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(mContext, CompletedFormsList.class);
+            Intent intent = new Intent(mContext, CompletedFormDetails.class);
             if (clickListener != null) {
                 clickListener.itemClicked(v,getPosition());
                 int i = mWomenList.size();

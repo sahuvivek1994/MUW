@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.data.model.completeFiledForm;
 import com.inscripts.ins_armman.muw.displayForms.displayForm;
+import com.inscripts.ins_armman.muw.mainMenu.MainActivity;
 import com.inscripts.ins_armman.muw.registration.EnrollmentQuestions;
 
 import java.util.List;
@@ -107,6 +108,7 @@ public class MidlineInterviewActivity extends AppCompatActivity implements IMidl
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        Intent intent = new Intent(MidlineInterviewActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHolder> {
     Context mContext;
-    String language, formName, participant_id;
+    String language, strFormName, participant_id;
     int form_id;
 
     int status = 0;
@@ -62,21 +62,24 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-        CompleteFormQnA c = mDetails.get(position);
         form_id = mDetails.get(position).getForm_id();
+        String strFormName = formName(position);
+        holder.formName.setText(strFormName);
+    }
+
+    private String formName(int position){
+        CompleteFormQnA c = mDetails.get(position);
+        String form = "";
         try {
             JSONObject obj = new JSONObject(c.getFormName());
             language = utility.getLanguagePreferance(mContext);
             if (language.isEmpty()) {
                 utility.setApplicationLocale(mContext, "en");
             } else {
-                utility.setApplicationLocale(mContext, language);
+                utility .setApplicationLocale(mContext, language);
             }
-            formName = obj.getString(this.language);
-            formName = formName.toUpperCase();
-            int count = 0;
-            holder.formName.setText(formName);
+            form = obj.getString(this.language);
+            form = form.toUpperCase();
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -86,7 +89,9 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
             System.out.println("formList" + mDetails);
             a++;
         }
+        return form;
     }
+
 
     @Override
     public int getItemCount() {
@@ -108,20 +113,15 @@ public class FormListAdapter extends RecyclerView.Adapter<FormListAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-
             Intent intent = new Intent(mContext, CompletedFormDetails.class);
             if (clickListener != null) {
                 clickListener.itemClicked(v, getPosition());
                 int formId = mDetails.get(getPosition()).getForm_id();
-                /*if (formId >= 6 && formId <= 9) {
-                   // uniqueId = childIdList.get(getPosition() - 5).getUnique_id();
-                    System.out.println("child id :" + formId);
-                    System.out.println("child id :" + uniqueId);
-                } else if (formId >= 1 && formId <= 9 || formId == 10) {
-                */    uniqueId = participant_id;
-                //}
+                strFormName = formName(getPosition());
+                uniqueId = participant_id;
                 intent.putExtra("unique_id", participant_id);
                 intent.putExtra("form_id", formId);
+                intent.putExtra("form_name",strFormName);
                 mContext.startActivity(intent);
             }
         }
