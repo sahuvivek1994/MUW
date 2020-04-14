@@ -116,11 +116,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getcompleteFormListList() {
-
-       // return utility.getDatabase().rawQuery("SELECT name,unique_id from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10 and form_completion_status = 1 )", null);
-       //for testing
-        return utility.getDatabase().rawQuery("SELECT name,unique_id from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 1 and form_completion_status = 1 )", null);
-    }
+        return utility.getDatabase().rawQuery("SELECT name,unique_id from registration WHERE unique_id IN (SELECT unique_id FROM filled_forms_status WHERE form_id = 10 and form_completion_status = 1 )", null);
+       }
 
     public Cursor getChildIdFromMotherId(String motherId) {
         return utility.getDatabase().rawQuery("SELECT name,unique_id FROM " + RegistrationTable.TABLE_NAME + " WHERE mother_id ='" + motherId + "'", null);
