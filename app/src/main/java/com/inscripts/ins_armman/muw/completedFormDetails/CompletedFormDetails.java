@@ -24,6 +24,7 @@ public class CompletedFormDetails extends AppCompatActivity implements IComplete
     DetailsAdapter adapter;
     DBHelper db;
     CompleteFormDetailsPresentor presentor;
+    String formName = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +39,10 @@ public class CompletedFormDetails extends AppCompatActivity implements IComplete
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         unique_id = getIntent().getStringExtra("unique_id");
         form_id = getIntent().getIntExtra("form_id", 0);
+        formName = getIntent().getStringExtra("form_name");
+        if(formName==null)
+            formName = "Filled form details";
+        setTitle(formName);
         presentor.displayFIlledForm(unique_id, form_id);
     }
 

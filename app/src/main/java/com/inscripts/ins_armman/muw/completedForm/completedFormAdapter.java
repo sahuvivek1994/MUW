@@ -3,6 +3,7 @@ package com.inscripts.ins_armman.muw.completedForm;
 import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,10 @@ public class completedFormAdapter extends RecyclerView.Adapter<completedFormAdap
     @Override
     public void onBindViewHolder(completedFormAdapter.ViewHolder holder, int i) {
         holder.bindData(mWomenList.get(i));
+        if(i%2==0)
+            holder.cardview.setCardBackgroundColor(mContext.getResources().getColor(R.color.light_bg1));
+        else
+            holder.cardview.setCardBackgroundColor(mContext.getResources().getColor(R.color.light_bg2));
     }
 
     @Override
@@ -57,6 +62,7 @@ public class completedFormAdapter extends RecyclerView.Adapter<completedFormAdap
 
         TextView textViewName;
         ConstraintLayout constraintLayout;
+        CardView cardview;
 
 
         public ViewHolder(View itemView) {
@@ -64,6 +70,8 @@ public class completedFormAdapter extends RecyclerView.Adapter<completedFormAdap
             itemView.setOnClickListener(this);
             textViewName = itemView.findViewById(R.id.textview_name);
             constraintLayout = itemView.findViewById(R.id.constraint_layout_root);
+            cardview = itemView.findViewById(R.id.card_view_completeList);
+
         }
 
         private void bindData(final completeFiledForm listModel) {

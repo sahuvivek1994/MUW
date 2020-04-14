@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#032029</color>
-    <color name="colorPrimaryDark">#001112</color>
+    <color name="colorPrimary">#149C71</color>
+    <color name="colorPrimaryDark">#0A5039</color>
 
     <!--<color name="colorPrimary">#3F51B5</color>-->
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
@@ -36,7 +36,9 @@
     <color name="home_bg_start">#378378</color>
     <color name="home_bg_end">#24312E</color>
     <color name="home_bg">#3C10382E</color>
-    <color name="light_bg">#45E5EEB2</color>
+    <color name="light_bg">#567CE6C4</color>
+    <color name="light_bg1">#56AEF4DE</color>
+    <color name="light_bg2">#56CEF4E8</color>
     <color name="verify_participant_cardview">#34495E</color>
     <color name="color1">#D5E90E0E</color>
     <color name="color2">#D5CC4141</color>
@@ -45,4 +47,5 @@
     <color name="login_text">#63E9D9</color>
     <color name="login_cred_color">#0E2E27</color>
     <color name="home_button_text">#112925</color>
+    <color name="home_button_hover">#527A74</color>
 </resources>

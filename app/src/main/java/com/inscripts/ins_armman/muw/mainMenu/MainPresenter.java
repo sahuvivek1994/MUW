@@ -2,6 +2,7 @@ package com.inscripts.ins_armman.muw.mainMenu;
 
 import android.database.Cursor;
 
+import com.inscripts.ins_armman.muw.BuildConfig;
 import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.data.model.SyncRegistrationDetails;
 import com.inscripts.ins_armman.muw.data.model.syncing.FormDetails;
@@ -43,6 +44,7 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
     MainInteractor mainInteractor;
     private String mUsername, mPassword;
     private ArrayList<String> mImei;
+    String versionName = BuildConfig.VERSION_NAME;
     private IMainPresenter.OnQueryFinished mOnQueryFinished = new OnQueryFinished() {
         @Override
         public void onSuccess(Cursor cursor, int id) {
@@ -125,6 +127,7 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
         regDetails.setUserName(mUsername);
         regDetails.setPassword(mPassword);
         regDetails.setImei(mImei);
+        regDetails.setVersionName(versionName);
 
         ArrayList<beneficiaries> regData = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -164,6 +167,7 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
             details.setUserName(mUsername);
             details.setPassword(mPassword);
             details.setImei(mImei);
+            details.setVersionName(versionName);
             String uniqueId = cursor.getString(cursor.getColumnIndex(DatabaseContract.FilledFormStatusTable.COLUMN_UNIQUE_ID));
             details.setUniqueId(uniqueId);
             String formId = cursor.getString(cursor.getColumnIndex(DatabaseContract.FilledFormStatusTable.COLUMN_FORM_ID));

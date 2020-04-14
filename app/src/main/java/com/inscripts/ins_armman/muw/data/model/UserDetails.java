@@ -19,6 +19,8 @@ public class UserDetails {
     private ArrayList<String> imei;
     @SerializedName("showdata")
     private String showdata;
+    @SerializedName("versionName")
+    private String versionName;
 
     public void setShowdata(String showdata) {
         this.showdata = showdata;
@@ -44,6 +46,10 @@ public class UserDetails {
         this.password = password;
     }
 
+    public String getVersionName() { return versionName; }
+
+    public void setVersionName(String versionName) { this.versionName = versionName; }
+
     @Override
     public String toString() {
         return "UserDetails{" +
@@ -51,7 +57,7 @@ public class UserDetails {
                 ", password='" + password + '\'' +
                 ", imei=" + imei +
                 ", showdata='" + showdata + '\'' +
+                ", versionName='" + versionName + '\'' +
                 '}';
     }
-
 }
