@@ -173,7 +173,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor fetchAllParticipants(){
-        return utility.getDatabase().rawQuery("SELECT registration_name,unique_id From all_registration_detail where unique_id IN(SELECT unique_id FROM filled_forms_status WHERE form_id = 11 and form_completion_status = 1 )", null);
+        return utility.getDatabase().rawQuery("SELECT DISTINCT unique_id,registration_name From all_registration_detail where unique_id IN(SELECT unique_id FROM filled_forms_status WHERE form_id = 11 and form_completion_status = 1 )", null);
     }
 
     /**
