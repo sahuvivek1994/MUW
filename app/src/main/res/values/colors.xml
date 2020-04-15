@@ -7,7 +7,7 @@
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
 
 
-    <color name="colorAccent">#00a1a0</color>
+    <color name="colorAccent">#EC4817</color>
     <color name="colorRed">#B71C1C</color>
     <color name="color_white">#FFF</color>
     <color name="green">#3cc749</color>
@@ -43,7 +43,7 @@
     <color name="color1">#D5E90E0E</color>
     <color name="color2">#D5CC4141</color>
     <color name="color3">#D5DB7272</color>
-    <color name="settings_icon">#D5275688</color>
+    <color name="settings_icon">#149C71</color>
     <color name="login_text">#63E9D9</color>
     <color name="login_cred_color">#0E2E27</color>
     <color name="home_button_text">#112925</color>

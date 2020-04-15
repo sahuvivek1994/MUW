@@ -51,7 +51,7 @@ public class CompletedFormsListPresentor implements ICompletedFormsListPresentor
         }
 
         //get forms
-            res = interactor.getCompleteFormList();
+            res = interactor.getCompleteFormList(unique_mother_id);
 
             if (res != null & res.moveToFirst()) {
                 do {
