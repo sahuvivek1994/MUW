@@ -33,8 +33,6 @@ public class IncompleteFormList extends AppCompatActivity implements IIncomplete
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_completed_forms_list);
         setTitle("Filled Form List");
         recyclerView = findViewById(R.id.recyclerView);

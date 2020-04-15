@@ -191,7 +191,7 @@ public class SettingInteractor implements ISettingInteractor, LoaderManager.Load
     @Override
     public void downloadAndSaveApk(String apkLink) {
         String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Download/";
-        String fileName = "Npdsf.apk";
+        String fileName = "MUW.apk";
         destination += fileName;
         final Uri uri = Uri.parse("file://" + destination);
 

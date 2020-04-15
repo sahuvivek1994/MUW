@@ -15,8 +15,8 @@ public class CompletedFormsListInteractor implements ICompletedFormsListInteract
     }
 
     @Override
-    public Cursor getCompleteFormList() {
-        return db.getFormsList();
+    public Cursor getCompleteFormList(String motherId) {
+        return db.getFormsList(motherId);
     }
 
     @Override
