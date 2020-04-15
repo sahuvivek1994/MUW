@@ -1,17 +1,22 @@
 package com.inscripts.ins_armman.muw.incompleteFormList;
 
+import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.inscripts.ins_armman.muw.R;
 import com.inscripts.ins_armman.muw.data.model.CompleteFormQnA;
 import com.inscripts.ins_armman.muw.database.DBHelper;
+import com.inscripts.ins_armman.muw.mainMenu.MainActivity;
+import com.inscripts.ins_armman.muw.settingActivity.Settings;
 
 import java.util.ArrayList;
 
@@ -28,6 +33,8 @@ public class IncompleteFormList extends AppCompatActivity implements IIncomplete
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_completed_forms_list);
         setTitle("Filled Form List");
         recyclerView = findViewById(R.id.recyclerView);
@@ -59,5 +66,19 @@ public class IncompleteFormList extends AppCompatActivity implements IIncomplete
     @Override
     public void itemClicked(View view, int position) {
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                Intent intent = new Intent(IncompleteFormList.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
