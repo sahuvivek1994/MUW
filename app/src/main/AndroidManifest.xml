@@ -47,7 +47,11 @@
         <activity android:name="com.inscripts.ins_armman.muw.userProfile.userProfile" />
         <activity android:name="com.inscripts.ins_armman.muw.registration.EnrollmentQuestions" />
         <activity android:name="com.inscripts.ins_armman.muw.displayForms.displayForm" />
-        <activity android:name="com.inscripts.ins_armman.muw.incompleteForm.IncompleteForm" />
+        <activity android:name="com.inscripts.ins_armman.muw.incompleteForm.IncompleteForm" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.inscripts.ins_armman.muw.mainMenu.MainActivity" />
+        </activity>
         <activity android:name="com.inscripts.ins_armman.muw.completedForm.completedForm" />
         <activity android:name="com.inscripts.ins_armman.muw.completedFormList.CompletedFormsList" />
         <activity android:name="com.inscripts.ins_armman.muw.completedFormDetails.CompletedFormDetails" />

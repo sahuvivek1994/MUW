@@ -86,7 +86,7 @@ public class completedFormAdapter extends RecyclerView.Adapter<completedFormAdap
                 if (clickListener != null) {
                     clickListener.itemClicked(v,getPosition());
                     int i = mWomenList.size();
-                intent.putExtra("id",mWomenList.get(getPosition()).getUnique_id());
+                intent.putExtra("unique_id",mWomenList.get(getPosition()).getUnique_id());
                 intent.putExtra("name",mWomenList.get(getPosition()).getName());
                 }
                 mContext.startActivity(intent);
