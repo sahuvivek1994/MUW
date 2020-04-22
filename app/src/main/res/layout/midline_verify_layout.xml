@@ -11,9 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="PARTICIPANT DETAILS"
+        android:text="@string/midline_header"
         android:textColor="@color/verify_participant_cardview"
-        android:textSize="20sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,9 +82,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center|center_vertical"
-                    android:text="search result"
+                    android:text="@string/search_result"
                     android:textColor="#FFFF"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -94,12 +94,12 @@
                     android:id="@+id/txtParticipantName"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text=""
                     android:textColor="#FFFFFF"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline27"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline26"
@@ -126,8 +126,8 @@
                     android:id="@+id/imgName"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
                     android:visibility="invisible"
@@ -149,21 +149,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.35" />
+                    app:layout_constraintGuide_percent="0.40" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline29"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.20" />
+                    app:layout_constraintGuide_percent="0.23" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline28"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.50" />
+                    app:layout_constraintGuide_percent="0.60" />
 
         <!--        <ImageView
                     android:id="@+id/imageView4"
@@ -243,6 +243,20 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.28" />
 
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:gravity="left"
+                android:text="Please enter the user id to verify"
+                android:textColor="@color/color_white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline19"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 

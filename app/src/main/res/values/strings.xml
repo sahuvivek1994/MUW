@@ -125,10 +125,12 @@
     <string name="midline_popup_msg">Please enter the id of the participant to fill the Midline Interview </string>
     <string name="midline_continue">Continue</string>
     <string name="midline_empty">No Records found. \n Please click on the following button to start the interview.</string>
-    <string name="search_result">search result</string>
-    <string name="search_found">Search result  found.</string>
-    <string name="search_already_filled">Form Already filled</string>
-    <string name="search_not_found">Search result not found. \n Please enter valid Participant Id and try again.</string>
-    <string name="participant_data_stored">Participant data stored successfully..</string>
+    <string name="search_result">SEARCH RESULT</string>
+    <string name="search_found">SEARCH RESULT FOUND </string>
+    <string name="search_already_filled">Form Already filled \n looks like you have already filled the form for this user id</string>
+    <string name="search_not_found">SEARCH RESULT NOT FOUND. \n Please enter valid Participant Id and try again.</string>
+    <string name="participant_data_stored">user data stored successfully..</string>
+    <string name="midline_title">VERIFY USER DETAILS</string>
+    <string name="midline_header">USER DETAILS</string>
 
 </resources>

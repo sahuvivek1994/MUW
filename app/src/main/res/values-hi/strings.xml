@@ -114,8 +114,10 @@
     <string name="midline_empty">कोई रिकॉर्ड नहीं मिला। \n इंटरव्यू शुरू करने के लिए कृपया निम्नलिखित बटन पर क्लिक करें।</string>
     <string name="search_result">खोज परिणाम</string>
     <string name="search_found">खोज परिणाम मिला।</string>
-    <string name="search_already_filled">फॉर्म पहले से भरा है</string>
+    <string name="search_already_filled">फॉर्म पहले से भरा है \n ऐसा लगता है कि आपने इस उपयोगकर्ता आईडी के लिए पहले ही फॉर्म भर दिया है</string>
     <string name="search_not_found">खोज परिणाम नहीं मिला। \n कृपया मान्य प्रतिभागी आईडी दर्ज करें और पुनः प्रयास करें।</string>
     <string name="participant_data_stored">प्रतिभागी डेटा को सफलतापूर्वक संग्रहीत किया गया ..</string>
+    <string name="midline_title">प्रतिभागी की जानकारी सत्यापित करें</string>
+    <string name="midline_header">प्रतिभागी की जानकारी</string>
 
 </resources>
