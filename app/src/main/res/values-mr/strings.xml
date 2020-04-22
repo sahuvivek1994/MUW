@@ -115,9 +115,10 @@
     <string name="midline_empty">रेकॉर्ड आढळली नाहीत.. \n कृपया मुलाखत सुरू करण्यासाठी खालील बटणावर क्लिक करा.</string>
     <string name="search_result">शोधेचा निकाल</string>
     <string name="search_found">शोध परिणाम आढळला.</string>
-    <string name="search_already_filled">फॉर्म भरलेला आहे</string>
+    <string name="search_already_filled">फॉर्म भरलेला आहे \n आपण या वापरकर्त्याच्या आयडीसाठी फॉर्म आधीच भरला आहे असे दिसते</string>
     <string name="search_not_found">शोध परिणाम आढळला नाही. \n कृपया वैध सहभागी आयडी प्रविष्ट करा आणि पुन्हा प्रयत्न करा.</string>
     <string name="participant_data_stored">सहभागी डेटा यशस्वीरित्या संग्रहित झाला ..</string>
-
+    <string name="midline_title">सहभागीची माहिती सत्यापित करा</string>
+    <string name="midline_header">सहभागीची माहिती</string>
 
 </resources>
