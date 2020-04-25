@@ -38,8 +38,9 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
     private static final int FETCH_REGISTRATION_DATA = 102;
     private static final int FETCH_USER_DATA = 101;
     private static final int FETCH_UNSENT_FORM_COUNT = 104;
-    private static final int FETCH_GROWTH_MONITORING_DATA = 105;
+    private static final int FETCH_MIDLINE_FORM = 105;
     private static final int FETCH_AROGYASAKHI_INFO = 108;
+
     IMainView iMainView;
     MainInteractor mainInteractor;
     private String mUsername, mPassword;
@@ -69,12 +70,13 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
                         onFetchedRegistrationData(cursor);
                     } else syncUnsentForms();
                     break;
-                case FETCH_GROWTH_MONITORING_DATA:
+                case FETCH_MIDLINE_FORM:
+                    if (cursor.getCount() > 0) {
+                        onFetchedMidlineDataForm();
+                    } else
                     iMainView.hideProgressBar();
                     fetchUnsentFormsCount();
                     break;
-
-
             }
         }
 
@@ -156,6 +158,38 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
     }
 
     @Override
+    public void onFetchedMidlineDataForm() {
+        Cursor cursor = mainInteractor.checkMidlineUnsentForms();
+        if (cursor.moveToFirst()) {
+            FormDetails details = new FormDetails();
+            ArrayList<QuestionAnswer> answerList = new ArrayList<>();
+            details.setUserName(mUsername);
+            details.setPassword(mPassword);
+            details.setImei(mImei);
+            details.setVersionName(versionName);
+            String uniqueId = cursor.getString(cursor.getColumnIndex(DatabaseContract.FilledFormStatusTable.COLUMN_UNIQUE_ID));
+            details.setUniqueId(uniqueId);
+            String formId = cursor.getString(cursor.getColumnIndex(DatabaseContract.FilledFormStatusTable.COLUMN_FORM_ID));
+            details.setFormId(formId);
+            String ref_Id = cursor.getString(cursor.getColumnIndex(DatabaseContract.FilledFormStatusTable.COLUMN_ID));
+
+            Cursor cursorForm = mainInteractor.fetchMidlineFormData(ref_Id);
+            while (cursorForm.moveToNext()) {
+                QuestionAnswer answer = new QuestionAnswer();
+                answer.setKeyword(cursorForm.getString(cursorForm.getColumnIndex(DatabaseContract.QuestionAnswerTable.COLUMN_QUESTION_KEYWORD)));
+                answer.setAnswer(cursorForm.getString(cursorForm.getColumnIndex(DatabaseContract.QuestionAnswerTable.COLUMN_ANSWER_KEYWORD)));
+                answer.setCreatedOn(cursorForm.getString(cursorForm.getColumnIndex(DatabaseContract.QuestionAnswerTable.COLUMN_CREATED_ON)));
+                answerList.add(answer);
+            }
+            details.setData(answerList);
+            mainInteractor.sendForms(details, this);
+        } else {
+            iMainView.hideProgressBar();
+            fetchUnsentFormsCount();
+        }
+    }
+
+    @Override
     public void syncUnsentForms() {
         Cursor cursor = mainInteractor.checkUnsentForms();
 
@@ -197,9 +231,7 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
             mainInteractor.sendForms(details, this);
 
         } else {
-
-            iMainView.hideProgressBar();
-            fetchUnsentFormsCount();
+            mainInteractor.fetchMidlineDetailsForm(FETCH_MIDLINE_FORM);
         }
     }
 
