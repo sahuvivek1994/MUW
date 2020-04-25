@@ -205,12 +205,12 @@ public class MainInteractor implements IMainInteractor, LoaderManager.LoaderCall
     }
 
     @Override
-    public Cursor fetchMidlineFormData(String Uniqueid) {
+    public Cursor fetchMidlineFormData(String ref_id) {
         String query = "SELECT * FROM "
                 + DatabaseContract.QuestionAnswerTable.TABLE_NAME
                 + " WHERE "
-                + DatabaseContract.QuestionAnswerTable.COLUMN_UNIQUE_ID + " = ? ";
-        return utility.getDatabase().rawQuery(query, new String[]{Uniqueid});
+                + DatabaseContract.QuestionAnswerTable.COLUMN_REFERENCE_ID + " = ? ";
+        return utility.getDatabase().rawQuery(query, new String[]{ref_id});
     }
 
     @Override

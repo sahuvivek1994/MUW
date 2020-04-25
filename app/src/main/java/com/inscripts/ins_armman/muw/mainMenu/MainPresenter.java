@@ -171,8 +171,9 @@ public class MainPresenter implements IMainPresenter<IMainView>, IMainInteractor
             details.setUniqueId(uniqueId);
             String formId = cursor.getString(cursor.getColumnIndex(DatabaseContract.FilledFormStatusTable.COLUMN_FORM_ID));
             details.setFormId(formId);
+            String ref_Id = cursor.getString(cursor.getColumnIndex(DatabaseContract.FilledFormStatusTable.COLUMN_ID));
 
-            Cursor cursorForm = mainInteractor.fetchMidlineFormData(uniqueId);
+            Cursor cursorForm = mainInteractor.fetchMidlineFormData(ref_Id);
             while (cursorForm.moveToNext()) {
                 QuestionAnswer answer = new QuestionAnswer();
                 answer.setKeyword(cursorForm.getString(cursorForm.getColumnIndex(DatabaseContract.QuestionAnswerTable.COLUMN_QUESTION_KEYWORD)));
