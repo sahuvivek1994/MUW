@@ -22,10 +22,13 @@ public interface IMainInteractor {
 
     void fetchRegistrationDetails(int id);
 
+    void fetchMidlineDetailsForm(int id);
     Cursor checkUnsentForms();
+    Cursor checkMidlineUnsentForms();
 
     Cursor fetchFormData(String referenceId);
 
+    Cursor fetchMidlineFormData(String Uniqueid);
     void sendForms(FormDetails formDetails, IMainInteractor.OnFormSync onFormSync);
 
     int fetchUnregisteredChildCount(String motherId);

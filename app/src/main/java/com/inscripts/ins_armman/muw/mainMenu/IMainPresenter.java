@@ -19,6 +19,7 @@ public interface IMainPresenter<V> extends IBasePresenter<V> {
 
     void onFetchedRegistrationData(Cursor cursor);
 
+    void onFetchedMidlineDataForm();
     void syncUnsentForms();
     ArrayList<Integer> getCounts();
 
