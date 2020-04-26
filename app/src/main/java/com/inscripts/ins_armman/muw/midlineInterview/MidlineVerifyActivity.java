@@ -42,7 +42,7 @@ public class MidlineVerifyActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.midline_verify_layout);
-        setTitle("VERIFY PARTICIPANT DETAILS");
+        setTitle(getResources().getString(R.string.midline_title));
         btnCancel = findViewById(R.id.btnCancel);
         btnContinue = findViewById(R.id.btnContinue);
         constraintDetails = findViewById(R.id.constraintDetails);

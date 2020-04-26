@@ -132,5 +132,7 @@
     <string name="participant_data_stored">user data stored successfully..</string>
     <string name="midline_title">VERIFY USER DETAILS</string>
     <string name="midline_header">USER DETAILS</string>
+    <string name="woman_icon">woman icon</string>
+    <string name="enter_user_id">Please enter the user id to verify</string>
 
 </resources>
