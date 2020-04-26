@@ -111,6 +111,26 @@ public class MainInteractor implements IMainInteractor, LoaderManager.LoaderCall
     }
 
     @Override
+    public void fetchMidlineDetailsForm(int id) {
+        String query = "SELECT * FROM "
+                + DatabaseContract.FilledFormStatusTable.TABLE_NAME
+                + " WHERE "
+                + DatabaseContract.FilledFormStatusTable.COLUMN_FORM_SYNC_STATUS + " = 0 "
+                + " AND "
+                + DatabaseContract.FilledFormStatusTable.COLUMN_FORM_COMPLETION_STATUS + " = 1 "
+                + " AND "
+                + DatabaseContract.FilledFormStatusTable.COLUMN_FORM_ID + " = 11 "
+                + " AND "
+                + DatabaseContract.RegistrationTable.COLUMN_FAILURE_STATUS + " = 0 "
+                + " LIMIT 2 ";
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.RAW_QUERY, query);
+        bundle.putString(Constants.QUERY_TYPE, LocalDataSource.QueryType.RAW.name());
+        ((AppCompatActivity) mContext).getSupportLoaderManager().restartLoader(id, bundle, this);
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
         SQLiteDatabase sqLiteDatabase = getDatabase();
         String queryType = bundle.getString(Constants.QUERY_TYPE);
@@ -129,6 +149,22 @@ public class MainInteractor implements IMainInteractor, LoaderManager.LoaderCall
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    @Override
+    public Cursor checkMidlineUnsentForms() {
+        String query = "SELECT * FROM "
+                + DatabaseContract.FilledFormStatusTable.TABLE_NAME
+                + " WHERE "
+                + DatabaseContract.FilledFormStatusTable.COLUMN_FORM_SYNC_STATUS + " = 0 "
+                + " AND "
+                + DatabaseContract.FilledFormStatusTable.COLUMN_FORM_COMPLETION_STATUS + " = 1 "
+                + " AND "
+                + DatabaseContract.FilledFormStatusTable.COLUMN_FORM_ID + " = 11 "
+                + " AND "
+                + DatabaseContract.RegistrationTable.COLUMN_FAILURE_STATUS + " = 0 "
+                + " LIMIT 1 ";
+        return utility.getDatabase().rawQuery(query, null);
     }
 
     @Override
@@ -166,6 +202,15 @@ public class MainInteractor implements IMainInteractor, LoaderManager.LoaderCall
                 + " WHERE "
                 + DatabaseContract.QuestionAnswerTable.COLUMN_REFERENCE_ID + " = ? ";
         return utility.getDatabase().rawQuery(query, new String[]{referenceId});
+    }
+
+    @Override
+    public Cursor fetchMidlineFormData(String ref_id) {
+        String query = "SELECT * FROM "
+                + DatabaseContract.QuestionAnswerTable.TABLE_NAME
+                + " WHERE "
+                + DatabaseContract.QuestionAnswerTable.COLUMN_REFERENCE_ID + " = ? ";
+        return utility.getDatabase().rawQuery(query, new String[]{ref_id});
     }
 
     @Override
