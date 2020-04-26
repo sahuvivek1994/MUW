@@ -15,6 +15,7 @@
         android:textColor="@color/verify_participant_cardview"
         android:textSize="26sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline16" />
@@ -50,7 +51,6 @@
                 android:layout_marginTop="4dp"
                 android:inputType="numberPassword"
                 android:background="@drawable/midline_verify_element_bg"
-                android:backgroundTint="@color/grey"
                 android:hint="@string/midline_unique_id"
                 android:textColor="#FFFFFF"
                 android:textColorHint="@color/color_dark_gray"
@@ -58,7 +58,8 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline19" />
+                app:layout_constraintTop_toTopOf="@+id/guideline19"
+                android:autofillHints="" />
 
 
             <android.support.constraint.ConstraintLayout
@@ -78,14 +79,15 @@
 
                 <TextView
                     android:id="@+id/txtSearchResult"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center|center_vertical"
                     android:text="@string/search_result"
                     android:textColor="#FFFF"
                     android:textSize="24sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline29"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -95,7 +97,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:text=""
                     android:textColor="#FFFFFF"
@@ -105,23 +107,6 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline26"
                     app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
-<!--
-                <TextView
-                    android:id="@+id/txtParticipantPhone"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="9874563210"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline28"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline26"
-                    app:layout_constraintTop_toTopOf="@+id/guideline27" />
--->
-
                 <ImageView
                     android:id="@+id/imgName"
                     android:layout_width="0dp"
@@ -130,6 +115,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
+                    android:contentDescription="@string/woman_icon"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/guideline27"
                     app:layout_constraintEnd_toStartOf="@+id/guideline26"
@@ -149,69 +135,53 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.40" />
+                    app:layout_constraintGuide_percent="0.5" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline29"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.23" />
+                    app:layout_constraintGuide_percent="0.25" />
 
-                <android.support.constraint.Guideline
-                    android:id="@+id/guideline28"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.60" />
-
-        <!--        <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="4dp"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline28"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline26"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/guideline27"
-                    app:srcCompat="@drawable/participant_phone" />
-         -->   </android.support.constraint.ConstraintLayout>
+            </android.support.constraint.ConstraintLayout>
 
             <Button
                 android:id="@+id/btnContinue"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="35dp"
+                android:layout_marginEnd="2dp"
                 android:background="@drawable/midline_verify_button_bg"
-                android:drawableRight="@drawable/ic_arrow_right"
+                android:drawableEnd="@drawable/ic_arrow_right"
                 android:gravity="center"
                 android:paddingStart="15dp"
-                android:paddingLeft="5dp"
+                android:paddingEnd="0dp"
                 android:text="@string/midline_continue"
                 android:textColor="#FFFF"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline21"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline36"
                 app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
             <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="35dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/midline_verify_button_bg"
-                android:drawableLeft="@drawable/ic_arrow_left"
+                android:drawableStart="@drawable/ic_arrow_left"
                 android:gravity="center"
                 android:paddingStart="15dp"
-                android:paddingLeft="15dp"
                 android:paddingEnd="20dp"
-                android:paddingRight="20dp"
                 android:text="@string/cancel"
                 android:textColor="#FFFF"
                 app:layout_constraintBottom_toTopOf="@+id/guideline21"
+                app:layout_constraintEnd_toStartOf="@+id/guideline36"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
@@ -240,8 +210,10 @@
                 android:id="@+id/guideline25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.28" />
+                app:layout_constraintGuide_percent="0.28"
+                app:layout_constraintTop_toBottomOf="@+id/etParticipantId" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -250,27 +222,36 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="20dp"
                 android:gravity="left"
-                android:text="Please enter the user id to verify"
+                android:text="@string/enter_user_id"
                 android:textColor="@color/color_white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline19"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImageProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
         android:elevation="8dp"
         android:src="@drawable/survey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline17" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline17"
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintStart_toStartOf="@+id/guideline23"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:targetApi="lollipop" />
 
 
     <android.support.constraint.Guideline
@@ -285,7 +266,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_percent="0.25" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline18"
