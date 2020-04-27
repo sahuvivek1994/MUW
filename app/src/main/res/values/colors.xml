@@ -48,4 +48,5 @@
     <color name="login_cred_color">#0E2E27</color>
     <color name="home_button_text">#112925</color>
     <color name="home_button_hover">#527A74</color>
+    <color name="forms_element">#BAF3E1</color>
 </resources>

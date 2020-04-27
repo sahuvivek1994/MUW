@@ -16,10 +16,10 @@
             android:width="48dip" />
 
         <gradient
-            android:centerColor="@color/color2"
+            android:centerColor="@color/login_cred_color"
             android:centerY="0.50"
-            android:endColor="@color/color3"
-            android:startColor="@color/color1"
+            android:endColor="@color/home_button_text"
+            android:startColor="@color/settings_icon"
             android:type="sweep"
             android:useLevel="false" />
 

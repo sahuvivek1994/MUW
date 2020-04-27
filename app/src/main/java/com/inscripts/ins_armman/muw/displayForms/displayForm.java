@@ -10,6 +10,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -232,6 +234,8 @@ public class displayForm extends AppCompatActivity {
     String pageCountText;
     TextView textViewTotalPgCount;
     String visitId;
+    int screen_width,screen_height;
+    Resources res;
     // List<ListClass> womenData = null;
     InputFilter filter = new InputFilter() {
         public CharSequence filter(CharSequence source, int start, int end,
@@ -307,7 +311,10 @@ public class displayForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.displayform);
         new DisplayQuestions().execute();
-
+        res = ctx.getApplicationContext().getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        screen_width = dm.widthPixels;
+        screen_height = dm.heightPixels;
     }
 
     @Override
