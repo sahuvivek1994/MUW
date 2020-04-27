@@ -23,6 +23,7 @@
     <dimen name="questions_top_bottom_margin">-10dp</dimen>
     <dimen name="text_size_medium">6sp</dimen>
     <dimen name="radio_text_size">3sp</dimen>
+    <dimen name="cardview_formname_font">14sp</dimen>
 
     <!--Text sizes -->
     <dimen name="text_size_xxx_large">20sp</dimen>
