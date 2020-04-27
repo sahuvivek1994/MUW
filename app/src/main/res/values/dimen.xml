@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="login_button_padding">24dp</dimen>
-    <dimen name="badge_text_size">14sp</dimen>
+    <dimen name="badge_text_size">12sp</dimen>
     <dimen name="mainMenu_margin">10dp</dimen>
     <dimen name="Main_home_Icon_weight">120dp</dimen>
     <dimen name="Main_home_Icon_Height">90dp</dimen>
     <dimen name="npdsf_main_menu_text_size">16sp</dimen>
+    <dimen name="main_home_form_text_size">16sp</dimen>
+    <dimen name="main_home_user_name_font">22sp</dimen>
+    <dimen name="home_menubar_icon_height">30dp</dimen>
+    <dimen name="home_menubar_icon_width">30dp</dimen>
 
     <dimen name="progressbar_margin_top">10dp</dimen>
     <dimen name="progress_dialog_padding">20dp</dimen>
     <dimen name="enr_xlarge_margin">40dp</dimen>
     <dimen name="enr_small_padding">5dp</dimen>
-    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_large">12sp</dimen>
     <dimen name="enr_large_margin">20dp</dimen>
-    <dimen name="text_size_xx_large">25sp</dimen>
+    <dimen name="text_size_xx_large">16sp</dimen>
     <dimen name="enr_normal_padding">10dp</dimen>
     <dimen name="enr_large_padding">15dp</dimen>
     <dimen name="questions_top_bottom_margin">-10dp</dimen>
-    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_medium">6sp</dimen>
+    <dimen name="radio_text_size">3sp</dimen>
 
     <!--Text sizes -->
-    <dimen name="text_size_xxx_large">27sp</dimen>
+    <dimen name="text_size_xxx_large">20sp</dimen>
     <dimen name="text_size_x_large">22sp</dimen>
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
@@ -36,5 +41,12 @@
     <dimen name="ic_armman_margin">16dp</dimen>
     <dimen name="enr_button_height">60dp</dimen>
     <dimen name="searchview_normal_marging">10dp</dimen>
-
+    <!--    midline activity text sizes-->
+    <dimen name="header_text_size">20sp</dimen>
+    <dimen name="enter_details_text_size">14sp</dimen>
+    <dimen name="search_result_text_size">16sp</dimen>
+    <dimen name="woman_name_text_size">16sp</dimen>
+    <dimen name="button_text_size">14sp</dimen>
+    <dimen name="midline_cardview_item_text_size">18sp</dimen>
+    <dimen name="midline_cardview_button_text_size">16sp</dimen>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/baseLinear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,20 +9,29 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/enr_xlarge_margin"
-        android:layout_marginRight="@dimen/enr_xlarge_margin"
-        android:layout_marginTop="@dimen/enr_large_margin"
-        android:progressDrawable="@drawable/progress_enroll" />
+        android:background="@color/forms_element"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:progressDrawable="@drawable/progress_enroll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_total_count"
@@ -30,9 +40,12 @@
             android:paddingTop="@dimen/enr_small_padding"
             android:text="0/00"
             android:textSize="@dimen/text_size_large"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar1"
+            app:layout_constraintStart_toStartOf="@+id/progressBar1"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar1" />
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/frame"
@@ -40,23 +53,31 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="0.9"
-        android:background="#fafafa" />
+        android:background="#fafafa"
+        app:layout_constraintBottom_toTopOf="@+id/guideline39"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="16dp" />
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/buttonlayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="0.1"
-        android:background="#fafafa"
+        android:background="@color/forms_element"
         android:gravity="center"
-        android:paddingLeft="@dimen/enr_xlarge_margin"
-        android:paddingRight="@dimen/enr_xlarge_margin">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline39">
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:mrl_rippleAlpha="0.4"
             app:mrl_rippleColor="@color/color_pinkish_grey"
             app:mrl_rippleDelayClick="true"
@@ -79,9 +100,13 @@
         </com.balysv.materialripple.MaterialRippleLayout>
 
         <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/materialRippleLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:mrl_rippleAlpha="0.4"
             app:mrl_rippleColor="@color/color_pinkish_grey"
             app:mrl_rippleDelayClick="true"
@@ -103,9 +128,16 @@
 
         </com.balysv.materialripple.MaterialRippleLayout>
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
-</LinearLayout>
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline39"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+</android.support.constraint.ConstraintLayout>
 
 
 
