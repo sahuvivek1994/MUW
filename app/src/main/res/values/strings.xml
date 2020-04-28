@@ -14,6 +14,7 @@
     <string name="error">Error</string>
     <string name="authentication_error_msg">Invalid Username and Password</string>
     <string name="authentication_failed">Authentication failed</string>
+    <string name="invalid_imei">Invalid IMEI or IMEI not found</string>
     <string name="response_not_found">Response not found</string>
     <string name="input_output_error_occured">Input output error occurred</string>
     <string name="invalid_data_frm_server">Invalid data from server.</string>
@@ -126,13 +127,14 @@
     <string name="midline_continue">Continue</string>
     <string name="midline_empty">No Records found. \n Please click on the following button to start the interview.</string>
     <string name="search_result">SEARCH RESULT</string>
-    <string name="search_found">SEARCH RESULT FOUND </string>
+    <string name="search_found">Search Result Found </string>
     <string name="search_already_filled">Form Already filled \n looks like you have already filled the form for this user id</string>
-    <string name="search_not_found">SEARCH RESULT NOT FOUND. \n Please enter valid Participant Id and try again.</string>
+    <string name="search_not_found">Search Result Not Found. \n Please enter valid Participant Id and try again.</string>
     <string name="participant_data_stored">user data stored successfully..</string>
     <string name="midline_title">VERIFY USER DETAILS</string>
     <string name="midline_header">USER DETAILS</string>
     <string name="woman_icon">woman icon</string>
     <string name="enter_user_id">Please enter the user id to verify</string>
+    <string name="start">START</string>
 
 </resources>

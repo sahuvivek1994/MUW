@@ -17,6 +17,7 @@
     <string name="error">त्रुटि</string>
     <string name="authentication_error_msg">अमान्य उपयोगकर्ता नाम और पासवर्ड</string>
     <string name="authentication_failed">प्रमाणीकरण विफल होना</string>
+    <string name="invalid_imei">गलत आयएमईआय या आयएमईआय नहीं मिला</string>
     <string name="response_not_found">प्रतिक्रिया नहीं मिली</string>
     <string name="input_output_error_occured">इनपुट आउटपुट त्रुटि हुई</string>
     <string name="invalid_data_frm_server">सर्वर से अमान्य डेटा मिला है</string>
@@ -121,5 +122,6 @@
     <string name="midline_header">प्रतिभागी की जानकारी</string>
     <string name="woman_icon">woman icon</string>
     <string name="enter_user_id">सत्यापन के लिए कृपया प्रतिभागी की आईडी दर्ज करें</string>
+    <string name="start">शुरू करें</string>
 
 </resources>

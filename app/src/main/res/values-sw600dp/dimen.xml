@@ -21,7 +21,7 @@
     <dimen name="enr_normal_padding">10dp</dimen>
     <dimen name="enr_large_padding">15dp</dimen>
     <dimen name="questions_top_bottom_margin">-10dp</dimen>
-    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_medium">20sp</dimen>
     <dimen name="radio_text_size">10sp</dimen>
     <dimen name="cardview_formname_font">18sp</dimen>
 
