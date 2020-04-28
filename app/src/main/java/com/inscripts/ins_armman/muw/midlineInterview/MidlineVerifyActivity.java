@@ -37,7 +37,6 @@ public class MidlineVerifyActivity extends AppCompatActivity {
     TextView txtParticipantName,txtParticipantPhone,txtSearchResult;
     int searchResult = 0;
     ArrayMap n;
-    ImageView imgName;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +47,6 @@ public class MidlineVerifyActivity extends AppCompatActivity {
         constraintDetails = findViewById(R.id.constraintDetails);
         etParticipantId = findViewById(R.id.etParticipantId);
         txtParticipantName = findViewById(R.id.txtParticipantName);
-        imgName = findViewById(R.id.imgName);
        // txtParticipantPhone = findViewById(R.id.txtParticipantPhone);
         txtSearchResult = findViewById(R.id.txtSearchResult);
         dbHelper = new DBHelper(this);
@@ -88,6 +86,12 @@ public class MidlineVerifyActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 final String enteredValue = etParticipantId.getText().toString();
                 if(enteredValue.length() == 4 || enteredValue.length() == 5 ){
+                    /** this is to hide the keyboard once the input is given to search*/
+                    InputMethodManager imm = (InputMethodManager)
+                            getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                    }
                     int count = dbHelper.checkAlreadyfilled(enteredValue);
                     if(count == 0) {
 
@@ -99,22 +103,14 @@ public class MidlineVerifyActivity extends AppCompatActivity {
                             txtSearchResult.setText(getResources().getString(R.string.search_not_found));
                             txtSearchResult.setTextColor(getResources().getColor(R.color.color_incomplete));
                             txtParticipantName.setText("");
-                            imgName.setVisibility(View.INVISIBLE);
                             btnContinue.setVisibility(View.INVISIBLE);
                         } else {
                             searchResult = 100;
                             txtSearchResult.setText(getResources().getString(R.string.search_found));
                             txtSearchResult.setTextColor(getResources().getColor(R.color.green));
                             btnContinue.setVisibility(View.VISIBLE);
-                            imgName.setVisibility(View.VISIBLE);
                             txtParticipantName.setText(participantName);
                             //     txtParticipantPhone.setText("value");
-                        }
-                        /** this is to hide the keyboard once the input is given to search*/
-                        InputMethodManager imm = (InputMethodManager)
-                                getSystemService(Context.INPUT_METHOD_SERVICE);
-                        if (imm != null) {
-                            imm.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }
                     else
@@ -123,7 +119,6 @@ public class MidlineVerifyActivity extends AppCompatActivity {
                         txtSearchResult.setText(getResources().getString(R.string.search_already_filled));
                         txtSearchResult.setTextColor(getResources().getColor(R.color.green));
                         btnContinue.setVisibility(View.GONE);
-                        imgName.setVisibility(View.GONE);
                         //txtParticipantName.setText(participantName);
                     }
                 }
@@ -133,7 +128,6 @@ public class MidlineVerifyActivity extends AppCompatActivity {
                     txtParticipantName.setText("");
                     txtSearchResult.setText(getResources().getString(R.string.search_result));
                     txtSearchResult.setTextColor(getResources().getColor(R.color.color_white));
-                    imgName.setVisibility(View.INVISIBLE);
                     btnContinue.setVisibility(View.INVISIBLE);
                 }
             }

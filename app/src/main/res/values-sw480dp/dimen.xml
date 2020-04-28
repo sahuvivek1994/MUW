@@ -21,7 +21,7 @@
     <dimen name="enr_normal_padding">10dp</dimen>
     <dimen name="enr_large_padding">15dp</dimen>
     <dimen name="questions_top_bottom_margin">-10dp</dimen>
-    <dimen name="text_size_medium">6sp</dimen>
+    <dimen name="text_size_medium">5sp</dimen>
     <dimen name="radio_text_size">3sp</dimen>
     <dimen name="cardview_formname_font">14sp</dimen>
 
@@ -48,7 +48,7 @@
     <dimen name="enter_details_text_size">16sp</dimen>
     <dimen name="search_result_text_size">20sp</dimen>
     <dimen name="woman_name_text_size">20sp</dimen>
-    <dimen name="button_text_size">16sp</dimen>
+    <dimen name="button_text_size">12sp</dimen>
     <dimen name="midline_cardview_item_text_size">21sp</dimen>
     <dimen name="midline_cardview_button_text_size">18sp</dimen>
 

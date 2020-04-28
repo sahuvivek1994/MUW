@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.inscripts.ins_armman.muw.utility.Constants.AUTHENTICATION_FAILED;
+import static com.inscripts.ins_armman.muw.utility.Constants.INVALID_IMEI;
 
 /**
  * @author Vivek & Juilee  Created on 14/8/2019
@@ -126,6 +127,11 @@ public class LoginPresenter implements ILoginPresenter<ILoginview>, LoginInterac
                 case AUTHENTICATION_FAILED:
                     iLoginview.hideProgressBar();
                     iLoginview.showDialog(iLoginview.getContext().getString(R.string.error), iLoginview.getContext().getString(R.string.authentication_failed));
+                    iLoginview.setAuthenticationFailedError();
+                    break;
+                case INVALID_IMEI:
+                    iLoginview.hideProgressBar();
+                    iLoginview.showDialog(iLoginview.getContext().getString(R.string.error), iLoginview.getContext().getString(R.string.invalid_imei));
                     iLoginview.setAuthenticationFailedError();
                     break;
                 default:

@@ -17,6 +17,7 @@
     <string name="error">त्रुटी</string>
     <string name="authentication_error_msg">अवैध वापरकर्ता चे नाव आणि पासवर्ड</string>
     <string name="authentication_failed">प्रमाणीकरण अयशस्वी</string>
+    <string name="invalid_imei">चुकीचे आयएमईआय किंवा आयएमईआय आढळले नाही</string>
     <string name="response_not_found">प्रतिसाद मिळत नाही</string>
     <string name="input_output_error_occured">त्रुटी आढळली</string>
     <string name="invalid_data_frm_server">सर्व्हर पासून अवैध डेटा मिळत आहे</string>
@@ -122,6 +123,7 @@
     <string name="midline_header">सहभागीची माहिती</string>
     <string name="woman_icon">woman icon</string>
     <string name="enter_user_id">कृपया सत्यापित करण्यासाठी सहभागीची आयडी प्रविष्ट करा </string>
+    <string name="start">सुरू करा</string>
 
 
 </resources>
